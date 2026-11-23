@@ -178,8 +178,7 @@
     #recentList .recent-item:nth-child(6n + 1),
     #allExpensesList .recent-item:nth-child(6n + 1),
     #allTransfersList .recent-item:nth-child(6n + 1),
-    #wikiItemsList .wiki-item:nth-child(6n + 1),
-    .contact-item:nth-child(6n + 1) {
+    #wikiItemsList .wiki-item:nth-child(6n + 1) {
       border-left: 4px solid var(--pride-red);
     }
 
@@ -187,8 +186,7 @@
     #recentList .recent-item:nth-child(6n + 2),
     #allExpensesList .recent-item:nth-child(6n + 2),
     #allTransfersList .recent-item:nth-child(6n + 2),
-    #wikiItemsList .wiki-item:nth-child(6n + 2),
-    .contact-item:nth-child(6n + 2) {
+    #wikiItemsList .wiki-item:nth-child(6n + 2) {
       border-left: 4px solid var(--pride-orange);
     }
 
@@ -196,8 +194,7 @@
     #recentList .recent-item:nth-child(6n + 3),
     #allExpensesList .recent-item:nth-child(6n + 3),
     #allTransfersList .recent-item:nth-child(6n + 3),
-    #wikiItemsList .wiki-item:nth-child(6n + 3),
-    .contact-item:nth-child(6n + 3) {
+    #wikiItemsList .wiki-item:nth-child(6n + 3) {
       border-left: 4px solid var(--pride-yellow);
     }
 
@@ -205,8 +202,7 @@
     #recentList .recent-item:nth-child(6n + 4),
     #allExpensesList .recent-item:nth-child(6n + 4),
     #allTransfersList .recent-item:nth-child(6n + 4),
-    #wikiItemsList .wiki-item:nth-child(6n + 4),
-    .contact-item:nth-child(6n + 4) {
+    #wikiItemsList .wiki-item:nth-child(6n + 4) {
       border-left: 4px solid var(--pride-green);
     }
 
@@ -214,8 +210,7 @@
     #recentList .recent-item:nth-child(6n + 5),
     #allExpensesList .recent-item:nth-child(6n + 5),
     #allTransfersList .recent-item:nth-child(6n + 5),
-    #wikiItemsList .wiki-item:nth-child(6n + 5),
-    .contact-item:nth-child(6n + 5) {
+    #wikiItemsList .wiki-item:nth-child(6n + 5) {
       border-left: 4px solid var(--pride-blue);
     }
 
@@ -223,8 +218,7 @@
     #recentList .recent-item:nth-child(6n + 6),
     #allExpensesList .recent-item:nth-child(6n + 6),
     #allTransfersList .recent-item:nth-child(6n + 6),
-    #wikiItemsList .wiki-item:nth-child(6n + 6),
-    .contact-item:nth-child(6n + 6) {
+    #wikiItemsList .wiki-item:nth-child(6n + 6) {
       border-left: 4px solid var(--pride-purple);
     }
 
@@ -527,9 +521,9 @@
         var(--pride-purple)
       ) 1;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 2px;
-      padding: 6px 6px calc(8px + env(safe-area-inset-bottom));
+      padding: 6px 4px calc(8px + env(safe-area-inset-bottom));
       z-index: 20;
       box-shadow: 0 -2px 10px rgba(45, 18, 89, 0.08);
     }
@@ -537,8 +531,8 @@
     .tab-btn {
       border: none;
       background: none;
-      padding: 5px 2px;
-      font-size: 11px;
+      padding: 5px 1px;
+      font-size: 10px;
       font-weight: 600;
       color: var(--muted);
       cursor: pointer;
@@ -555,7 +549,7 @@
     }
 
     .tab-btn span.ico {
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.1;
     }
 
@@ -733,7 +727,10 @@
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
           <strong style="color:var(--navy);">Betalningsförslag i realtid</strong>
-          <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
+          <div style="display:flex;gap:6px;">
+            <button class="quick-btn" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">💸 Betala av</button>
+            <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
+          </div>
         </div>
         <div id="partyList">Hämtar...</div>
       </div>
@@ -851,7 +848,10 @@
 
     <div id="tab-transfer" class="section">
       <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">Registrera betalning mellan parter</strong>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <strong style="color:var(--navy);font-size:16px;">💸 Betala av / Registrera överföring</strong>
+          <button class="quick-btn" onclick="switchTab('transfers-list', null)">Visa historik →</button>
+        </div>
         <p style="font-size:13px;color:var(--muted);margin:4px 0 10px;">Använd när en part Swishar eller betalar en annan för att direkt minska skulden.</p>
 
         <label class="field-lbl">Från part (Betalare)</label>
@@ -889,6 +889,11 @@
         <input id="trComment" type="text" placeholder="t.ex. Swish delbetalning">
 
         <button class="btn-primary" id="btnSaveTr" onclick="submitTransfer()">Registrera betalning</button>
+      </div>
+
+      <div class="card">
+        <strong style="color:var(--navy);font-size:15px;">🔄 Registrerade överföringar</strong>
+        <div id="transferTabHistory" style="color:var(--muted);font-size:13px;margin-top:6px;">Hämtar överföringar...</div>
       </div>
     </div>
 
@@ -977,7 +982,7 @@
         <div style="display:flex;justify-content:space-between;align-items:center;">
           <strong style="color:var(--navy);font-size:16px;">🔄 Överföringar</strong>
           <div style="display:flex;gap:6px;">
-            <button class="quick-btn" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">+ Ny</button>
+            <button class="quick-btn" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">+ Ny betalning</button>
             <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
           </div>
         </div>
@@ -991,6 +996,7 @@
   <nav class="tabs">
     <button class="tab-btn active" id="nav-overview" onclick="switchTab('overview', this)"><span class="ico">📊</span>Saldo</button>
     <button class="tab-btn" id="nav-expense" onclick="switchTab('expense', this)"><span class="ico">📷</span>Nytt kvitto</button>
+    <button class="tab-btn" id="nav-transfer" onclick="switchTab('transfer', this)"><span class="ico">💸</span>Betala av</button>
     <button class="tab-btn" id="nav-expenses-list" onclick="switchTab('expenses-list', this)"><span class="ico">🧾</span>Utgifter</button>
     <button class="tab-btn" id="nav-wiki" onclick="switchTab('wiki', this)"><span class="ico">✅</span>Wiki &amp; Listor</button>
   </nav>
@@ -1353,15 +1359,18 @@
 
     function renderTransfersList() {
       const container = document.getElementById('allTransfersList');
+      const tabHistory = document.getElementById('transferTabHistory');
       if (!latestData) return;
 
       const transfers = latestData.transfers || [];
       if (!transfers.length) {
-        container.innerHTML = '<div style="padding:10px 0;">Inga överföringar registrerade ännu.</div>';
+        const emptyMsg = '<div style="padding:10px 0;">Inga överföringar registrerade ännu.</div>';
+        if (container) container.innerHTML = emptyMsg;
+        if (tabHistory) tabHistory.innerHTML = emptyMsg;
         return;
       }
 
-      container.innerHTML = transfers.map(t => {
+      const html = transfers.map(t => {
         const from = t.fromParty || t.from || '';
         const to = t.toParty || t.to || '';
         const title = (from && to) ? (from + ' → ' + to) : (t.place || 'Överföring');
@@ -1375,6 +1384,9 @@
           '<div style="text-align:right;white-space:nowrap;"><strong>' + sekVal + '</strong><div class="meta">' + orig + '</div></div>' +
         '</div>';
       }).join('');
+
+      if (container) container.innerHTML = html;
+      if (tabHistory) tabHistory.innerHTML = html;
     }
 
     function renderWikiList() {
