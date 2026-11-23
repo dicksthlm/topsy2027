@@ -1636,29 +1636,43 @@
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 
-      // 1. E-postadresser -> mailto:
-      let out = escaped.replace(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g, function(email) {
-        return '<a class="pill-link" href="mailto:' + email + '" style="margin:3px 4px 2px 0;">✉️ ' + email + '</a>';
-      });
+      // Steg 1: Dela upp texten på webbadresser och e-post först så att siffror i URL:er aldrig tolkas som telefonnummer
+      const parts = escaped.split(/(https?:\/\/[^\s|<]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g);
 
-      // 2. Telefonnummer (+44..., +46..., +34... eller nödnummer 999 / 111) -> tel:
-      out = out.replace(/(\+\d[\d\s\-()]{6,}|\b(?:999|111)\b)/g, function(tel) {
-        const cleanTel = tel.replace(/[^\d+]/g, '');
-        if (cleanTel.length < 3) return tel;
-        return '<a class="pill-link" href="tel:' + cleanTel + '" style="margin:3px 4px 2px 0;">📞 ' + tel.trim() + '</a>';
-      });
+      return parts.map(function(part) {
+        if (!part) return '';
 
-      // 3. Webbadresser -> https://...
-      out = out.replace(/(https?:\/\/[^\s|<]+)/g, function(url) {
-        let label = '🔗 Öppna länk ↗';
-        if (url.indexOf('chat.google.com') !== -1) label = '💬 Öppna Google Chat ↗';
-        else if (url.indexOf('facebook.com/messages') !== -1 || url.indexOf('messenger.com') !== -1) label = '💙 Öppna Messenger ↗';
-        else if (url.indexOf('maps.app.goo.gl') !== -1 || url.indexOf('google.com/maps') !== -1) label = '📍 Google Maps ↗';
-        else if (url.indexOf('bath-narrowboats.co.uk') !== -1) label = '🚤 Bath Narrowboats ↗';
-        return '<a class="pill-link" href="' + url + '" target="_blank" rel="noopener" style="margin:3px 4px 2px 0;">' + label + '</a>';
-      });
+        // Webbadress
+        if (/^https?:\/\//i.test(part)) {
+          let href = part;
+          let label = '🔗 Öppna länk ↗';
 
-      return out;
+          if (part.indexOf('chat.google.com') !== -1) {
+            label = '💬 Öppna Google Chat ↗';
+          } else if (part.indexOf('facebook.com/messages') !== -1 || part.indexOf('messenger.com') !== -1) {
+            // Byt facebook.com/messages/t/... till messenger.com/t/... som fungerar bättre i mobilappar
+            href = part.replace('www.facebook.com/messages/t/', 'www.messenger.com/t/');
+            label = '💙 Öppna Messenger ↗';
+          } else if (part.indexOf('maps.app.goo.gl') !== -1 || part.indexOf('google.com/maps') !== -1) {
+            label = '📍 Google Maps ↗';
+          } else if (part.indexOf('bath-narrowboats.co.uk') !== -1) {
+            label = '🚤 Bath Narrowboats ↗';
+          }
+          return '<a class="pill-link" href="' + href + '" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" style="margin:3px 4px 2px 0;">' + label + '</a>';
+        }
+
+        // E-postadress
+        if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part)) {
+          return '<a class="pill-link" href="mailto:' + part + '" onclick="event.stopPropagation();" style="margin:3px 4px 2px 0;">✉️ ' + part + '</a>';
+        }
+
+        // Vanlig text: gör telefonnummer klickbara
+        return part.replace(/(\+\d[\d\s\-()]{6,}|\b(?:999|111)\b)/g, function(tel) {
+          const cleanTel = tel.replace(/[^\d+]/g, '');
+          if (cleanTel.length < 3) return tel;
+          return '<a class="pill-link" href="tel:' + cleanTel + '" onclick="event.stopPropagation();" style="margin:3px 4px 2px 0;">📞 ' + tel.trim() + '</a>';
+        });
+      }).join('');
     }
     
     function renderWikiList() {
