@@ -456,7 +456,6 @@
       cursor: not-allowed;
     }
 
-    /* Bottenmeny med 8 flikar (4x2 rutnät) */
     .tabs {
       position: fixed;
       bottom: 0;
@@ -617,7 +616,6 @@
       flex-shrink: 0;
     }
 
-    /* Reseguide-kort med flera actionknappar (Webb / Karta) */
     .guide-item {
       padding: 11px 12px;
       border-radius: 12px;
@@ -672,7 +670,6 @@
       font-size: 14px;
     }
 
-    /* Infosida: Instruktioner & Kontaktuppgifter */
     .info-box {
       background: linear-gradient(135deg, #FDF2F8 0%, #EFF6FF 100%);
       border: 1px solid rgba(115, 41, 130, 0.2);
@@ -746,7 +743,6 @@
   <div id="toast" class="toast"></div>
 
   <div class="container">
-    <!-- FLIK 1: ÖVERSIKT / SALDO -->
     <div id="tab-overview" class="section active">
       <button class="hero-scan-btn" onclick="openScanFlow()">
         📷 Skanna / fota nytt kvitto
@@ -774,7 +770,6 @@
       </div>
     </div>
 
-    <!-- FLIK 2: NYTT KVITTO -->
     <div id="tab-expense" class="section">
       <div class="card">
         <div class="scan-box">
@@ -851,7 +846,6 @@
       </div>
     </div>
 
-    <!-- FLIK 3: BETALA AV (REGISTRERA ÖVERFÖRING) -->
     <div id="tab-transfer" class="section">
       <div class="card">
         <strong style="color:var(--navy);font-size:16px;">Registrera betalning mellan parter</strong>
@@ -895,7 +889,6 @@
       </div>
     </div>
 
-    <!-- FLIK 4: UTGIFTER (LISTA) -->
     <div id="tab-expenses-list" class="section">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -918,7 +911,6 @@
       </div>
     </div>
 
-    <!-- FLIK 5: ÖVERFÖRINGAR (LISTA) -->
     <div id="tab-transfers-list" class="section">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -934,7 +926,6 @@
       </div>
     </div>
 
-    <!-- FLIK 6: LÄNKAR (DRIVE & DOKUMENT) -->
     <div id="tab-links" class="section">
       <div class="card">
         <strong style="color:var(--navy);font-size:16px;">📁 Gemensamma dokument &amp; mappar</strong>
@@ -1050,7 +1041,6 @@
       </div>
     </div>
 
-    <!-- FLIK 7: RESEGUIDE (ALLA LÄNKAR FRÅN GOOGLE DOC) -->
     <div id="tab-guide" class="section">
       <div class="card">
         <strong style="color:var(--navy);font-size:16px;">🗺️ Reseguide – Kartor, Pubar &amp; Butiker</strong>
@@ -1068,7 +1058,6 @@
         </div>
       </div>
 
-      <!-- KATEGORI 1: KARTOR & TURISTINFO -->
       <div class="card guide-section" data-cat="maps">
         <strong style="color:var(--navy);font-size:15px;">🧭 Kartor, Turistinfo &amp; Sevärdheter</strong>
         <div class="link-list">
@@ -1139,7 +1128,6 @@
         </div>
       </div>
 
-      <!-- KATEGORI 2: BÅTEN TOPSY & UTHYRAREN -->
       <div class="card guide-section" data-cat="boat">
         <strong style="color:var(--navy);font-size:15px;">🚤 Båten Topsy &amp; Bath Narrowboats</strong>
         <div class="link-list">
@@ -1163,7 +1151,6 @@
         </div>
       </div>
 
-      <!-- KATEGORI 3: MATBUTIKER -->
       <div class="card guide-section" data-cat="grocery">
         <strong style="color:var(--navy);font-size:15px;">🛒 Matbutiker längs kanalen</strong>
         <div class="link-list">
@@ -1178,7 +1165,6 @@
         </div>
       </div>
 
-      <!-- KATEGORI 4: RESTAURANGER, PUBAR & CAFÉER -->
       <div class="card guide-section" data-cat="food">
         <strong style="color:var(--navy);font-size:15px;">🍻 Pubar, Caféer &amp; Restauranger</strong>
 
@@ -1336,7 +1322,6 @@
       </div>
     </div>
 
-    <!-- FLIK 8: INFOSIDA -->
     <div id="tab-info" class="section">
       <div class="card">
         <strong style="color:var(--navy);font-size:16px;">💬 Gemensam chatt (Google Chat)</strong>
@@ -1455,11 +1440,42 @@
   </nav>
 
   <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzL0EbrmcCKkWPR74iH51vpxtUnaHZUI6EviQ8VuBOCMRPhJphHHlz7n_mx_vpAGmzf/exec';
+
     let currentRate = 13.38;
     let expCurrency = 'GBP';
     let trCurrency = 'SEK';
     let compressedBase64 = '';
     let latestData = null;
+
+    function ensureApiUrl() {
+      if (!API_URL || API_URL.indexOf('https://script.google.com/macros/s/') !== 0) {
+        throw new Error('Lägg in er publicerade Apps Script /exec-URL i API_URL i index.html.');
+      }
+    }
+
+    async function apiGet() {
+      ensureApiUrl();
+      const res = await fetch(API_URL, { method: 'GET' });
+      const json = await res.json();
+      if (!json.ok) {
+        throw new Error(json.error || 'Kunde inte hämta data från servern.');
+      }
+      return json.data;
+    }
+
+    async function apiPost(bodyObj) {
+      ensureApiUrl();
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify(bodyObj)
+      });
+      const json = await res.json();
+      if (json.ok === false) {
+        throw new Error(json.error || 'Ett fel uppstod vid kommunikation med servern.');
+      }
+      return json;
+    }
 
     function todayISO() {
       const d = new Date();
@@ -1569,7 +1585,7 @@
       const reader = new FileReader();
       reader.onload = function(ev) {
         const img = new Image();
-        img.onload = function() {
+        img.onload = async function() {
           const maxW = 1400;
           const scale = Math.min(1, maxW / img.width);
           const canvas = document.createElement('canvas');
@@ -1582,35 +1598,36 @@
           preview.style.display = 'block';
 
           setAiStatus('🔍 Läser av kvittot...', 'info');
-          google.script.run
-            .withSuccessHandler(res => {
-              if (!res.aiEnabled) {
-                setAiStatus('📎 ' + res.message, 'info');
-                return;
+          try {
+            const res = await apiPost({
+              action: 'scanReceiptWithAI',
+              imageBase64: compressedBase64
+            });
+            if (!res.aiEnabled) {
+              setAiStatus('📎 ' + res.message, 'info');
+              return;
+            }
+            const r = res.result || {};
+            if (r.place) document.getElementById('expPlace').value = r.place;
+            if (r.amount && r.amount > 0) document.getElementById('expAmount').value = r.amount;
+            if (r.currency === 'SEK' || r.currency === 'GBP') setExpCurrency(r.currency);
+            if (r.date && /^\d{4}-\d{2}-\d{2}$/.test(r.date)) document.getElementById('expDate').value = r.date;
+            if (r.comment) document.getElementById('expComment').value = r.comment;
+            if (r.category) {
+              const catSel = document.getElementById('expCategory');
+              for (let i = 0; i < catSel.options.length; i++) {
+                if (catSel.options[i].value === r.category) { catSel.selectedIndex = i; break; }
               }
-              const r = res.result || {};
-              if (r.place) document.getElementById('expPlace').value = r.place;
-              if (r.amount && r.amount > 0) document.getElementById('expAmount').value = r.amount;
-              if (r.currency === 'SEK' || r.currency === 'GBP') setExpCurrency(r.currency);
-              if (r.date && /^\d{4}-\d{2}-\d{2}$/.test(r.date)) document.getElementById('expDate').value = r.date;
-              if (r.comment) document.getElementById('expComment').value = r.comment;
-              if (r.category) {
-                const catSel = document.getElementById('expCategory');
-                for (let i = 0; i < catSel.options.length; i++) {
-                  if (catSel.options[i].value === r.category) { catSel.selectedIndex = i; break; }
-                }
-              }
-              updatePreview();
-              if (r.uncertain) {
-                setAiStatus('⚠️ Kontrollera: ' + r.uncertain + ' — Välj vem som betalade och vilka som delade innan du sparar.', 'warn');
-              } else {
-                setAiStatus('✅ Kvittot avläst! Kontrollera belopp, vem som betalade och vilka som delade innan du sparar.', 'ok');
-              }
-            })
-            .withFailureHandler(err => {
-              setAiStatus('⚠️ ' + err.message, 'warn');
-            })
-            .scanReceiptWithAI(compressedBase64);
+            }
+            updatePreview();
+            if (r.uncertain) {
+              setAiStatus('⚠️ Kontrollera: ' + r.uncertain + ' — Välj vem som betalade och vilka som delade innan du sparar.', 'warn');
+            } else {
+              setAiStatus('✅ Kvittot avläst! Kontrollera belopp, vem som betalade och vilka som delade innan du sparar.', 'ok');
+            }
+          } catch (err) {
+            setAiStatus('⚠️ ' + err.message, 'warn');
+          }
         };
         img.src = ev.target.result;
       };
@@ -1644,178 +1661,4 @@
       container.innerHTML = filtered.map(r => {
         const orig = r.currency === 'GBP'
           ? ('£' + Number(r.amount || 0).toFixed(2))
-          : (Math.round(Number(r.amount || 0)) + ' kr');
-        const extra = [r.date, r.payer, r.category].filter(Boolean).join(' • ');
-        const commentLine = r.comment ? ('<div class="meta">' + r.comment + '</div>') : '';
-        return '<div class="recent-item">' +
-          '<div><strong>' + (r.place || 'Utgift') + '</strong><div class="meta">' + extra + '</div>' + commentLine + '</div>' +
-          '<div style="text-align:right;white-space:nowrap;"><strong>' + fmtSek(r.amountSek || 0) + '</strong><div class="meta">' + orig + '</div></div>' +
-        '</div>';
-      }).join('');
-    }
-
-    function renderTransfersList() {
-      const container = document.getElementById('allTransfersList');
-      if (!latestData) return;
-
-      const transfers = latestData.transfers || [];
-      if (!transfers.length) {
-        container.innerHTML = '<div style="padding:10px 0;">Inga överföringar registrerade ännu. Klicka på <strong>+ Ny</strong> uppe till höger eller på <strong>Betala av</strong> för att lägga in en betalning.</div>';
-        return;
-      }
-
-      container.innerHTML = transfers.map(t => {
-        const from = t.fromParty || t.from || '';
-        const to = t.toParty || t.to || '';
-        const title = (from && to) ? (from + ' → ' + to) : (t.place || 'Överföring');
-        const orig = t.currency === 'GBP'
-          ? ('£' + Number(t.amount || 0).toFixed(2))
-          : (Math.round(Number(t.amount || 0)) + ' kr');
-        const sekVal = t.amountSek != null ? fmtSek(t.amountSek) : orig;
-        const meta = [t.date, t.comment].filter(Boolean).join(' • ');
-        return '<div class="recent-item">' +
-          '<div><strong>' + title + '</strong><div class="meta">' + meta + '</div></div>' +
-          '<div style="text-align:right;white-space:nowrap;"><strong>' + sekVal + '</strong><div class="meta">' + orig + '</div></div>' +
-        '</div>';
-      }).join('');
-    }
-
-    function renderData(d) {
-      latestData = d;
-      currentRate = d.rate;
-      document.getElementById('rateHeader').textContent =
-        'Växelkurs: 1 GBP = ' + d.rate.toFixed(2) + ' kr • ' + d.receiptCount + ' kvitton';
-      document.getElementById('kpiTotal').textContent = fmtSek(d.totalSek);
-      document.getElementById('kpiPerPerson').textContent = fmtSek(d.perPerson);
-
-      const catSel = document.getElementById('expCategory');
-      if (catSel.options.length === 0) {
-        d.categories.forEach(c => {
-          const o = document.createElement('option');
-          o.value = c; o.textContent = c;
-          catSel.appendChild(o);
-        });
-      }
-
-      const pList = document.getElementById('partyList');
-      pList.innerHTML = d.parties.map(p => {
-        const cls = p.balance > 0.5 ? 'pos' : (p.balance < -0.5 ? 'neg' : 'zero');
-        const sign = p.balance > 0.5 ? '+' : '';
-        return '<div class="party-row">' +
-          '<div class="party-top">' +
-            '<span class="party-name">' + p.name + '</span>' +
-            '<span class="badge ' + cls + '">' + sign + fmtSek(p.balance) + '</span>' +
-          '</div>' +
-          '<div class="suggestion">' + p.suggestion + '</div>' +
-          '<div class="meta">Utlägg: ' + fmtSek(p.paid) + ' • Andel: ' + fmtSek(p.share) + '</div>' +
-        '</div>';
-      }).join('');
-
-      const rList = document.getElementById('recentList');
-      if (!d.recent.length) {
-        rList.innerHTML = 'Inga kvitton registrerade ännu.';
-      } else {
-        rList.innerHTML = d.recent.map(r => {
-          const orig = r.currency === 'GBP' ? ('£' + r.amount.toFixed(2)) : (Math.round(r.amount) + ' kr');
-          return '<div class="recent-item">' +
-            '<div><strong>' + r.place + '</strong><div class="meta">' + r.date + ' • ' + r.payer + '</div></div>' +
-            '<div style="text-align:right;"><strong>' + fmtSek(r.amountSek) + '</strong><div class="meta">' + orig + '</div></div>' +
-          '</div>';
-        }).join('');
-      }
-
-      renderExpensesList();
-      renderTransfersList();
-      updatePreview();
-    }
-
-    function loadData() {
-      google.script.run
-        .withSuccessHandler(renderData)
-        .withFailureHandler(err => showToast('Fel: ' + err.message, 'err'))
-        .getDashboardData();
-    }
-
-    function submitExpense() {
-      const btn = document.getElementById('btnSaveExp');
-      const chips = Array.from(document.querySelectorAll('#peopleChips .chip'));
-      const participants = chips.map(c => c.classList.contains('active'));
-
-      const payload = {
-        date: document.getElementById('expDate').value,
-        place: document.getElementById('expPlace').value,
-        category: document.getElementById('expCategory').value,
-        payer: document.getElementById('expPayer').value,
-        amount: document.getElementById('expAmount').value,
-        currency: expCurrency,
-        fxRate: document.getElementById('expFxRate').value,
-        participants: participants,
-        comment: document.getElementById('expComment').value,
-        imageBase64: compressedBase64
-      };
-
-      btn.disabled = true;
-      btn.textContent = 'Sparar...';
-      google.script.run
-        .withSuccessHandler(res => {
-          btn.disabled = false;
-          btn.textContent = 'Spara kvitto';
-          showToast(res.message, 'ok');
-          document.getElementById('expPlace').value = '';
-          document.getElementById('expAmount').value = '';
-          document.getElementById('expFxRate').value = '';
-          document.getElementById('expComment').value = '';
-          document.getElementById('expPhotoCam').value = '';
-          document.getElementById('expPhotoGal').value = '';
-          document.getElementById('photoPreview').style.display = 'none';
-          setAiStatus('');
-          compressedBase64 = '';
-          selectAllPeople(true);
-          renderData(res.data);
-          switchTab('overview', document.getElementById('nav-overview'));
-        })
-        .withFailureHandler(err => {
-          btn.disabled = false;
-          btn.textContent = 'Spara kvitto';
-          showToast(err.message, 'err');
-        })
-        .saveExpense(payload);
-    }
-
-    function submitTransfer() {
-      const btn = document.getElementById('btnSaveTr');
-      const payload = {
-        date: document.getElementById('trDate').value,
-        fromParty: document.getElementById('trFrom').value,
-        toParty: document.getElementById('trTo').value,
-        amount: document.getElementById('trAmount').value,
-        currency: trCurrency,
-        comment: document.getElementById('trComment').value
-      };
-
-      btn.disabled = true;
-      btn.textContent = 'Registrerar...';
-      google.script.run
-        .withSuccessHandler(res => {
-          btn.disabled = false;
-          btn.textContent = 'Registrera betalning';
-          showToast(res.message, 'ok');
-          document.getElementById('trAmount').value = '';
-          document.getElementById('trComment').value = '';
-          renderData(res.data);
-          switchTab('overview', document.getElementById('nav-overview'));
-        })
-        .withFailureHandler(err => {
-          btn.disabled = false;
-          btn.textContent = 'Registrera betalning';
-          showToast(err.message, 'err');
-        })
-        .saveTransfer(payload);
-    }
-
-    document.getElementById('expDate').value = todayISO();
-    document.getElementById('trDate').value = todayISO();
-    loadData();
-  </script>
-</body>
-</html>
+          : (Math.round(Number(r.amount || 0))
