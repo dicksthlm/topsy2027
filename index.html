@@ -1700,8 +1700,11 @@
         return matchType && matchPage && matchOwner;
       });
       
-      const doneCount = filtered.filter(i => i.checked).length;
-      metaEl.textContent = doneCount + ' av ' + filtered.length + ' klarmarkerade i valda listor';
+      const checkable = filtered.filter(i => i.type !== 'Wiki');
+      const doneCount = checkable.filter(i => i.checked).length;
+      metaEl.textContent = checkable.length
+        ? (doneCount + ' av ' + checkable.length + ' klarmarkerade i valda listor')
+        : (filtered.length + ' wikisidor visas');
 
       if (!filtered.length) {
         container.innerHTML = '<div style="padding:10px 0;color:var(--muted);">Inga poster matchar filtret.</div>';
@@ -1709,12 +1712,16 @@
       }
 
       container.innerHTML = filtered.map(item => {
-        const checkedAttr = item.checked ? ' checked' : '';
-        const checkedCls = item.checked ? ' checked' : '';
-        const subParts = [item.page, item.owner].filter(Boolean).join(' • ');
-        const noteHtml = item.note ? ('<div class="meta" style="margin-top:4px;line-height:1.5;">' + linkifyWikiNote(item.note) + '</div>') : '';
-        return '<div class="wiki-item' + checkedCls + '">' +
-          '<input type="checkbox"' + checkedAttr + ' onchange="onToggleWikiItem(' + item.rowIndex + ', this.checked)">' +
+        const isWiki = item.type === 'Wiki';
+      const checkedAttr = item.checked ? ' checked' : '';
+      const checkedCls = (!isWiki && item.checked) ? ' checked' : '';
+      const subParts = [item.page, item.owner].filter(Boolean).join(' • ');
+      const noteHtml = item.note ? ('<div class="meta" style="margin-top:4px;line-height:1.5;">' + linkifyWikiNote(item.note) + '</div>') : '';
+      const leftControlHtml = isWiki
+        ? '<span style="font-size:20px;line-height:1;margin-top:2px;user-select:none;" title="Wiki-information">ℹ️</span>'
+        : '<input type="checkbox"' + checkedAttr + ' onchange="onToggleWikiItem(' + item.rowIndex + ', this.checked)">';
+      return '<div class="wiki-item' + checkedCls + '">' +
+        leftControlHtml +
           '<div style="flex:1;">' +
             '<div class="wiki-title"><span class="wiki-badge">' + item.type + '</span><strong>' + item.title + '</strong></div>' +
             '<div class="meta">' + subParts + '</div>' +
