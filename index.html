@@ -178,6 +178,7 @@
     #recentList .recent-item:nth-child(6n + 1),
     #allExpensesList .recent-item:nth-child(6n + 1),
     #allTransfersList .recent-item:nth-child(6n + 1),
+    #wikiItemsList .wiki-item:nth-child(6n + 1),
     .contact-item:nth-child(6n + 1) {
       border-left: 4px solid var(--pride-red);
     }
@@ -186,6 +187,7 @@
     #recentList .recent-item:nth-child(6n + 2),
     #allExpensesList .recent-item:nth-child(6n + 2),
     #allTransfersList .recent-item:nth-child(6n + 2),
+    #wikiItemsList .wiki-item:nth-child(6n + 2),
     .contact-item:nth-child(6n + 2) {
       border-left: 4px solid var(--pride-orange);
     }
@@ -194,6 +196,7 @@
     #recentList .recent-item:nth-child(6n + 3),
     #allExpensesList .recent-item:nth-child(6n + 3),
     #allTransfersList .recent-item:nth-child(6n + 3),
+    #wikiItemsList .wiki-item:nth-child(6n + 3),
     .contact-item:nth-child(6n + 3) {
       border-left: 4px solid var(--pride-yellow);
     }
@@ -202,6 +205,7 @@
     #recentList .recent-item:nth-child(6n + 4),
     #allExpensesList .recent-item:nth-child(6n + 4),
     #allTransfersList .recent-item:nth-child(6n + 4),
+    #wikiItemsList .wiki-item:nth-child(6n + 4),
     .contact-item:nth-child(6n + 4) {
       border-left: 4px solid var(--pride-green);
     }
@@ -210,6 +214,7 @@
     #recentList .recent-item:nth-child(6n + 5),
     #allExpensesList .recent-item:nth-child(6n + 5),
     #allTransfersList .recent-item:nth-child(6n + 5),
+    #wikiItemsList .wiki-item:nth-child(6n + 5),
     .contact-item:nth-child(6n + 5) {
       border-left: 4px solid var(--pride-blue);
     }
@@ -218,6 +223,7 @@
     #recentList .recent-item:nth-child(6n + 6),
     #allExpensesList .recent-item:nth-child(6n + 6),
     #allTransfersList .recent-item:nth-child(6n + 6),
+    #wikiItemsList .wiki-item:nth-child(6n + 6),
     .contact-item:nth-child(6n + 6) {
       border-left: 4px solid var(--pride-purple);
     }
@@ -268,6 +274,42 @@
       margin-top: 2px;
     }
 
+    .coord-line {
+      font-size: 12px;
+      color: var(--navy);
+      font-weight: 600;
+      margin-top: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .item-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      background: #FDF2F8;
+      color: var(--pride-purple);
+      border: 1px solid rgba(115, 41, 130, 0.25);
+      cursor: pointer;
+    }
+
+    .pill-link.map {
+      background: #EFF6FF;
+      color: var(--pride-blue);
+      border-color: rgba(0, 76, 255, 0.25);
+    }
+
     label.field-lbl {
       display: block;
       font-size: 13px;
@@ -277,18 +319,20 @@
     }
 
     input,
-    select {
+    select,
+    textarea {
       width: 100%;
       padding: 11px 12px;
       border: 1px solid var(--border);
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 15px;
       background: #fff;
       color: var(--text);
     }
 
     input:focus,
-    select:focus {
+    select:focus,
+    textarea:focus {
       outline: none;
       border-color: var(--pride-purple);
       box-shadow: 0 0 0 3px rgba(115, 41, 130, 0.12);
@@ -439,6 +483,14 @@
       margin-top: 6px;
     }
 
+    .place-panel {
+      background: #FAF5FF;
+      border: 1px solid rgba(115, 41, 130, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
     .btn-primary {
       width: 100%;
       margin-top: 16px;
@@ -545,7 +597,7 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 10px;
-      padding: 9px 0 9px 10px;
+      padding: 10px 0 10px 10px;
       border-bottom: 1px solid var(--border);
       font-size: 13px;
     }
@@ -554,109 +606,42 @@
       border-bottom: none;
     }
 
-    .link-list {
+    .wiki-item {
       display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-top: 8px;
-    }
-
-    .link-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 13px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      text-decoration: none;
-      color: var(--text);
-      box-shadow: 0 2px 6px rgba(45, 18, 89, 0.04);
-      transition: transform 0.1s ease, border-color 0.15s ease;
-    }
-
-    .link-card:hover {
-      transform: translateY(-1px);
-      border-color: var(--pride-purple);
-    }
-
-    .link-card:nth-child(6n + 1) { border-left: 4px solid var(--pride-red); }
-    .link-card:nth-child(6n + 2) { border-left: 4px solid var(--pride-orange); }
-    .link-card:nth-child(6n + 3) { border-left: 4px solid var(--pride-yellow); }
-    .link-card:nth-child(6n + 4) { border-left: 4px solid var(--pride-green); }
-    .link-card:nth-child(6n + 5) { border-left: 4px solid var(--pride-blue); }
-    .link-card:nth-child(6n + 6) { border-left: 4px solid var(--pride-purple); }
-
-    .link-left {
-      display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
+      padding: 10px 0 10px 10px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
     }
 
-    .link-ico {
-      font-size: 20px;
+    .wiki-item:last-child {
+      border-bottom: none;
+    }
+
+    .wiki-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
       flex-shrink: 0;
+      accent-color: var(--pride-purple);
+      cursor: pointer;
     }
 
-    .link-title {
+    .wiki-item.checked .wiki-title {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .wiki-badge {
+      display: inline-block;
+      font-size: 10px;
       font-weight: 700;
-      font-size: 14px;
-      color: var(--navy);
-    }
-
-    .link-desc {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 1px;
-    }
-
-    .link-arrow {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--pride-purple);
-      flex-shrink: 0;
-    }
-
-    .guide-item {
-      padding: 11px 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #FFFFFF;
-      box-shadow: 0 2px 6px rgba(45, 18, 89, 0.04);
-    }
-    .guide-item:nth-child(6n + 1) { border-left: 4px solid var(--pride-red); }
-    .guide-item:nth-child(6n + 2) { border-left: 4px solid var(--pride-orange); }
-    .guide-item:nth-child(6n + 3) { border-left: 4px solid var(--pride-yellow); }
-    .guide-item:nth-child(6n + 4) { border-left: 4px solid var(--pride-green); }
-    .guide-item:nth-child(6n + 5) { border-left: 4px solid var(--pride-blue); }
-    .guide-item:nth-child(6n + 6) { border-left: 4px solid var(--pride-purple); }
-
-    .guide-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .pill-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 10px;
+      padding: 2px 7px;
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      text-decoration: none;
-      background: #FDF2F8;
+      background: #F3E8FF;
       color: var(--pride-purple);
-      border: 1px solid rgba(115, 41, 130, 0.25);
-    }
-
-    .pill-link.map {
-      background: #EFF6FF;
-      color: var(--pride-blue);
-      border-color: rgba(0, 76, 255, 0.25);
+      margin-right: 6px;
     }
 
     .filter-bar {
@@ -672,67 +657,26 @@
       font-size: 14px;
     }
 
-    .info-box {
-      background: linear-gradient(135deg, #FDF2F8 0%, #EFF6FF 100%);
-      border: 1px solid rgba(115, 41, 130, 0.2);
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 10px;
-      font-size: 13px;
-      line-height: 1.5;
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(31, 24, 41, 0.55);
+      z-index: 60;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
     }
 
-    .info-box h4 {
-      margin: 0 0 6px;
-      font-size: 14px;
-      color: var(--navy);
-    }
-
-    .info-box ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .info-box li {
-      margin-bottom: 6px;
-    }
-
-    .info-box li:last-child {
-      margin-bottom: 0;
-    }
-
-    .contact-item {
-      padding: 10px 0 10px 10px;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-    }
-
-    .contact-item:last-child {
-      border-bottom: none;
-      padding-bottom: 2px;
-    }
-
-    .contact-name {
-      font-weight: 700;
-      font-size: 14px;
-      color: var(--navy);
-      margin-bottom: 4px;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .contact-links a {
-      color: var(--pride-purple);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .contact-links a:hover {
-      text-decoration: underline;
+    .modal-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 16px;
+      width: 100%;
+      max-width: 480px;
+      max-height: 88vh;
+      overflow-y: auto;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
     }
   </style>
 </head>
@@ -743,6 +687,37 @@
   </header>
 
   <div id="toast" class="toast"></div>
+
+  <div id="editLinksModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <strong style="color:var(--navy);font-size:15px;" id="modalPlaceTitle">Uppdatera karta &amp; länkar</strong>
+        <button type="button" class="quick-btn" onclick="closeEditLinksModal()">✕</button>
+      </div>
+      <input type="hidden" id="editRowIndex">
+      <label class="field-lbl">Adress / Ort (valfritt)</label>
+      <input id="editAddress" type="text" placeholder="t.ex. Sydney Wharf, Bath">
+
+      <label class="field-lbl">Google Maps-länk</label>
+      <input id="editMapsUrl" type="url" placeholder="https://maps.app.goo.gl/... eller https://www.google.com/maps/...">
+
+      <div class="coord-line" id="editCoordsPreview">Koordinater: –</div>
+
+      <label class="field-lbl">Webbsida</label>
+      <input id="editWebsiteUrl" type="url" placeholder="https://...">
+
+      <label class="field-lbl">Bokningslänk</label>
+      <input id="editBookingUrl" type="url" placeholder="https://...">
+
+      <label class="field-lbl">Onlineorder / Webshop</label>
+      <input id="editOrderUrl" type="url" placeholder="https://...">
+
+      <div class="quick-row" style="margin-top:10px;">
+        <button type="button" class="quick-btn" onclick="autoLookupEditLinks()">🔎 Sök koordinater &amp; länkar automatiskt</button>
+      </div>
+      <button type="button" class="btn-primary" id="btnSaveEditLinks" onclick="saveEditedLinks()">Spara länkar &amp; koordinater</button>
+    </div>
+  </div>
 
   <div class="container">
     <div id="tab-overview" class="section active">
@@ -788,7 +763,10 @@
         </div>
 
         <label class="field-lbl">Inköpsställe</label>
-        <input id="expPlace" type="text" placeholder="t.ex. The George Inn, Tesco...">
+        <input id="expPlace" type="text" placeholder="t.ex. The George Inn, Sainsbury's...">
+
+        <label class="field-lbl">Adress / Ort (hjälper automatisk Google Maps-sökning)</label>
+        <input id="expAddress" type="text" placeholder="t.ex. Bathampton, Bath BA2 6TS">
 
         <div class="row2">
           <div>
@@ -826,6 +804,29 @@
             <label class="field-lbl">Datum</label>
             <input id="expDate" type="date">
           </div>
+        </div>
+
+        <div class="place-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+            <strong style="color:var(--navy);font-size:14px;">📍 Google Maps, Koordinater &amp; Webblänkar</strong>
+            <button type="button" class="quick-btn" id="btnAutoPlace" onclick="lookupNewExpensePlace()">🔎 Hämta automatiskt</button>
+          </div>
+          <div class="meta">Fylls i automatiskt när företagsnamn/adress finns, eller klistra in en Google Maps-länk manuellt.</div>
+
+          <label class="field-lbl">Google Maps-länk</label>
+          <input id="expMapsUrl" type="url" placeholder="https://maps.app.goo.gl/... eller https://www.google.com/maps/..." oninput="syncNewExpenseCoordsFromUrl()">
+
+          <div class="coord-line" id="expCoordsDisplay">Koordinater: –</div>
+          <input type="hidden" id="expCoords">
+
+          <label class="field-lbl">Webbsida (valfritt – hämtas från Google Maps om det finns)</label>
+          <input id="expWebsiteUrl" type="url" placeholder="https://...">
+
+          <label class="field-lbl">Bokningslänk (valfritt)</label>
+          <input id="expBookingUrl" type="url" placeholder="https://...">
+
+          <label class="field-lbl">Onlineorder / Webshop (valfritt)</label>
+          <input id="expOrderUrl" type="url" placeholder="https://...">
         </div>
 
         <label class="field-lbl">Vilka delade på kvittot?</label>
@@ -913,6 +914,64 @@
       </div>
     </div>
 
+    <div id="tab-wiki" class="section">
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <strong style="color:var(--navy);font-size:16px;">📚 Wiki, Inköpslistor &amp; Checklistor</strong>
+          <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
+        </div>
+        <div class="meta" id="wikiProgressMeta">Synkat med fliken Wiki &amp; Listor i Google Kalkylark</div>
+
+        <div class="filter-bar">
+          <select id="wikiTypeFilter" onchange="renderWikiList()">
+            <option value="">Alla typer</option>
+            <option value="Checklista">Checklistor</option>
+            <option value="Inköpslista">Inköpslistor</option>
+            <option value="Wiki">Wikisidor</option>
+          </select>
+          <select id="wikiPageFilter" onchange="renderWikiList()">
+            <option value="">Alla sidor/listor</option>
+          </select>
+        </div>
+
+        <div id="wikiItemsList">Hämtar listor &amp; wikisidor...</div>
+      </div>
+
+      <div class="card">
+        <strong style="color:var(--navy);font-size:15px;">➕ Lägg till punkt eller wikisida</strong>
+        <div class="row2">
+          <div>
+            <label class="field-lbl">Typ</label>
+            <select id="newWikiType">
+              <option value="Inköpslista">Inköpslista</option>
+              <option value="Checklista">Checklista</option>
+              <option value="Wiki">Wiki</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-lbl">Sida / Lista</label>
+            <input id="newWikiPage" type="text" placeholder="t.ex. Frukost, Packning, Rutt">
+          </div>
+        </div>
+
+        <label class="field-lbl">Rubrik / Vara / Uppgift</label>
+        <input id="newWikiTitle" type="text" placeholder="t.ex. Tonic water, Kolla slusstider...">
+
+        <label class="field-lbl">Anteckning / Wiki-text (valfritt)</label>
+        <textarea id="newWikiNote" rows="2" placeholder="Detaljer, länk eller kommentar..."></textarea>
+
+        <label class="field-lbl">Ansvarig</label>
+        <select id="newWikiOwner">
+          <option value="Alla">Alla</option>
+          <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+          <option value="Dick & Micke">Dick &amp; Micke</option>
+          <option value="Anders">Anders</option>
+        </select>
+
+        <button type="button" class="btn-primary" id="btnSaveWikiItem" onclick="submitWikiItem()">Lägg till i kalkylarket</button>
+      </div>
+    </div>
+
     <div id="tab-transfers-list" class="section">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -927,518 +986,13 @@
         <div id="allTransfersList" style="color:var(--muted);font-size:13px;">Hämtar överföringar...</div>
       </div>
     </div>
-
-    <div id="tab-links" class="section">
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">📁 Gemensamma dokument &amp; mappar</strong>
-        <div class="meta">Öppnas i Google Drive, Kalkylark och Dokument</div>
-
-        <div class="link-list">
-          <a class="link-card" href="https://drive.google.com/drive/folders/1IA2WIM_bH7kcY6tVLl9vuOzhjeJRjMAI?usp=drive_link" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📂</span>
-              <div>
-                <div class="link-title">Kanalbåt England (Huvudmapp)</div>
-                <div class="link-desc">Google Drive-mapp för hela resan</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://docs.google.com/spreadsheets/d/1FSdwExJGllOyjPYoJ26vBLDnUVZael0UkDBzKe2aj04/edit?usp=drive_link" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📊</span>
-              <div>
-                <div class="link-title">Kalkyldokument (Reseutgifter)</div>
-                <div class="link-desc">Google Kalkylark med utgifter, kurser &amp; avräkning</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://docs.google.com/document/d/1zYGpz4lt1R67vbxJQn0xWLsrq-ObKty3tIBiqX1JBU4/edit?usp=sharing" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📝</span>
-              <div>
-                <div class="link-title">Masterdokument (Reseplan)</div>
-                <div class="link-desc">Google Doc med rutt, båtfakta &amp; checklista</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">📸 Media – Ladda upp bilder &amp; video</strong>
-        <div class="meta">Välj din mapp eller gemensamma mappen för att ladda upp från mobilen</div>
-
-        <div class="link-list">
-          <a class="link-card" href="https://drive.google.com/drive/folders/1YapvxZEcSXJbAaq6H0-e5rFOqJw16Q2E" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">🌈</span>
-              <div>
-                <div class="link-title">Bilder och video – Alla</div>
-                <div class="link-desc">Gemensam mapp för hela gänget</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/1ZFpbujBUEg6gkQkotrMhCD-E2VgnrdZ2" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Anders</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/1zLFT5KB8p21E603Dgd7EdjRazQyP1War" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Dick</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/1s5SiJg9161LTPASJ1vjhK-CLRZzM0b6M" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Gunnar</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/1nB4d1Iy3ZCtGRJHyPAgALoSGftLHkgu3" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Micke</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/17kVLmuyWgSBGgZ7_oNfra0SA62LwTjEg" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Patrik</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-guide" class="section">
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">🗺️ Reseguide – Kartor, Pubar &amp; Butiker</strong>
-        <div class="meta">Alla länkar från masterdokumentet för Bath &amp; Kennet &amp; Avon Canal</div>
-
-        <div class="filter-bar">
-          <input id="guideSearch" type="text" placeholder="Sök ort, pub, butik..." oninput="filterGuide()">
-          <select id="guideCategory" onchange="filterGuide()">
-            <option value="">Alla kategorier</option>
-            <option value="maps">Kartor &amp; Turistinfo</option>
-            <option value="boat">Båten Topsy &amp; Uthyrare</option>
-            <option value="grocery">Matbutiker</option>
-            <option value="food">Restauranger &amp; Pubar</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="card guide-section" data-cat="maps">
-        <strong style="color:var(--navy);font-size:15px;">🧭 Kartor, Turistinfo &amp; Sevärdheter</strong>
-        <div class="link-list">
-          <div class="guide-item" data-search="drifters uk canal map karta rutt">
-            <div class="link-title">Drifters UK Canal Map</div>
-            <div class="link-desc">Översiktskarta över kanalsystemet, slussar och körtider</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.drifters.co.uk/canal-map/" target="_blank" rel="noopener">🌐 Öppna karta ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="canal river trust karta slussar gästhamnar">
-            <div class="link-title">Canal &amp; River Trust – Detaljkarta</div>
-            <div class="link-desc">Officiell karta med slussar, gästhamnar, pubar och akvedukter</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://canalrivertrust.org.uk/enjoy-the-waterways/canal-and-river-network" target="_blank" rel="noopener">🌐 Öppna karta ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="open canal map gps app webbversion">
-            <div class="link-title">Open Canal Map (Webbversion)</div>
-            <div class="link-desc">GPS-karta för avstånd till vattenpåfyllning, slussar och pubar</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://opencanalmap.uk/" target="_blank" rel="noopener">🌐 Öppna karta ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="visit bath turistinformation turistinfo sydney wharf">
-            <div class="link-title">Bath &amp; Visit Bath (Turistinfo)</div>
-            <div class="link-desc">Officiell turistguide och karta över Sydney Wharf i Bath</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.visitbath.co.uk/" target="_blank" rel="noopener">🌐 Visit Bath ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/tnsFK8Df2eByhwS37" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="bath walk history guide youtube video">
-            <div class="link-title">Bath – Walk History and Guide (YouTube)</div>
-            <div class="link-desc">Videoguide och historisk promenad genom Bath</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.youtube.com/watch?v=4VGTqypDePc" target="_blank" rel="noopener">▶️ Se på YouTube ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="donts visiting bath youtube tips">
-            <div class="link-title">The Don'ts of Visiting Bath (YouTube)</div>
-            <div class="link-desc">Praktiska turisttips inför besöket i Bath</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.youtube.com/watch?v=CrQorcS2yR0" target="_blank" rel="noopener">▶️ Se på YouTube ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="dundas aqueduct akvedukt claverton karta">
-            <div class="link-title">Dundas Aqueduct</div>
-            <div class="link-desc">Historisk stenakvedukt över floden Avon (ca 2,5 h från Bath)</div>
-            <div class="guide-actions">
-              <a class="pill-link map" href="https://maps.app.goo.gl/SeabBUHecMvNu5aAA" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="semington drone footage youtube slussar">
-            <div class="link-title">Semington Drone Footage (YouTube)</div>
-            <div class="link-desc">Drönarfilm över kanalen och slussarna vid Semington</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.youtube.com/watch?v=9FD4sLcmwnc" target="_blank" rel="noopener">▶️ Se på YouTube ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card guide-section" data-cat="boat">
-        <strong style="color:var(--navy);font-size:15px;">🚤 Båten Topsy &amp; Bath Narrowboats</strong>
-        <div class="link-list">
-          <div class="guide-item" data-search="topsy bath narrowboats sydney wharf">
-            <div class="link-title">Widebeam-båten Topsy &amp; Bath Narrowboats</div>
-            <div class="link-desc">Info om båten, hemmahamnen Sydney Wharf och videopresentation</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.bath-narrowboats.co.uk/" target="_blank" rel="noopener">🌐 Bath Narrowboats ↗</a>
-              <a class="pill-link" href="https://youtu.be/6r69cKmg-2M?si=hd9sMq17Uq4h4kLK" target="_blank" rel="noopener">▶️ Video på Topsy ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/emY3M49f2LG7TXH49" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="boat hire extras terms conditions hyresvillkor">
-            <div class="link-title">Boat Hire Extras &amp; Hyresvillkor (T&amp;Cs)</div>
-            <div class="link-desc">Tillval, deposition och villkor hos Bath Narrowboats</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.bath-narrowboats.co.uk/boats/holiday-boats/untitled-boat-5/" target="_blank" rel="noopener">🌐 Öppna villkor ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card guide-section" data-cat="grocery">
-        <strong style="color:var(--navy);font-size:15px;">🛒 Matbutiker längs kanalen</strong>
-        <div class="link-list">
-          <div class="guide-item" data-search="sainsburys bradford on avon superstore matbutik proviant">
-            <div class="link-title">Sainsbury's Bradford on Avon Superstore</div>
-            <div class="link-desc">Stor matbutik nära kanalen för påfyllning av mat och dryck (öppet till 21:00)</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://stores.sainsburys.co.uk/2143/bradford-on-avon?utm_source=gmb&utm_medium=yext&y_source=1_MTU1NjY1MjQtNzE1LWxvY2F0aW9uLndlYnNpdGU%3D" target="_blank" rel="noopener">🌐 Öppettider &amp; info ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/DgwQ1kDrd6CsSHsHA" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card guide-section" data-cat="food">
-        <strong style="color:var(--navy);font-size:15px;">🍻 Pubar, Caféer &amp; Restauranger</strong>
-
-        <div class="meta" style="margin-top:8px;font-weight:700;color:var(--navy);">Bathampton (45 min från Bath)</div>
-        <div class="link-list">
-          <div class="guide-item" data-search="george inn bathampton pub restaurang">
-            <div class="link-title">The George Inn</div>
-            <div class="link-desc">Historisk kanalpub från 1682 med terrass vid vattnet i Bathampton</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.chefandbrewer.com/pubs/somerset/george-inn?utm_source=g_places&utm_medium=locations&utm_campaign=CB_pubpage" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/cRj7ToBXGWFDt5ALA" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="bathampton mill country pub restaurang">
-            <div class="link-title">The Bathampton Mill</div>
-            <div class="link-desc">Country pub &amp; restaurang (7 min promenad från The George Inn)</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.thebathamptonmill.co.uk/?v_id=fc91c1a0-3bba-41a9-9ed4-c9564d77bc18&consented=true#/" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/Z4ZP7LycSR5GXXAGA" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="meta" style="margin-top:14px;font-weight:700;color:var(--navy);">Dundas &amp; Avoncliff (2,5 – 3,5 h från Bath)</div>
-        <div class="link-list">
-          <div class="guide-item" data-search="angelfish cafe dundas restaurang">
-            <div class="link-title">The Angelfish Cafe (Dundas)</div>
-            <div class="link-desc">Café och restaurang vid Dundas Aqueduct</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.facebook.com/TheAngelfishRestaurant/" target="_blank" rel="noopener">🌐 Facebook ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/K96swoePsduxYbgd7" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="cross guns avoncliff pub trädgård">
-            <div class="link-title">The Cross Guns (Avoncliff)</div>
-            <div class="link-desc">Klassisk pub med lummig trädgård ner mot kanalen vid Avoncliff Aqueduct</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://crossgunsavoncliff.com/" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/8nHq9Kzx1fzEBpvm6" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="meta" style="margin-top:14px;font-weight:700;color:var(--navy);">Bradford on Avon &amp; Widbrook (4 – 4,5 h från Bath)</div>
-        <div class="link-list">
-          <div class="guide-item" data-search="canal tavern bradford on avon pub">
-            <div class="link-title">Canal Tavern</div>
-            <div class="link-desc">Pub vid kanalen i Bradford on Avon</div>
-            <div class="guide-actions">
-              <a class="pill-link map" href="https://maps.app.goo.gl/1q3zWmerQWEtHFgQA" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="lock inn cafe bradford on avon">
-            <div class="link-title">The Lock Inn Café</div>
-            <div class="link-desc">Populärt kanalkafé och matställe vid slussen i Bradford on Avon</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.thelockinn.co.uk/" target="_blank" rel="noopener">🌐 Hemsida ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/TyS4LVyVe8VJvBPY9" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="timbrells yard bradford on avon gastropub">
-            <div class="link-title">Timbrell's Yard</div>
-            <div class="link-desc">Gastropub och restaurang vid floden Avon</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://timbrellsyard.com/" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/dWs2qb7ZMdFgtRTB8" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="ravello italian restaurant bradford on avon italienskt">
-            <div class="link-title">Ravello Italian Restaurant</div>
-            <div class="link-desc">Italiensk restaurang i Bradford on Avon</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://ravellos.co.uk/" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/ctS9BvUubXWpVEoL7" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="parsons bakery bradford on avon bageri frukost">
-            <div class="link-title">Parsons Bakery</div>
-            <div class="link-desc">Bageri i Bradford on Avon för nybakat bröd och fika</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.parsonsbakery.co.uk/" target="_blank" rel="noopener">🌐 Hemsida ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/eGuVDkpEQagdPFUT8" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="il fiume ristorante italiano bradford on avon italienskt">
-            <div class="link-title">Il Fiume Ristorante Italiano</div>
-            <div class="link-desc">Italiensk restaurang i Bradford on Avon</div>
-            <div class="guide-actions">
-              <a class="pill-link map" href="https://maps.app.goo.gl/BK6TkKtdkK6gsnhC6" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="pizzeria amici bradford on avon pizza">
-            <div class="link-title">Pizzeria Amici</div>
-            <div class="link-desc">Pizzeria i Bradford on Avon</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.pizzeriaamiciboa.com/" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/9WXaswdCp75eEhaW6" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="thai barn bradford on avon thailändskt">
-            <div class="link-title">Thai Barn Restaurant</div>
-            <div class="link-desc">Thailändsk restaurang i historisk lada</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.thaibarn.co.uk/" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/xsJQJ7YYsaftmHhK8" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="the barge inn bradford on avon pub">
-            <div class="link-title">The Barge Inn (Bradford on Avon)</div>
-            <div class="link-desc">Kanalpub i Bradford on Avon</div>
-            <div class="guide-actions">
-              <a class="pill-link map" href="https://maps.app.goo.gl/KnSgd2bqa7zUye3H8" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="the boathouse widbrook bradford on avon pub">
-            <div class="link-title">The Boathouse (Widbrook)</div>
-            <div class="link-desc">Pub och restaurang vid kanalen strax utanför Bradford on Avon</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.boathouse.pub/" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/HAFWnQLYTSAYTcZBA" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="meta" style="margin-top:14px;font-weight:700;color:var(--navy);">Seend &amp; Sells Green (8 – 10 h från Bath, nära vändpunkten)</div>
-        <div class="link-list">
-          <div class="guide-item" data-search="the barge inn seend pub">
-            <div class="link-title">The Barge Inn (Seend)</div>
-            <div class="link-desc">Kanalpub och restaurang vid slussarna i Seend</div>
-            <div class="guide-actions">
-              <a class="pill-link" href="https://www.bargeinnseend.co.uk/" target="_blank" rel="noopener">🌐 Hemsida / Meny ↗</a>
-              <a class="pill-link map" href="https://maps.app.goo.gl/qPyqzxGGyJ7NjX4r7" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-
-          <div class="guide-item" data-search="three magpies sells green pub">
-            <div class="link-title">The Three Magpies (Sells Green)</div>
-            <div class="link-desc">Sista puben före Foxhangers Marina och vändpunkten</div>
-            <div class="guide-actions">
-              <a class="pill-link map" href="https://maps.app.goo.gl/v4w5qkQ1AwFiwzEp7" target="_blank" rel="noopener">📍 Google Maps ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-info" class="section">
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">💬 Gemensam chatt (Google Chat)</strong>
-        <div class="meta">Snabbgenväg till gruppens chattrum i Google Chat</div>
-
-        <div class="link-list">
-          <a class="link-card" href="https://chat.google.com/room/AAQAoPDgMeA?cls=0" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">💬</span>
-              <div>
-                <div class="link-title">Öppna Google Chat</div>
-                <div class="link-desc">Kanalbåt England 2027 – gruppchatt</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">📱 Lägg till appen på hemskärmen</strong>
-        <div class="meta">Spara denna webbapp på startskärmen så fungerar den som en mobilapp</div>
-
-        <div class="info-box">
-          <h4>Så här gör du:</h4>
-          <ul>
-            <li><strong>På iPhone/iPad (Safari):</strong> Öppna webbappens länk i Safari, tryck på <strong>Dela-ikonen</strong> (fyrkant med pil upp) och välj <strong>Lägg till på hemskärmen</strong>.</li>
-            <li><strong>På Android (Chrome):</strong> Öppna webbappens länk i Chrome, tryck på <strong>menyn (tre prickar)</strong> uppe till höger och välj <strong>Lägg till på startskärmen</strong> / <strong>Installera app</strong> (eller <em>Skapa genväg</em>).</li>
-            <li><strong>Fördelar:</strong> Ingen app-butik, inga utvecklarkonton, direkt koppling till ert Google Kalkylark och Google Drive, och uppdateringar slår igenom när ni publicerar en ny version i Apps Script.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">👥 Kontaktuppgifter – Gänget</strong>
-        <div class="meta">Tryck på nummer eller e-post för att ringa eller mejla direkt</div>
-
-        <div style="margin-top:8px;">
-          <div class="contact-item">
-            <div class="contact-name">Gunnar</div>
-            <div class="contact-links">
-              <a href="tel:+34640054847">📞 +34 640 05 48 47</a>
-              <a href="mailto:g.nihlen@gmail.com">✉️ g.nihlen@gmail.com</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-name">Patrik</div>
-            <div class="contact-links">
-              <a href="tel:+34640392794">📞 +34 640 39 27 94</a>
-              <a href="mailto:patrik.jonsson.nihlen@gmail.com">✉️ patrik.jonsson.nihlen@gmail.com</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-name">Micke</div>
-            <div class="contact-links">
-              <a href="tel:+46705554836">📞 +46 70-555 48 36</a>
-              <a href="mailto:micke@vygorth.se">✉️ micke@vygorth.se (ordinarie)</a>
-              <a href="mailto:vygorth@gmail.com">✉️ vygorth@gmail.com (ej ordinarie)</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-name">Dick</div>
-            <div class="contact-links">
-              <a href="tel:+46707559971">📞 +46 70-755 99 71</a>
-              <a href="mailto:dick@ingelsbo.com">✉️ dick@ingelsbo.com (ordinarie)</a>
-              <a href="mailto:dick71sthlm@gmail.com">✉️ dick71sthlm@gmail.com (ej ordinarie)</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-name">Anders</div>
-            <div class="contact-links">
-              <a href="tel:+46739856323">📞 +46 73-985 63 23</a>
-              <a href="mailto:dr.anders.61@gmail.com">✉️ dr.anders.61@gmail.com</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">🚤 Uthyrare &amp; Nödnummer (England)</strong>
-        <div style="margin-top:8px;">
-          <div class="contact-item">
-            <div class="contact-name">Bath Narrowboats (Sydney Wharf)</div>
-            <div class="contact-links">
-              <a href="tel:+441225447276">📞 +44 (0)1225 447276</a>
-              <a href="mailto:mail@bath-narrowboats.co.uk">✉️ mail@bath-narrowboats.co.uk</a>
-              <a href="https://www.bath-narrowboats.co.uk/" target="_blank" rel="noopener">🌐 www.bath-narrowboats.co.uk</a>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-name">Nödnummer i Storbritannien</div>
-            <div class="contact-links">
-              <a href="tel:999">🚨 999 (Akut – polis, ambulans, brandkår)</a>
-              <a href="tel:111">🏥 111 (NHS sjukvårdsrådgivning)</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <nav class="tabs">
     <button class="tab-btn active" id="nav-overview" onclick="switchTab('overview', this)"><span class="ico">📊</span>Saldo</button>
     <button class="tab-btn" id="nav-expense" onclick="switchTab('expense', this)"><span class="ico">📷</span>Nytt kvitto</button>
-    <button class="tab-btn" id="nav-transfer" onclick="switchTab('transfer', this)"><span class="ico">💸</span>Betala av</button>
     <button class="tab-btn" id="nav-expenses-list" onclick="switchTab('expenses-list', this)"><span class="ico">🧾</span>Utgifter</button>
-    <button class="tab-btn" id="nav-transfers-list" onclick="switchTab('transfers-list', this)"><span class="ico">🔄</span>Överföringar</button>
-    <button class="tab-btn" id="nav-links" onclick="switchTab('links', this)"><span class="ico">🔗</span>Länkar</button>
-    <button class="tab-btn" id="nav-guide" onclick="switchTab('guide', this)"><span class="ico">🗺️</span>Reseguide</button>
-    <button class="tab-btn" id="nav-info" onclick="switchTab('info', this)"><span class="ico">ℹ️</span>Info</button>
+    <button class="tab-btn" id="nav-wiki" onclick="switchTab('wiki', this)"><span class="ico">✅</span>Wiki &amp; Listor</button>
   </nav>
 
   <script>
@@ -1508,21 +1062,63 @@
       switchTab('expense', document.getElementById('nav-expense'));
     }
 
-    function filterGuide() {
-      const q = (document.getElementById('guideSearch').value || '').trim().toLowerCase();
-      const cat = document.getElementById('guideCategory').value;
-      document.querySelectorAll('#tab-guide .guide-section').forEach(sec => {
-        const secCat = sec.getAttribute('data-cat');
-        const catMatch = !cat || secCat === cat;
-        let visibleCount = 0;
-        sec.querySelectorAll('.guide-item').forEach(item => {
-          const text = (item.textContent + ' ' + (item.getAttribute('data-search') || '')).toLowerCase();
-          const show = catMatch && (!q || text.includes(q));
-          item.style.display = show ? 'block' : 'none';
-          if (show) visibleCount++;
+    function extractCoordsFromUrlClient(url) {
+      if (!url) return '';
+      const str = String(url);
+      let m = str.match(/@(-?\d+\.\d+),\s*(-?\d+\.\d+)/);
+      if (m) return Number(m[1]).toFixed(6) + ', ' + Number(m[2]).toFixed(6);
+      m = str.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/);
+      if (m) return Number(m[1]).toFixed(6) + ', ' + Number(m[2]).toFixed(6);
+      m = str.match(/[?&](?:q|query|ll)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/);
+      if (m) return Number(m[1]).toFixed(6) + ', ' + Number(m[2]).toFixed(6);
+      return '';
+    }
+
+    function syncNewExpenseCoordsFromUrl() {
+      const urlVal = document.getElementById('expMapsUrl').value.trim();
+      const parsed = extractCoordsFromUrlClient(urlVal);
+      if (parsed) {
+        document.getElementById('expCoords').value = parsed;
+        document.getElementById('expCoordsDisplay').textContent = 'Koordinater: ' + parsed;
+      }
+    }
+
+    async function lookupNewExpensePlace() {
+      const place = document.getElementById('expPlace').value.trim();
+      const address = document.getElementById('expAddress').value.trim();
+      const mapsUrl = document.getElementById('expMapsUrl').value.trim();
+      if (!place && !address && !mapsUrl) {
+        showToast('Ange företagsnamn, adress eller Google Maps-länk först.', 'err');
+        return;
+      }
+      const btn = document.getElementById('btnAutoPlace');
+      btn.disabled = true;
+      btn.textContent = 'Söker...';
+      try {
+        const res = await apiPost({
+          action: 'lookupPlaceDetails',
+          place: place,
+          address: address,
+          mapsUrl: mapsUrl,
+          websiteUrl: document.getElementById('expWebsiteUrl').value.trim(),
+          bookingUrl: document.getElementById('expBookingUrl').value.trim(),
+          orderUrl: document.getElementById('expOrderUrl').value.trim()
         });
-        sec.style.display = visibleCount > 0 ? 'block' : 'none';
-      });
+        if (res.mapsUrl) document.getElementById('expMapsUrl').value = res.mapsUrl;
+        if (res.coordinates) {
+          document.getElementById('expCoords').value = res.coordinates;
+          document.getElementById('expCoordsDisplay').textContent = 'Koordinater: ' + res.coordinates;
+        }
+        if (res.websiteUrl) document.getElementById('expWebsiteUrl').value = res.websiteUrl;
+        if (res.bookingUrl) document.getElementById('expBookingUrl').value = res.bookingUrl;
+        if (res.orderUrl) document.getElementById('expOrderUrl').value = res.orderUrl;
+        showToast('Google Maps-länk, koordinater och länkar hämtade!', 'ok');
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🔎 Hämta automatiskt';
+      }
     }
 
     function setExpCurrency(c) {
@@ -1582,12 +1178,13 @@
           preview.src = dataUrl;
           preview.style.display = 'block';
 
-          setAiStatus('🔍 Läser av kvittot...', 'info');
+          setAiStatus('🔍 Läser av kvitto och söker Google Maps...', 'info');
           try {
             const res = await apiPost({ action: 'scanReceiptWithAI', imageBase64: compressedBase64 });
             if (!res.aiEnabled) { setAiStatus('📎 ' + res.message, 'info'); return; }
             const r = res.result || {};
             if (r.place) document.getElementById('expPlace').value = r.place;
+            if (r.address) document.getElementById('expAddress').value = r.address;
             if (r.amount && r.amount > 0) document.getElementById('expAmount').value = r.amount;
             if (r.currency === 'SEK' || r.currency === 'GBP') setExpCurrency(r.currency);
             if (r.date && /^\d{4}-\d{2}-\d{2}$/.test(r.date)) document.getElementById('expDate').value = r.date;
@@ -1598,11 +1195,20 @@
                 if (catSel.options[i].value === r.category) { catSel.selectedIndex = i; break; }
               }
             }
+            if (r.mapsUrl) document.getElementById('expMapsUrl').value = r.mapsUrl;
+            if (r.coordinates) {
+              document.getElementById('expCoords').value = r.coordinates;
+              document.getElementById('expCoordsDisplay').textContent = 'Koordinater: ' + r.coordinates;
+            }
+            if (r.websiteUrl) document.getElementById('expWebsiteUrl').value = r.websiteUrl;
+            if (r.bookingUrl) document.getElementById('expBookingUrl').value = r.bookingUrl;
+            if (r.orderUrl) document.getElementById('expOrderUrl').value = r.orderUrl;
+
             updatePreview();
             if (r.uncertain) {
-              setAiStatus('⚠️ Kontrollera: ' + r.uncertain + ' — Välj vem som betalade och vilka som delade innan du sparar.', 'warn');
+              setAiStatus('⚠️ Kontrollera: ' + r.uncertain + ' — Verifiera belopp, karta och länkar innan du sparar.', 'warn');
             } else {
-              setAiStatus('✅ Kvittot avläst! Kontrollera belopp, vem som betalade och vilka som delade innan du sparar.', 'ok');
+              setAiStatus('✅ Kvittot och platsinfo avlästa! Kontrollera innan du sparar.', 'ok');
             }
           } catch (err) {
             setAiStatus('⚠️ ' + err.message, 'warn');
@@ -1611,6 +1217,101 @@
         img.src = ev.target.result;
       };
       reader.readAsDataURL(file);
+    }
+
+    function openEditLinksModalByRow(rowIndex) {
+      if (!latestData) return;
+      const item = (latestData.expenses || []).find(x => Number(x.rowIndex) === Number(rowIndex));
+      if (!item) return;
+      document.getElementById('editRowIndex').value = item.rowIndex;
+      document.getElementById('modalPlaceTitle').textContent = '📍 ' + (item.place || 'Utgift');
+      document.getElementById('editAddress').value = '';
+      document.getElementById('editMapsUrl').value = item.mapsUrl || '';
+      document.getElementById('editCoordsPreview').textContent = 'Koordinater: ' + (item.coordinates || '–');
+      document.getElementById('editWebsiteUrl').value = item.websiteUrl || '';
+      document.getElementById('editBookingUrl').value = item.bookingUrl || '';
+      document.getElementById('editOrderUrl').value = item.orderUrl || '';
+      document.getElementById('editLinksModal').style.display = 'flex';
+    }
+
+    function closeEditLinksModal() {
+      document.getElementById('editLinksModal').style.display = 'none';
+    }
+
+    async function autoLookupEditLinks() {
+      const rowIndex = Number(document.getElementById('editRowIndex').value);
+      const item = (latestData && latestData.expenses || []).find(x => Number(x.rowIndex) === rowIndex);
+      try {
+        const res = await apiPost({
+          action: 'lookupPlaceDetails',
+          place: item ? item.place : '',
+          address: document.getElementById('editAddress').value.trim(),
+          mapsUrl: document.getElementById('editMapsUrl').value.trim(),
+          websiteUrl: document.getElementById('editWebsiteUrl').value.trim(),
+          bookingUrl: document.getElementById('editBookingUrl').value.trim(),
+          orderUrl: document.getElementById('editOrderUrl').value.trim()
+        });
+        if (res.mapsUrl) document.getElementById('editMapsUrl').value = res.mapsUrl;
+        if (res.coordinates) document.getElementById('editCoordsPreview').textContent = 'Koordinater: ' + res.coordinates;
+        if (res.websiteUrl) document.getElementById('editWebsiteUrl').value = res.websiteUrl;
+        if (res.bookingUrl) document.getElementById('editBookingUrl').value = res.bookingUrl;
+        if (res.orderUrl) document.getElementById('editOrderUrl').value = res.orderUrl;
+        showToast('Uppgifter hämtade!', 'ok');
+      } catch (err) {
+        showToast(err.message, 'err');
+      }
+    }
+
+    async function saveEditedLinks() {
+      const btn = document.getElementById('btnSaveEditLinks');
+      btn.disabled = true;
+      btn.textContent = 'Sparar...';
+      try {
+        const res = await apiPost({
+          action: 'updateExpenseLinks',
+          payload: {
+            rowIndex: Number(document.getElementById('editRowIndex').value),
+            address: document.getElementById('editAddress').value.trim(),
+            mapsUrl: document.getElementById('editMapsUrl').value.trim(),
+            websiteUrl: document.getElementById('editWebsiteUrl').value.trim(),
+            bookingUrl: document.getElementById('editBookingUrl').value.trim(),
+            orderUrl: document.getElementById('editOrderUrl').value.trim()
+          }
+        });
+        showToast(res.message, 'ok');
+        closeEditLinksModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Spara länkar & koordinater';
+      }
+    }
+
+    function buildExpenseExtrasHtml(r) {
+      const coords = r.coordinates || extractCoordsFromUrlClient(r.mapsUrl);
+      const coordHtml = coords ? ('<div class="coord-line">📌 Koordinater: ' + coords + '</div>') : '';
+
+      const links = [];
+      if (r.mapsUrl) {
+        links.push('<a class="pill-link map" href="' + r.mapsUrl + '" target="_blank" rel="noopener">📍 Google Maps ↗</a>');
+      }
+      if (r.websiteUrl) {
+        links.push('<a class="pill-link" href="' + r.websiteUrl + '" target="_blank" rel="noopener">🌐 Webbsida ↗</a>');
+      }
+      if (r.bookingUrl) {
+        links.push('<a class="pill-link" href="' + r.bookingUrl + '" target="_blank" rel="noopener">📅 Bokning ↗</a>');
+      }
+      if (r.orderUrl) {
+        links.push('<a class="pill-link" href="' + r.orderUrl + '" target="_blank" rel="noopener">🛒 Onlineorder ↗</a>');
+      }
+      if (r.rowIndex) {
+        links.push('<button type="button" class="pill-link" onclick="openEditLinksModalByRow(' + r.rowIndex + ')">✏️ Karta &amp; länkar</button>');
+      }
+
+      const linksHtml = links.length ? ('<div class="item-links">' + links.join('') + '</div>') : '';
+      return coordHtml + linksHtml;
     }
 
     function renderExpensesList() {
@@ -1624,7 +1325,7 @@
 
       const filtered = list.filter(r => {
         const matchPayer = !payerFilter || r.payer === payerFilter;
-        const text = ((r.place || '') + ' ' + (r.category || '') + ' ' + (r.comment || '')).toLowerCase();
+        const text = ((r.place || '') + ' ' + (r.category || '') + ' ' + (r.comment || '') + ' ' + (r.coordinates || '')).toLowerCase();
         const matchQuery = !q || text.includes(q);
         return matchPayer && matchQuery;
       });
@@ -1644,7 +1345,7 @@
         const extra = [r.date, r.payer, r.category].filter(Boolean).join(' • ');
         const commentLine = r.comment ? ('<div class="meta">' + r.comment + '</div>') : '';
         return '<div class="recent-item">' +
-          '<div><strong>' + (r.place || 'Utgift') + '</strong><div class="meta">' + extra + '</div>' + commentLine + '</div>' +
+          '<div><strong>' + (r.place || 'Utgift') + '</strong><div class="meta">' + extra + '</div>' + commentLine + buildExpenseExtrasHtml(r) + '</div>' +
           '<div style="text-align:right;white-space:nowrap;"><strong>' + fmtSek(r.amountSek || 0) + '</strong><div class="meta">' + orig + '</div></div>' +
         '</div>';
       }).join('');
@@ -1656,7 +1357,7 @@
 
       const transfers = latestData.transfers || [];
       if (!transfers.length) {
-        container.innerHTML = '<div style="padding:10px 0;">Inga överföringar registrerade ännu. Klicka på <strong>+ Ny</strong> uppe till höger eller på <strong>Betala av</strong> för att lägga in en betalning.</div>';
+        container.innerHTML = '<div style="padding:10px 0;">Inga överföringar registrerade ännu.</div>';
         return;
       }
 
@@ -1674,6 +1375,96 @@
           '<div style="text-align:right;white-space:nowrap;"><strong>' + sekVal + '</strong><div class="meta">' + orig + '</div></div>' +
         '</div>';
       }).join('');
+    }
+
+    function renderWikiList() {
+      const container = document.getElementById('wikiItemsList');
+      const metaEl = document.getElementById('wikiProgressMeta');
+      const pageSel = document.getElementById('wikiPageFilter');
+      if (!latestData) return;
+
+      const items = latestData.wikiItems || [];
+      const currentPageVal = pageSel.value;
+      const pages = Array.from(new Set(items.map(i => i.page).filter(Boolean)));
+      pageSel.innerHTML = '<option value="">Alla sidor/listor</option>' + pages.map(p =>
+        '<option value="' + p + '"' + (p === currentPageVal ? ' selected' : '') + '>' + p + '</option>'
+      ).join('');
+
+      const typeFilter = document.getElementById('wikiTypeFilter').value;
+      const pageFilter = pageSel.value;
+
+      const filtered = items.filter(i => {
+        const matchType = !typeFilter || i.type === typeFilter;
+        const matchPage = !pageFilter || i.page === pageFilter;
+        return matchType && matchPage;
+      });
+
+      const doneCount = filtered.filter(i => i.checked).length;
+      metaEl.textContent = doneCount + ' av ' + filtered.length + ' klarmarkerade i valda listor';
+
+      if (!filtered.length) {
+        container.innerHTML = '<div style="padding:10px 0;color:var(--muted);">Inga poster matchar filtret.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const checkedAttr = item.checked ? ' checked' : '';
+        const checkedCls = item.checked ? ' checked' : '';
+        const subParts = [item.page, item.owner].filter(Boolean).join(' • ');
+        const noteHtml = item.note ? ('<div class="meta">' + item.note + '</div>') : '';
+        return '<div class="wiki-item' + checkedCls + '">' +
+          '<input type="checkbox"' + checkedAttr + ' onchange="onToggleWikiItem(' + item.rowIndex + ', this.checked)">' +
+          '<div style="flex:1;">' +
+            '<div class="wiki-title"><span class="wiki-badge">' + item.type + '</span><strong>' + item.title + '</strong></div>' +
+            '<div class="meta">' + subParts + '</div>' +
+            noteHtml +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    async function onToggleWikiItem(rowIndex, checked) {
+      try {
+        const res = await apiPost({
+          action: 'toggleChecklistItem',
+          payload: { rowIndex: rowIndex, checked: checked }
+        });
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      }
+    }
+
+    async function submitWikiItem() {
+      const btn = document.getElementById('btnSaveWikiItem');
+      const title = document.getElementById('newWikiTitle').value.trim();
+      if (!title) {
+        showToast('Skriv en rubrik, vara eller uppgift först.', 'err');
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Sparar...';
+      try {
+        const res = await apiPost({
+          action: 'saveListItem',
+          payload: {
+            type: document.getElementById('newWikiType').value,
+            page: document.getElementById('newWikiPage').value.trim() || 'Allmänt',
+            title: title,
+            note: document.getElementById('newWikiNote').value.trim(),
+            owner: document.getElementById('newWikiOwner').value
+          }
+        });
+        document.getElementById('newWikiTitle').value = '';
+        document.getElementById('newWikiNote').value = '';
+        showToast(res.message, 'ok');
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Lägg till i kalkylarket';
+      }
     }
 
     function renderData(d) {
@@ -1714,7 +1505,7 @@
         rList.innerHTML = d.recent.map(r => {
           const orig = r.currency === 'GBP' ? ('£' + r.amount.toFixed(2)) : (Math.round(r.amount) + ' kr');
           return '<div class="recent-item">' +
-            '<div><strong>' + r.place + '</strong><div class="meta">' + r.date + ' • ' + r.payer + '</div></div>' +
+            '<div><strong>' + r.place + '</strong><div class="meta">' + r.date + ' • ' + r.payer + '</div>' + buildExpenseExtrasHtml(r) + '</div>' +
             '<div style="text-align:right;"><strong>' + fmtSek(r.amountSek) + '</strong><div class="meta">' + orig + '</div></div>' +
           '</div>';
         }).join('');
@@ -1722,6 +1513,7 @@
 
       renderExpensesList();
       renderTransfersList();
+      renderWikiList();
       updatePreview();
     }
 
@@ -1742,11 +1534,17 @@
       const payload = {
         date: document.getElementById('expDate').value,
         place: document.getElementById('expPlace').value,
+        address: document.getElementById('expAddress').value,
         category: document.getElementById('expCategory').value,
         payer: document.getElementById('expPayer').value,
         amount: document.getElementById('expAmount').value,
         currency: expCurrency,
         fxRate: document.getElementById('expFxRate').value,
+        mapsUrl: document.getElementById('expMapsUrl').value,
+        coordinates: document.getElementById('expCoords').value,
+        websiteUrl: document.getElementById('expWebsiteUrl').value,
+        bookingUrl: document.getElementById('expBookingUrl').value,
+        orderUrl: document.getElementById('expOrderUrl').value,
         participants: participants,
         comment: document.getElementById('expComment').value,
         imageBase64: compressedBase64
@@ -1760,8 +1558,15 @@
         btn.textContent = 'Spara kvitto';
         showToast(res.message, 'ok');
         document.getElementById('expPlace').value = '';
+        document.getElementById('expAddress').value = '';
         document.getElementById('expAmount').value = '';
         document.getElementById('expFxRate').value = '';
+        document.getElementById('expMapsUrl').value = '';
+        document.getElementById('expCoords').value = '';
+        document.getElementById('expCoordsDisplay').textContent = 'Koordinater: –';
+        document.getElementById('expWebsiteUrl').value = '';
+        document.getElementById('expBookingUrl').value = '';
+        document.getElementById('expOrderUrl').value = '';
         document.getElementById('expComment').value = '';
         document.getElementById('expPhotoCam').value = '';
         document.getElementById('expPhotoGal').value = '';
@@ -1811,3 +1616,5 @@
     document.getElementById('trDate').value = todayISO();
     loadData();
   </script>
+</body>
+</html>
