@@ -1034,6 +1034,13 @@
           <select id="wikiPageFilter" onchange="renderWikiList()">
             <option value="">Alla sidor/listor</option>
           </select>
+          <select id="wikiOwnerFilter" onchange="renderWikiList()" style="grid-column: 1 / -1;">
+            <option value="">Alla ansvariga</option>
+            <option value="Alla">Alla (gemensamt)</option>
+            <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+            <option value="Dick & Micke">Dick &amp; Micke</option>
+            <option value="Anders">Anders</option>
+          </select>
         </div>
 
         <div id="wikiItemsList">Hämtar listor &amp; wikisidor...</div>
@@ -1637,14 +1644,16 @@
 
       const typeFilter = document.getElementById('wikiTypeFilter').value;
       const pageFilter = pageSel.value;
+      const ownerFilter = document.getElementById('wikiOwnerFilter').value;
 
       const filtered = items.filter(i => {
         if (i.type === 'Typ' || i.title === 'Punkt / Innehåll') return false;
         const matchType = !typeFilter || i.type === typeFilter;
         const matchPage = !pageFilter || i.page === pageFilter;
-        return matchType && matchPage;
+        const matchOwner = !ownerFilter || i.owner === ownerFilter;
+        return matchType && matchPage && matchOwner;
       });
-
+      
       const doneCount = filtered.filter(i => i.checked).length;
       metaEl.textContent = doneCount + ' av ' + filtered.length + ' klarmarkerade i valda listor';
 
