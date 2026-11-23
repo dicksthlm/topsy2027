@@ -1639,6 +1639,7 @@
       const pageFilter = pageSel.value;
 
       const filtered = items.filter(i => {
+        if (i.type === 'Typ' || i.title === 'Punkt / Innehåll') return false;
         const matchType = !typeFilter || i.type === typeFilter;
         const matchPage = !pageFilter || i.page === pageFilter;
         return matchType && matchPage;
