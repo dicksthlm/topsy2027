@@ -92,6 +92,32 @@
       border: 1px solid rgba(115, 41, 130, 0.14);
     }
 
+    .subnav-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 10px;
+    }
+
+    .subnav-pill {
+      white-space: nowrap;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .subnav-pill.active {
+      background: linear-gradient(135deg, var(--pride-purple), var(--pride-blue));
+      color: #fff;
+      border-color: var(--pride-purple);
+    }
+
     .hero-scan-btn {
       width: 100%;
       display: flex;
@@ -280,7 +306,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 6px;
+      margin-top: 7px;
     }
 
     .pill-link {
@@ -302,6 +328,70 @@
       background: #EFF6FF;
       color: var(--pride-blue);
       border-color: rgba(0, 76, 255, 0.25);
+    }
+
+    .pill-link.receipt {
+      background: #ECFDF5;
+      color: var(--green);
+      border-color: rgba(19, 115, 51, 0.25);
+    }
+
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-top: 8px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 13px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: 0 2px 6px rgba(45, 18, 89, 0.04);
+    }
+
+    .link-card:nth-child(6n + 1) { border-left: 4px solid var(--pride-red); }
+    .link-card:nth-child(6n + 2) { border-left: 4px solid var(--pride-orange); }
+    .link-card:nth-child(6n + 3) { border-left: 4px solid var(--pride-yellow); }
+    .link-card:nth-child(6n + 4) { border-left: 4px solid var(--pride-green); }
+    .link-card:nth-child(6n + 5) { border-left: 4px solid var(--pride-blue); }
+    .link-card:nth-child(6n + 6) { border-left: 4px solid var(--pride-purple); }
+
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .link-ico {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .link-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--navy);
+    }
+
+    .link-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .link-arrow {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--pride-purple);
+      flex-shrink: 0;
     }
 
     label.field-lbl {
@@ -714,6 +804,12 @@
   </div>
 
   <div class="container">
+    <div class="subnav-bar">
+      <button type="button" class="subnav-pill" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">💸 Betala av</button>
+      <button type="button" class="subnav-pill" onclick="switchTab('transfers-list', null)">🔄 Överföringar</button>
+      <button type="button" class="subnav-pill" onclick="switchTab('links', document.getElementById('nav-links'))">📸 Bilder &amp; Mappar</button>
+    </div>
+
     <div id="tab-overview" class="section active">
       <button class="hero-scan-btn" onclick="openScanFlow()">
         📷 Skanna / fota nytt kvitto
@@ -977,6 +1073,119 @@
       </div>
     </div>
 
+    <div id="tab-links" class="section">
+      <div class="card">
+        <strong style="color:var(--navy);font-size:16px;">📸 Bilder &amp; video – Ladda upp till mapp</strong>
+        <div class="meta">Öppnar direkt respektive mapp i Google Drive för att ladda upp foton och filmklipp</div>
+
+        <div class="link-list">
+          <a class="link-card" href="https://drive.google.com/drive/folders/1YapvxZEcSXJbAaq6H0-e5rFOqJw16Q2E" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">🌈</span>
+              <div>
+                <div class="link-title">Bilder och video – Alla</div>
+                <div class="link-desc">Gemensam mapp för hela gänget</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+
+          <a class="link-card" href="https://drive.google.com/drive/folders/1ZFpbujBUEg6gkQkotrMhCD-E2VgnrdZ2" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">📷</span>
+              <div>
+                <div class="link-title">Bilder och video – Anders</div>
+                <div class="link-desc">Personlig uppladdningsmapp</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+
+          <a class="link-card" href="https://drive.google.com/drive/folders/1zLFT5KB8p21E603Dgd7EdjRazQyP1War" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">📷</span>
+              <div>
+                <div class="link-title">Bilder och video – Dick</div>
+                <div class="link-desc">Personlig uppladdningsmapp</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+
+          <a class="link-card" href="https://drive.google.com/drive/folders/1s5SiJg9161LTPASJ1vjhK-CLRZzM0b6M" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">📷</span>
+              <div>
+                <div class="link-title">Bilder och video – Gunnar</div>
+                <div class="link-desc">Personlig uppladdningsmapp</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+
+          <a class="link-card" href="https://drive.google.com/drive/folders/1nB4d1Iy3ZCtGRJHyPAgALoSGftLHkgu3" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">📷</span>
+              <div>
+                <div class="link-title">Bilder och video – Micke</div>
+                <div class="link-desc">Personlig uppladdningsmapp</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+
+          <a class="link-card" href="https://drive.google.com/drive/folders/17kVLmuyWgSBGgZ7_oNfra0SA62LwTjEg" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">📷</span>
+              <div>
+                <div class="link-title">Bilder och video – Patrik</div>
+                <div class="link-desc">Personlig uppladdningsmapp</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <strong style="color:var(--navy);font-size:16px;">📁 Gemensamma dokument &amp; mappar</strong>
+        <div class="link-list">
+          <a class="link-card" href="https://drive.google.com/drive/folders/1IA2WIM_bH7kcY6tVLl9vuOzhjeJRjMAI?usp=drive_link" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">📂</span>
+              <div>
+                <div class="link-title">Kanalbåt England (Huvudmapp)</div>
+                <div class="link-desc">Google Drive-mapp för hela resan</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+
+          <a class="link-card" href="https://docs.google.com/spreadsheets/d/1FSdwExJGllOyjPYoJ26vBLDnUVZael0UkDBzKe2aj04/edit?usp=drive_link" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">📊</span>
+              <div>
+                <div class="link-title">Kalkyldokument (Reseutgifter)</div>
+                <div class="link-desc">Google Kalkylark med utgifter, kurser &amp; avräkning</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+
+          <a class="link-card" href="https://docs.google.com/document/d/1zYGpz4lt1R67vbxJQn0xWLsrq-ObKty3tIBiqX1JBU4/edit?usp=sharing" target="_blank" rel="noopener">
+            <div class="link-left">
+              <span class="link-ico">📝</span>
+              <div>
+                <div class="link-title">Masterdokument (Reseplan)</div>
+                <div class="link-desc">Google Doc med rutt, båtfakta &amp; checklista</div>
+              </div>
+            </div>
+            <span class="link-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
     <div id="tab-transfers-list" class="section">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -996,9 +1205,9 @@
   <nav class="tabs">
     <button class="tab-btn active" id="nav-overview" onclick="switchTab('overview', this)"><span class="ico">📊</span>Saldo</button>
     <button class="tab-btn" id="nav-expense" onclick="switchTab('expense', this)"><span class="ico">📷</span>Nytt kvitto</button>
-    <button class="tab-btn" id="nav-transfer" onclick="switchTab('transfer', this)"><span class="ico">💸</span>Betala av</button>
     <button class="tab-btn" id="nav-expenses-list" onclick="switchTab('expenses-list', this)"><span class="ico">🧾</span>Utgifter</button>
     <button class="tab-btn" id="nav-wiki" onclick="switchTab('wiki', this)"><span class="ico">✅</span>Wiki &amp; Listor</button>
+    <button class="tab-btn" id="nav-links" onclick="switchTab('links', this)"><span class="ico">📸</span>Mappar</button>
   </nav>
 
   <script>
@@ -1066,6 +1275,21 @@
 
     function openScanFlow() {
       switchTab('expense', document.getElementById('nav-expense'));
+    }
+
+    function parseCommentAndReceipt(rawComment) {
+      const str = String(rawComment || '');
+      let cleanComment = str;
+      let receiptUrl = '';
+      const m = str.match(/\|\s*Kvitto:\s*(https?:\/\/\S+)|^Kvitto:\s*(https?:\/\/\S+)/);
+      if (m) {
+        receiptUrl = (m[1] || m[2] || '').trim();
+        cleanComment = str
+          .replace(/\s*\|\s*Kvitto:\s*https?:\/\/\S+/, '')
+          .replace(/^Kvitto:\s*https?:\/\/\S+/, '')
+          .trim();
+      }
+      return { cleanComment, receiptUrl };
     }
 
     function extractCoordsFromUrlClient(url) {
@@ -1296,10 +1520,15 @@
     }
 
     function buildExpenseExtrasHtml(r) {
+      const parsed = parseCommentAndReceipt(r.comment);
+      const receiptUrl = r.receiptUrl || parsed.receiptUrl;
       const coords = r.coordinates || extractCoordsFromUrlClient(r.mapsUrl);
       const coordHtml = coords ? ('<div class="coord-line">📌 Koordinater: ' + coords + '</div>') : '';
 
       const links = [];
+      if (receiptUrl) {
+        links.push('<a class="pill-link receipt" href="' + receiptUrl + '" target="_blank" rel="noopener">🧾 Kvittobild ↗</a>');
+      }
       if (r.mapsUrl) {
         links.push('<a class="pill-link map" href="' + r.mapsUrl + '" target="_blank" rel="noopener">📍 Google Maps ↗</a>');
       }
@@ -1331,7 +1560,8 @@
 
       const filtered = list.filter(r => {
         const matchPayer = !payerFilter || r.payer === payerFilter;
-        const text = ((r.place || '') + ' ' + (r.category || '') + ' ' + (r.comment || '') + ' ' + (r.coordinates || '')).toLowerCase();
+        const parsed = parseCommentAndReceipt(r.comment);
+        const text = ((r.place || '') + ' ' + (r.category || '') + ' ' + parsed.cleanComment + ' ' + (r.coordinates || '')).toLowerCase();
         const matchQuery = !q || text.includes(q);
         return matchPayer && matchQuery;
       });
@@ -1349,7 +1579,8 @@
           ? ('£' + Number(r.amount || 0).toFixed(2))
           : (Math.round(Number(r.amount || 0)) + ' kr');
         const extra = [r.date, r.payer, r.category].filter(Boolean).join(' • ');
-        const commentLine = r.comment ? ('<div class="meta">' + r.comment + '</div>') : '';
+        const parsed = parseCommentAndReceipt(r.comment);
+        const commentLine = parsed.cleanComment ? ('<div class="meta">' + parsed.cleanComment + '</div>') : '';
         return '<div class="recent-item">' +
           '<div><strong>' + (r.place || 'Utgift') + '</strong><div class="meta">' + extra + '</div>' + commentLine + buildExpenseExtrasHtml(r) + '</div>' +
           '<div style="text-align:right;white-space:nowrap;"><strong>' + fmtSek(r.amountSek || 0) + '</strong><div class="meta">' + orig + '</div></div>' +
@@ -1516,8 +1747,10 @@
       } else {
         rList.innerHTML = d.recent.map(r => {
           const orig = r.currency === 'GBP' ? ('£' + r.amount.toFixed(2)) : (Math.round(r.amount) + ' kr');
+          const parsed = parseCommentAndReceipt(r.comment);
+          const cLine = parsed.cleanComment ? ('<div class="meta">' + parsed.cleanComment + '</div>') : '';
           return '<div class="recent-item">' +
-            '<div><strong>' + r.place + '</strong><div class="meta">' + r.date + ' • ' + r.payer + '</div>' + buildExpenseExtrasHtml(r) + '</div>' +
+            '<div><strong>' + r.place + '</strong><div class="meta">' + r.date + ' • ' + r.payer + '</div>' + cLine + buildExpenseExtrasHtml(r) + '</div>' +
             '<div style="text-align:right;"><strong>' + fmtSek(r.amountSek) + '</strong><div class="meta">' + orig + '</div></div>' +
           '</div>';
         }).join('');
