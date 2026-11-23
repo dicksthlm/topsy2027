@@ -1683,7 +1683,7 @@
         const checkedAttr = item.checked ? ' checked' : '';
         const checkedCls = item.checked ? ' checked' : '';
         const subParts = [item.page, item.owner].filter(Boolean).join(' • ');
-        const noteHtml = item.note ? ('<div class="meta">' + item.note + '</div>') : '';
+        const noteHtml = item.note ? ('<div class="meta" style="margin-top:4px;line-height:1.5;">' + linkifyWikiNote(item.note) + '</div>') : '';
         return '<div class="wiki-item' + checkedCls + '">' +
           '<input type="checkbox"' + checkedAttr + ' onchange="onToggleWikiItem(' + item.rowIndex + ', this.checked)">' +
           '<div style="flex:1;">' +
