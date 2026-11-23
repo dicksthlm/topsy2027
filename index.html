@@ -1629,6 +1629,23 @@
       if (tabHistory) tabHistory.innerHTML = html;
     }
 
+    function linkifyWikiNote(text) {
+      if (!text) return '';
+      const escaped = String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      return escaped.replace(/(https?:\/\/[^\s|<]+)/g, function(url) {
+        let label = '🔗 Öppna länk ↗';
+        if (url.indexOf('chat.google.com') !== -1) label = '💬 Öppna Google Chat ↗';
+        else if (url.indexOf('facebook.com/messages') !== -1 || url.indexOf('messenger.com') !== -1) label = '💙 Öppna Messenger ↗';
+        else if (url.indexOf('maps.app.goo.gl') !== -1 || url.indexOf('google.com/maps') !== -1) label = '📍 Google Maps ↗';
+        else if (url.indexOf('bath-narrowboats.co.uk') !== -1) label = '🚤 Bath Narrowboats ↗';
+        return '<a class="pill-link" href="' + url + '" target="_blank" rel="noopener" style="margin:3px 4px 2px 0;">' + label + '</a>';
+      });
+    }
+    
     function renderWikiList() {
       const container = document.getElementById('wikiItemsList');
       const metaEl = document.getElementById('wikiProgressMeta');
