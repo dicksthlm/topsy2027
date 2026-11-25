@@ -8,27 +8,45 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
     :root {
-      --pride-red: #E40303;
-      --pride-orange: #FF8C00;
-      --pride-yellow: #E6B800;
-      --pride-green: #008026;
-      --pride-blue: #004CFF;
-      --pride-purple: #732982;
-      --pride-pink: #D81B60;
-      --navy: #3B175C;
-      --slate: #5E237B;
-      --teal: #0066CC;
-      --bg: #FFF7FB;
-      --card: #FFFFFF;
-      --text: #1F1829;
-      --muted: #665B75;
-      --border: #E8DCEB;
-      --green-bg: #E6F4EA;
-      --green: #137333;
-      --red-bg: #FCE8E6;
-      --red: #C5221F;
-      --warn-bg: #FEF7E0;
-      --warn: #8A5300;
+      /* Nedtonad regnbågspalett för mörkt tema */
+      --pride-red: #E06C88;
+      --pride-orange: #E58C5A;
+      --pride-yellow: #E2BE5A;
+      --pride-green: #5EC29B;
+      --pride-blue: #5CA4E6;
+      --pride-purple: #9C7AE6;
+      --pride-pink: #D96B9E;
+
+      --pride-gradient: linear-gradient(
+        90deg,
+        var(--pride-red) 0%,
+        var(--pride-orange) 20%,
+        var(--pride-yellow) 40%,
+        var(--pride-green) 60%,
+        var(--pride-blue) 80%,
+        var(--pride-purple) 100%
+      );
+
+      /* Mörka ytor & text */
+      --bg: #0E1017;
+      --bg-gradient: radial-gradient(circle at 15% 0%, rgba(156, 122, 230, 0.10), transparent 42%),
+                     radial-gradient(circle at 85% 12%, rgba(92, 164, 230, 0.08), transparent 40%),
+                     #0E1017;
+      --card: #161A24;
+      --card-elevated: #1E2331;
+      --card-hover: #252B3C;
+      --navy: #F2F4FA;
+      --text: #E9ECF5;
+      --muted: #98A1B8;
+      --border: rgba(255, 255, 255, 0.09);
+      --border-strong: rgba(255, 255, 255, 0.18);
+
+      --green-bg: rgba(94, 194, 155, 0.16);
+      --green: #7CE0B8;
+      --red-bg: rgba(224, 108, 136, 0.16);
+      --red: #F296AD;
+      --warn-bg: rgba(226, 190, 90, 0.16);
+      --warn: #F2D37E;
     }
 
     * {
@@ -38,42 +56,37 @@
 
     body {
       margin: 0;
-      background: linear-gradient(180deg, #FFF5FA 0%, #F4F8FF 52%, #FFFBEB 100%);
+      background: var(--bg-gradient);
       color: var(--text);
       padding-bottom: 128px;
       min-height: 100vh;
     }
 
     header {
-      background: linear-gradient(135deg, #2D1259 0%, #6A1B78 52%, #134E78 100%);
-      color: #fff;
-      padding: 16px 16px 13px;
+      background: linear-gradient(135deg, rgba(22, 26, 36, 0.96) 0%, rgba(32, 26, 48, 0.96) 55%, rgba(20, 32, 48, 0.96) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--navy);
+      padding: 15px 16px 13px;
       position: sticky;
       top: 0;
       z-index: 10;
-      box-shadow: 0 3px 12px rgba(45, 18, 89, 0.22);
-      border-top: 5px solid transparent;
-      border-bottom: 4px solid transparent;
-      border-image: linear-gradient(
-        90deg,
-        var(--pride-red),
-        var(--pride-orange),
-        var(--pride-yellow),
-        var(--pride-green),
-        var(--pride-blue),
-        var(--pride-purple)
-      ) 1;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      border-top: 3px solid transparent;
+      border-bottom: 2px solid transparent;
+      border-image: var(--pride-gradient) 1;
     }
 
     header h1 {
       margin: 0;
       font-size: 18px;
       letter-spacing: 0.2px;
+      font-weight: 700;
     }
 
     header .sub {
       font-size: 12px;
-      opacity: 0.92;
+      color: var(--muted);
       margin-top: 3px;
     }
 
@@ -85,16 +98,16 @@
 
     .card {
       background: var(--card);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 15px;
       margin-bottom: 12px;
-      box-shadow: 0 4px 14px rgba(45, 18, 89, 0.06);
-      border: 1px solid rgba(115, 41, 130, 0.14);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border);
     }
 
     .subnav-bar {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       overflow-x: auto;
       padding-bottom: 6px;
       margin-bottom: 10px;
@@ -102,20 +115,27 @@
 
     .subnav-pill {
       white-space: nowrap;
-      padding: 7px 12px;
+      padding: 8px 14px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: #fff;
-      color: var(--navy);
+      background: var(--card-elevated);
+      color: var(--text);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
+      transition: transform 0.14s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .subnav-pill:hover {
+      background: var(--card-hover);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
     }
 
     .subnav-pill.active {
-      background: linear-gradient(135deg, var(--pride-purple), var(--pride-blue));
+      background: linear-gradient(135deg, rgba(156, 122, 230, 0.28), rgba(92, 164, 230, 0.28));
       color: #fff;
-      border-color: var(--pride-purple);
+      border-color: rgba(156, 122, 230, 0.55);
     }
 
     .hero-scan-btn {
@@ -124,31 +144,36 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      padding: 15px;
+      padding: 15px 18px;
       border-radius: 14px;
-      border: none;
+      border: 1px solid rgba(255, 255, 255, 0.16);
       margin-bottom: 12px;
       background: linear-gradient(
-        90deg,
-        #E40303 0%,
-        #FF8C00 20%,
-        #D4A800 40%,
-        #008026 60%,
-        #004CFF 80%,
-        #732982 100%
+        100deg,
+        rgba(224, 108, 136, 0.90) 0%,
+        rgba(229, 140, 90, 0.90) 22%,
+        rgba(226, 190, 90, 0.90) 42%,
+        rgba(94, 194, 155, 0.90) 62%,
+        rgba(92, 164, 230, 0.90) 82%,
+        rgba(156, 122, 230, 0.92) 100%
       );
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
+      color: #0E1017;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
       cursor: pointer;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
-      box-shadow: 0 6px 18px rgba(115, 41, 130, 0.24);
-      transition: transform 0.12s ease, filter 0.12s ease;
+      box-shadow: 0 8px 22px rgba(156, 122, 230, 0.24), 0 4px 14px rgba(0, 0, 0, 0.4);
+      transition: transform 0.14s ease, filter 0.18s ease, box-shadow 0.18s ease;
     }
 
     .hero-scan-btn:hover {
       filter: brightness(1.06);
       transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(92, 164, 230, 0.30), 0 4px 16px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero-scan-btn:active {
+      transform: translateY(0) scale(0.985);
     }
 
     .kpi-grid {
@@ -160,20 +185,20 @@
 
     .kpi {
       background: var(--card);
-      border-radius: 12px;
-      padding: 12px;
+      border-radius: 14px;
+      padding: 13px;
       border: 1px solid var(--border);
-      box-shadow: 0 3px 10px rgba(45, 18, 89, 0.05);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
     }
 
     .kpi-grid .kpi:first-child {
-      border-top: 4px solid var(--pride-orange);
-      background: linear-gradient(180deg, #FFFDF7 0%, #FFFFFF 100%);
+      border-top: 3px solid var(--pride-orange);
+      background: linear-gradient(180deg, rgba(229, 140, 90, 0.08) 0%, var(--card) 100%);
     }
 
     .kpi-grid .kpi:last-child {
-      border-top: 4px solid var(--pride-blue);
-      background: linear-gradient(180deg, #F7FAFF 0%, #FFFFFF 100%);
+      border-top: 3px solid var(--pride-blue);
+      background: linear-gradient(180deg, rgba(92, 164, 230, 0.08) 0%, var(--card) 100%);
     }
 
     .kpi .lbl {
@@ -181,10 +206,11 @@
       color: var(--muted);
       text-transform: uppercase;
       font-weight: 600;
+      letter-spacing: 0.03em;
     }
 
     .kpi .val {
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 700;
       color: var(--navy);
       margin-top: 4px;
@@ -192,7 +218,7 @@
 
     .party-row {
       border-bottom: 1px solid var(--border);
-      padding: 11px 0 11px 10px;
+      padding: 11px 0 11px 11px;
     }
 
     .party-row:last-child {
@@ -204,48 +230,54 @@
     #recentList .recent-item:nth-child(6n + 1),
     #allExpensesList .recent-item:nth-child(6n + 1),
     #allTransfersList .recent-item:nth-child(6n + 1),
+    #transferTabHistory .recent-item:nth-child(6n + 1),
     #wikiItemsList .wiki-item:nth-child(6n + 1) {
-      border-left: 4px solid var(--pride-red);
+      border-left: 3px solid var(--pride-red);
     }
 
     #partyList .party-row:nth-child(6n + 2),
     #recentList .recent-item:nth-child(6n + 2),
     #allExpensesList .recent-item:nth-child(6n + 2),
     #allTransfersList .recent-item:nth-child(6n + 2),
+    #transferTabHistory .recent-item:nth-child(6n + 2),
     #wikiItemsList .wiki-item:nth-child(6n + 2) {
-      border-left: 4px solid var(--pride-orange);
+      border-left: 3px solid var(--pride-orange);
     }
 
     #partyList .party-row:nth-child(6n + 3),
     #recentList .recent-item:nth-child(6n + 3),
     #allExpensesList .recent-item:nth-child(6n + 3),
     #allTransfersList .recent-item:nth-child(6n + 3),
+    #transferTabHistory .recent-item:nth-child(6n + 3),
     #wikiItemsList .wiki-item:nth-child(6n + 3) {
-      border-left: 4px solid var(--pride-yellow);
+      border-left: 3px solid var(--pride-yellow);
     }
 
     #partyList .party-row:nth-child(6n + 4),
     #recentList .recent-item:nth-child(6n + 4),
     #allExpensesList .recent-item:nth-child(6n + 4),
     #allTransfersList .recent-item:nth-child(6n + 4),
+    #transferTabHistory .recent-item:nth-child(6n + 4),
     #wikiItemsList .wiki-item:nth-child(6n + 4) {
-      border-left: 4px solid var(--pride-green);
+      border-left: 3px solid var(--pride-green);
     }
 
     #partyList .party-row:nth-child(6n + 5),
     #recentList .recent-item:nth-child(6n + 5),
     #allExpensesList .recent-item:nth-child(6n + 5),
     #allTransfersList .recent-item:nth-child(6n + 5),
+    #transferTabHistory .recent-item:nth-child(6n + 5),
     #wikiItemsList .wiki-item:nth-child(6n + 5) {
-      border-left: 4px solid var(--pride-blue);
+      border-left: 3px solid var(--pride-blue);
     }
 
     #partyList .party-row:nth-child(6n + 6),
     #recentList .recent-item:nth-child(6n + 6),
     #allExpensesList .recent-item:nth-child(6n + 6),
     #allTransfersList .recent-item:nth-child(6n + 6),
+    #transferTabHistory .recent-item:nth-child(6n + 6),
     #wikiItemsList .wiki-item:nth-child(6n + 6) {
-      border-left: 4px solid var(--pride-purple);
+      border-left: 3px solid var(--pride-purple);
     }
 
     .party-top {
@@ -257,33 +289,38 @@
     .party-name {
       font-weight: 700;
       font-size: 15px;
+      color: var(--navy);
     }
 
     .badge {
       padding: 4px 10px;
       border-radius: 999px;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
+      border: 1px solid transparent;
     }
 
     .badge.pos {
       background: var(--green-bg);
       color: var(--green);
+      border-color: rgba(94, 194, 155, 0.3);
     }
 
     .badge.neg {
       background: var(--red-bg);
       color: var(--red);
+      border-color: rgba(224, 108, 136, 0.3);
     }
 
     .badge.zero {
-      background: #F3EEF6;
+      background: var(--card-elevated);
       color: var(--muted);
+      border-color: var(--border);
     }
 
     .suggestion {
       font-size: 13px;
-      color: var(--navy);
+      color: var(--pride-blue);
       margin-top: 5px;
       font-weight: 600;
     }
@@ -296,7 +333,7 @@
 
     .coord-line {
       font-size: 12px;
-      color: var(--navy);
+      color: var(--pride-green);
       font-weight: 600;
       margin-top: 4px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -306,34 +343,63 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 7px;
+      margin-top: 8px;
     }
 
     .pill-link {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 5px 9px;
+      padding: 5px 10px;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
       text-decoration: none;
-      background: #FDF2F8;
-      color: var(--pride-purple);
-      border: 1px solid rgba(115, 41, 130, 0.25);
+      background: rgba(156, 122, 230, 0.14);
+      color: #C7B2F5;
+      border: 1px solid rgba(156, 122, 230, 0.30);
       cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+    }
+
+    .pill-link:hover {
+      background: rgba(156, 122, 230, 0.24);
+      border-color: rgba(156, 122, 230, 0.50);
+      transform: translateY(-1px);
     }
 
     .pill-link.map {
-      background: #EFF6FF;
-      color: var(--pride-blue);
-      border-color: rgba(0, 76, 255, 0.25);
+      background: rgba(92, 164, 230, 0.14);
+      color: #96C8F7;
+      border-color: rgba(92, 164, 230, 0.30);
+    }
+
+    .pill-link.map:hover {
+      background: rgba(92, 164, 230, 0.24);
+      border-color: rgba(92, 164, 230, 0.50);
     }
 
     .pill-link.receipt {
-      background: #ECFDF5;
-      color: var(--green);
-      border-color: rgba(19, 115, 51, 0.25);
+      background: rgba(94, 194, 155, 0.14);
+      color: #8DE3C1;
+      border-color: rgba(94, 194, 155, 0.30);
+    }
+
+    .pill-link.receipt:hover {
+      background: rgba(94, 194, 155, 0.24);
+      border-color: rgba(94, 194, 155, 0.50);
+    }
+
+    .pill-link.edit-btn {
+      background: var(--card-elevated);
+      color: var(--text);
+      border-color: var(--border-strong);
+    }
+
+    .pill-link.edit-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--pride-yellow);
+      color: var(--pride-yellow);
     }
 
     .link-list {
@@ -351,18 +417,25 @@
       padding: 12px 13px;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: #FFFFFF;
+      background: var(--card-elevated);
       text-decoration: none;
       color: var(--text);
-      box-shadow: 0 2px 6px rgba(45, 18, 89, 0.04);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+      transition: background 0.16s ease, transform 0.14s ease, border-color 0.16s ease;
     }
 
-    .link-card:nth-child(6n + 1) { border-left: 4px solid var(--pride-red); }
-    .link-card:nth-child(6n + 2) { border-left: 4px solid var(--pride-orange); }
-    .link-card:nth-child(6n + 3) { border-left: 4px solid var(--pride-yellow); }
-    .link-card:nth-child(6n + 4) { border-left: 4px solid var(--pride-green); }
-    .link-card:nth-child(6n + 5) { border-left: 4px solid var(--pride-blue); }
-    .link-card:nth-child(6n + 6) { border-left: 4px solid var(--pride-purple); }
+    .link-card:hover {
+      background: var(--card-hover);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .link-card:nth-child(6n + 1) { border-left: 3px solid var(--pride-red); }
+    .link-card:nth-child(6n + 2) { border-left: 3px solid var(--pride-orange); }
+    .link-card:nth-child(6n + 3) { border-left: 3px solid var(--pride-yellow); }
+    .link-card:nth-child(6n + 4) { border-left: 3px solid var(--pride-green); }
+    .link-card:nth-child(6n + 5) { border-left: 3px solid var(--pride-blue); }
+    .link-card:nth-child(6n + 6) { border-left: 3px solid var(--pride-purple); }
 
     .link-left {
       display: flex;
@@ -396,10 +469,11 @@
 
     label.field-lbl {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       margin: 11px 0 5px;
-      color: var(--navy);
+      color: var(--muted);
+      letter-spacing: 0.02em;
     }
 
     input,
@@ -407,11 +481,12 @@
     textarea {
       width: 100%;
       padding: 11px 12px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-strong);
       border-radius: 10px;
       font-size: 15px;
-      background: #fff;
+      background: var(--card-elevated);
       color: var(--text);
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
     }
 
     input:focus,
@@ -419,7 +494,7 @@
     textarea:focus {
       outline: none;
       border-color: var(--pride-purple);
-      box-shadow: 0 0 0 3px rgba(115, 41, 130, 0.12);
+      box-shadow: 0 0 0 3px rgba(156, 122, 230, 0.22);
     }
 
     .row2 {
@@ -438,19 +513,26 @@
     .chip {
       padding: 10px;
       border-radius: 10px;
-      border: 1.5px solid var(--border);
-      background: #fff;
+      border: 1px solid var(--border-strong);
+      background: var(--card-elevated);
       font-weight: 600;
       font-size: 14px;
       color: var(--text);
       cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+    }
+
+    .seg button:hover,
+    .chip:hover {
+      background: var(--card-hover);
     }
 
     .seg button.active,
     .chip.active {
-      background: linear-gradient(135deg, var(--pride-purple), var(--pride-blue));
+      background: linear-gradient(135deg, rgba(156, 122, 230, 0.34), rgba(92, 164, 230, 0.34));
       color: #fff;
       border-color: var(--pride-purple);
+      box-shadow: 0 2px 10px rgba(156, 122, 230, 0.22);
     }
 
     .chips {
@@ -461,7 +543,7 @@
     }
 
     .chip {
-      padding: 8px 12px;
+      padding: 8px 13px;
       font-size: 13px;
       border-radius: 999px;
     }
@@ -475,18 +557,25 @@
 
     .quick-btn {
       font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(115, 41, 130, 0.25);
-      background: #FDF2F8;
-      color: var(--pride-purple);
+      padding: 6px 11px;
+      border-radius: 9px;
+      border: 1px solid var(--border-strong);
+      background: var(--card-elevated);
+      color: var(--text);
       font-weight: 600;
       cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+    }
+
+    .quick-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--pride-purple);
+      transform: translateY(-1px);
     }
 
     .scan-box {
-      background: linear-gradient(135deg, #FDF2F8 0%, #EFF6FF 100%);
-      border: 2px dashed #C084FC;
+      background: linear-gradient(135deg, rgba(156, 122, 230, 0.12) 0%, rgba(92, 164, 230, 0.10) 100%);
+      border: 1.5px dashed rgba(156, 122, 230, 0.45);
       border-radius: 14px;
       padding: 14px;
       text-align: center;
@@ -497,7 +586,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .scan-btn {
@@ -510,17 +599,24 @@
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
+      transition: transform 0.14s ease, filter 0.18s ease;
+    }
+
+    .scan-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.06);
     }
 
     .scan-btn.cam {
-      background: linear-gradient(135deg, var(--pride-purple), var(--pride-pink), var(--pride-blue));
+      background: linear-gradient(135deg, var(--pride-red), var(--pride-purple), var(--pride-blue));
       color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.14);
     }
 
     .scan-btn.gal {
-      background: #fff;
-      color: var(--pride-purple);
-      border: 1.5px solid var(--pride-purple);
+      background: var(--card-elevated);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
     }
 
     .hidden-file {
@@ -533,6 +629,7 @@
       border-radius: 10px;
       margin-top: 10px;
       display: none;
+      border: 1px solid var(--border-strong);
     }
 
     .ai-status {
@@ -546,30 +643,33 @@
     }
 
     .ai-status.info {
-      background: #F3E8FF;
-      color: var(--pride-purple);
+      background: rgba(156, 122, 230, 0.16);
+      color: #C7B2F5;
+      border: 1px solid rgba(156, 122, 230, 0.3);
     }
 
     .ai-status.ok {
       background: var(--green-bg);
       color: var(--green);
+      border: 1px solid rgba(94, 194, 155, 0.3);
     }
 
     .ai-status.warn {
       background: var(--warn-bg);
       color: var(--warn);
+      border: 1px solid rgba(226, 190, 90, 0.3);
     }
 
     .preview-sek {
       font-size: 13px;
-      color: var(--pride-purple);
+      color: var(--pride-yellow);
       font-weight: 700;
       margin-top: 6px;
     }
 
     .place-panel {
-      background: #FAF5FF;
-      border: 1px solid rgba(115, 41, 130, 0.2);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-strong);
       border-radius: 12px;
       padding: 12px;
       margin-top: 12px;
@@ -578,19 +678,31 @@
     .btn-primary {
       width: 100%;
       margin-top: 16px;
-      padding: 14px;
-      border: none;
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
-      background: linear-gradient(135deg, var(--pride-purple), var(--pride-pink), var(--pride-blue));
+      background: linear-gradient(120deg, var(--pride-red) 0%, var(--pride-purple) 52%, var(--pride-blue) 100%);
       color: #fff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
+      letter-spacing: 0.01em;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(115, 41, 130, 0.22);
+      box-shadow: 0 6px 18px rgba(156, 122, 230, 0.25), 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: transform 0.14s ease, filter 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 22px rgba(92, 164, 230, 0.30), 0 4px 14px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn-primary:active:not(:disabled) {
+      transform: translateY(0) scale(0.985);
     }
 
     .btn-primary:disabled {
-      opacity: 0.55;
+      opacity: 0.5;
       cursor: not-allowed;
     }
 
@@ -599,29 +711,23 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: #fff;
-      border-top: 3px solid transparent;
-      border-image: linear-gradient(
-        90deg,
-        var(--pride-red),
-        var(--pride-orange),
-        var(--pride-yellow),
-        var(--pride-green),
-        var(--pride-blue),
-        var(--pride-purple)
-      ) 1;
+      background: rgba(18, 21, 30, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 2px solid transparent;
+      border-image: var(--pride-gradient) 1;
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 2px;
-      padding: 6px 4px calc(8px + env(safe-area-inset-bottom));
+      gap: 4px;
+      padding: 6px 6px calc(8px + env(safe-area-inset-bottom));
       z-index: 20;
-      box-shadow: 0 -2px 10px rgba(45, 18, 89, 0.08);
+      box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.45);
     }
 
     .tab-btn {
-      border: none;
+      border: 1px solid transparent;
       background: none;
-      padding: 5px 1px;
+      padding: 6px 2px;
       font-size: 10px;
       font-weight: 600;
       color: var(--muted);
@@ -630,12 +736,19 @@
       flex-direction: column;
       align-items: center;
       gap: 2px;
-      border-radius: 8px;
+      border-radius: 10px;
+      transition: background 0.16s ease, color 0.16s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     .tab-btn.active {
-      color: var(--pride-purple);
-      background: #FDF2F8;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(156, 122, 230, 0.24), rgba(92, 164, 230, 0.22));
+      border-color: rgba(156, 122, 230, 0.35);
     }
 
     .tab-btn span.ico {
@@ -656,24 +769,30 @@
       top: 72px;
       left: 50%;
       transform: translateX(-50%);
-      background: #2D1259;
+      background: var(--card-elevated);
       color: #fff;
+      border: 1px solid var(--border-strong);
       padding: 11px 16px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 14px;
       font-weight: 600;
-      z-index: 50;
+      z-index: 80;
       display: none;
       max-width: 92%;
       text-align: center;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
     }
 
     .toast.err {
-      background: var(--red);
+      background: #4A1826;
+      border-color: var(--pride-red);
+      color: #FFD6DF;
     }
 
     .toast.ok {
-      background: var(--green);
+      background: #143D2F;
+      border-color: var(--pride-green);
+      color: #CCF7E6;
     }
 
     .recent-item {
@@ -681,7 +800,7 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 10px;
-      padding: 10px 0 10px 10px;
+      padding: 11px 0 11px 11px;
       border-bottom: 1px solid var(--border);
       font-size: 13px;
     }
@@ -694,7 +813,7 @@
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      padding: 10px 0 10px 10px;
+      padding: 11px 0 11px 11px;
       border-bottom: 1px solid var(--border);
       font-size: 13px;
     }
@@ -714,18 +833,43 @@
 
     .wiki-item.checked .wiki-title {
       text-decoration: line-through;
-      opacity: 0.6;
+      opacity: 0.55;
     }
 
     .wiki-badge {
       display: inline-block;
       font-size: 10px;
       font-weight: 700;
-      padding: 2px 7px;
+      padding: 2px 8px;
       border-radius: 999px;
-      background: #F3E8FF;
-      color: var(--pride-purple);
+      background: rgba(156, 122, 230, 0.18);
+      color: #C7B2F5;
+      border: 1px solid rgba(156, 122, 230, 0.30);
       margin-right: 6px;
+    }
+
+    .wiki-badge.type-check {
+      background: rgba(94, 194, 155, 0.16);
+      color: #8DE3C1;
+      border-color: rgba(94, 194, 155, 0.30);
+    }
+
+    .wiki-badge.type-shop {
+      background: rgba(226, 190, 90, 0.16);
+      color: #F2D37E;
+      border-color: rgba(226, 190, 90, 0.30);
+    }
+
+    .wiki-badge.type-route {
+      background: rgba(92, 164, 230, 0.16);
+      color: #96C8F7;
+      border-color: rgba(92, 164, 230, 0.30);
+    }
+
+    .wiki-badge.type-wiki {
+      background: rgba(156, 122, 230, 0.18);
+      color: #C7B2F5;
+      border-color: rgba(156, 122, 230, 0.32);
     }
 
     .filter-bar {
@@ -744,7 +888,9 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(31, 24, 41, 0.55);
+      background: rgba(6, 8, 13, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       z-index: 60;
       display: none;
       align-items: center;
@@ -753,14 +899,17 @@
     }
 
     .modal-card {
-      background: #fff;
-      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-top: 3px solid transparent;
+      border-image: var(--pride-gradient) 1;
+      border-radius: 16px;
       padding: 16px;
       width: 100%;
       max-width: 480px;
       max-height: 88vh;
       overflow-y: auto;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.65);
     }
   </style>
 </head>
@@ -772,6 +921,174 @@
 
   <div id="toast" class="toast"></div>
 
+  <!-- MODAL: Redigera Wiki & Listor -->
+  <div id="editWikiModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <strong style="color:var(--navy);font-size:15px;">✏️ Redigera punkt / wikisida</strong>
+        <button type="button" class="quick-btn" onclick="closeEditWikiModal()">✕</button>
+      </div>
+      <input type="hidden" id="editWikiRowIndex">
+
+      <div class="row2">
+        <div>
+          <label class="field-lbl">Typ</label>
+          <select id="editWikiType">
+            <option value="Checklista">Checklista</option>
+            <option value="Inköpslista">Inköpslista</option>
+            <option value="Resväg">Resväg</option>
+            <option value="Wiki">Wiki</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-lbl">Kategori</label>
+          <input id="editWikiPage" type="text" placeholder="t.ex. Packning, Bath...">
+        </div>
+      </div>
+
+      <label class="field-lbl">Rubrik / Vara / Uppgift</label>
+      <input id="editWikiTitle" type="text" placeholder="Rubrik">
+
+      <label class="field-lbl">Anteckning / Wiki-text</label>
+      <textarea id="editWikiNote" rows="3" placeholder="Detaljer, länk, telefonnummer..."></textarea>
+
+      <label class="field-lbl">Ansvarig</label>
+      <select id="editWikiOwner">
+        <option value="Alla">Alla</option>
+        <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+        <option value="Dick & Micke">Dick &amp; Micke</option>
+        <option value="Anders">Anders</option>
+      </select>
+
+      <button type="button" class="btn-primary" id="btnSaveEditWiki" onclick="saveEditedWikiItem()">Spara ändringar</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Redigera Utgift -->
+  <div id="editExpenseModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <strong style="color:var(--navy);font-size:15px;">✏️ Redigera utgift</strong>
+        <button type="button" class="quick-btn" onclick="closeEditExpenseModal()">✕</button>
+      </div>
+      <input type="hidden" id="editExpRowIndex">
+
+      <label class="field-lbl">Inköpsställe</label>
+      <input id="editExpPlace" type="text" placeholder="Inköpsställe">
+
+      <div class="row2">
+        <div>
+          <label class="field-lbl">Belopp</label>
+          <input id="editExpAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00">
+        </div>
+        <div>
+          <label class="field-lbl">Valuta</label>
+          <div class="seg">
+            <button type="button" id="editCurGBP" class="active" onclick="setEditExpCurrency('GBP')">£ GBP</button>
+            <button type="button" id="editCurSEK" onclick="setEditExpCurrency('SEK')">kr SEK</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="editFxRateWrap">
+        <label class="field-lbl">Manuell kurs (valfritt)</label>
+        <input id="editExpFxRate" type="number" inputmode="decimal" step="0.0001" placeholder="t.ex. 13,38">
+      </div>
+
+      <label class="field-lbl">Betalat av (Part)</label>
+      <select id="editExpPayer">
+        <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+        <option value="Dick & Micke">Dick &amp; Micke</option>
+        <option value="Anders">Anders</option>
+      </select>
+
+      <div class="row2">
+        <div>
+          <label class="field-lbl">Kategori</label>
+          <select id="editExpCategory"></select>
+        </div>
+        <div>
+          <label class="field-lbl">Datum</label>
+          <input id="editExpDate" type="date">
+        </div>
+      </div>
+
+      <label class="field-lbl">Vilka delade på kvittot?</label>
+      <div class="chips" id="editPeopleChips">
+        <button type="button" class="chip active" data-idx="0" onclick="togglePerson(this)">Gunnar</button>
+        <button type="button" class="chip active" data-idx="1" onclick="togglePerson(this)">Patrik</button>
+        <button type="button" class="chip active" data-idx="2" onclick="togglePerson(this)">Dick</button>
+        <button type="button" class="chip active" data-idx="3" onclick="togglePerson(this)">Micke</button>
+        <button type="button" class="chip active" data-idx="4" onclick="togglePerson(this)">Anders</button>
+      </div>
+
+      <label class="field-lbl">Kommentar</label>
+      <input id="editExpComment" type="text" placeholder="Kommentar">
+
+      <label class="field-lbl">Google Maps-länk (valfritt)</label>
+      <input id="editExpMapsUrl" type="url" placeholder="https://www.google.com/maps/...">
+
+      <label class="field-lbl">Webbsida (valfritt)</label>
+      <input id="editExpWebsiteUrl" type="url" placeholder="https://...">
+
+      <label class="field-lbl">Bokningslänk (valfritt)</label>
+      <input id="editExpBookingUrl" type="url" placeholder="https://...">
+
+      <label class="field-lbl">Onlineorder / Webshop (valfritt)</label>
+      <input id="editExpOrderUrl" type="url" placeholder="https://...">
+
+      <button type="button" class="btn-primary" id="btnSaveEditExp" onclick="saveEditedExpense()">Spara utgift</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Redigera Överföring -->
+  <div id="editTransferModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <strong style="color:var(--navy);font-size:15px;">✏️ Redigera överföring</strong>
+        <button type="button" class="quick-btn" onclick="closeEditTransferModal()">✕</button>
+      </div>
+      <input type="hidden" id="editTrRowIndex">
+
+      <label class="field-lbl">Från part (Betalare)</label>
+      <select id="editTrFrom">
+        <option value="Anders">Anders</option>
+        <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+        <option value="Dick & Micke">Dick &amp; Micke</option>
+      </select>
+
+      <label class="field-lbl">Till part (Mottagare)</label>
+      <select id="editTrTo">
+        <option value="Dick & Micke">Dick &amp; Micke</option>
+        <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+        <option value="Anders">Anders</option>
+      </select>
+
+      <div class="row2">
+        <div>
+          <label class="field-lbl">Belopp</label>
+          <input id="editTrAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00">
+        </div>
+        <div>
+          <label class="field-lbl">Valuta</label>
+          <div class="seg">
+            <button type="button" id="editTrCurSEK" class="active" onclick="setEditTrCurrency('SEK')">kr SEK</button>
+            <button type="button" id="editTrCurGBP" onclick="setEditTrCurrency('GBP')">£ GBP</button>
+          </div>
+        </div>
+      </div>
+
+      <label class="field-lbl">Datum</label>
+      <input id="editTrDate" type="date">
+
+      <label class="field-lbl">Kommentar / Betalsätt</label>
+      <input id="editTrComment" type="text" placeholder="t.ex. Swish">
+
+      <button type="button" class="btn-primary" id="btnSaveEditTr" onclick="saveEditedTransfer()">Spara överföring</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Uppdatera Karta & länkar -->
   <div id="editLinksModal" class="modal-backdrop">
     <div class="modal-card">
       <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -1224,7 +1541,9 @@
 
     let currentRate = 13.38;
     let expCurrency = 'GBP';
+    let editExpCurrency = 'GBP';
     let trCurrency = 'SEK';
+    let editTrCurrency = 'SEK';
     let compressedBase64 = '';
     let latestData = null;
 
@@ -1369,10 +1688,24 @@
       updatePreview();
     }
 
+    function setEditExpCurrency(c) {
+      editExpCurrency = c;
+      document.getElementById('editCurGBP').classList.toggle('active', c === 'GBP');
+      document.getElementById('editCurSEK').classList.toggle('active', c === 'SEK');
+      document.getElementById('editFxRateWrap').style.display = (c === 'GBP') ? 'block' : 'none';
+      if (c === 'SEK') document.getElementById('editExpFxRate').value = '';
+    }
+
     function setTrCurrency(c) {
       trCurrency = c;
       document.getElementById('trCurSEK').classList.toggle('active', c === 'SEK');
       document.getElementById('trCurGBP').classList.toggle('active', c === 'GBP');
+    }
+
+    function setEditTrCurrency(c) {
+      editTrCurrency = c;
+      document.getElementById('editTrCurSEK').classList.toggle('active', c === 'SEK');
+      document.getElementById('editTrCurGBP').classList.toggle('active', c === 'GBP');
     }
 
     function updatePreview() {
@@ -1458,6 +1791,180 @@
       reader.readAsDataURL(file);
     }
 
+    /* === REDIGERING: WIKI & LISTOR === */
+    function openEditWikiModal(rowIndex) {
+      if (!latestData) return;
+      const item = (latestData.wikiItems || []).find(x => Number(x.rowIndex) === Number(rowIndex));
+      if (!item) return;
+
+      document.getElementById('editWikiRowIndex').value = item.rowIndex;
+      document.getElementById('editWikiType').value = item.type || 'Inköpslista';
+      document.getElementById('editWikiPage').value = item.page || 'Allmänt';
+      document.getElementById('editWikiTitle').value = item.title || '';
+      document.getElementById('editWikiNote').value = item.note || '';
+      document.getElementById('editWikiOwner').value = item.owner || 'Alla';
+      document.getElementById('editWikiModal').style.display = 'flex';
+    }
+
+    function closeEditWikiModal() {
+      document.getElementById('editWikiModal').style.display = 'none';
+    }
+
+    async function saveEditedWikiItem() {
+      const btn = document.getElementById('btnSaveEditWiki');
+      const title = document.getElementById('editWikiTitle').value.trim();
+      if (!title) {
+        showToast('Ange en rubrik eller uppgift.', 'err');
+        return;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Sparar...';
+      try {
+        const res = await apiPost({
+          action: 'updateListItem',
+          payload: {
+            rowIndex: Number(document.getElementById('editWikiRowIndex').value),
+            type: document.getElementById('editWikiType').value,
+            page: document.getElementById('editWikiPage').value.trim() || 'Allmänt',
+            title: title,
+            note: document.getElementById('editWikiNote').value.trim(),
+            owner: document.getElementById('editWikiOwner').value
+          }
+        });
+        showToast(res.message, 'ok');
+        closeEditWikiModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Spara ändringar';
+      }
+    }
+
+    /* === REDIGERING: UTGIFTER === */
+    function openEditExpenseModal(rowIndex) {
+      if (!latestData) return;
+      const item = (latestData.expenses || []).find(x => Number(x.rowIndex) === Number(rowIndex));
+      if (!item) return;
+
+      document.getElementById('editExpRowIndex').value = item.rowIndex;
+      document.getElementById('editExpPlace').value = item.place || '';
+      document.getElementById('editExpAmount').value = item.amount || '';
+      setEditExpCurrency(item.currency === 'SEK' ? 'SEK' : 'GBP');
+      document.getElementById('editExpFxRate').value = item.fxRate || '';
+      document.getElementById('editExpPayer').value = item.payer || 'Gunnar & Patrik';
+      document.getElementById('editExpCategory').value = item.category || '';
+      document.getElementById('editExpDate').value = item.date || todayISO();
+
+      const parsed = parseCommentAndReceipt(item.comment);
+      document.getElementById('editExpComment').value = parsed.cleanComment || '';
+      document.getElementById('editExpMapsUrl').value = item.mapsUrl || '';
+      document.getElementById('editExpWebsiteUrl').value = item.websiteUrl || '';
+      document.getElementById('editExpBookingUrl').value = item.bookingUrl || '';
+      document.getElementById('editExpOrderUrl').value = item.orderUrl || '';
+
+      const marks = Array.isArray(item.participants) && item.participants.length === 5
+        ? item.participants
+        : [true, true, true, true, true];
+      document.querySelectorAll('#editPeopleChips .chip').forEach((chip, idx) => {
+        chip.classList.toggle('active', Boolean(marks[idx]));
+      });
+
+      document.getElementById('editExpenseModal').style.display = 'flex';
+    }
+
+    function closeEditExpenseModal() {
+      document.getElementById('editExpenseModal').style.display = 'none';
+    }
+
+    async function saveEditedExpense() {
+      const btn = document.getElementById('btnSaveEditExp');
+      const chips = Array.from(document.querySelectorAll('#editPeopleChips .chip'));
+      const participants = chips.map(c => c.classList.contains('active'));
+
+      btn.disabled = true;
+      btn.textContent = 'Sparar...';
+      try {
+        const res = await apiPost({
+          action: 'updateExpense',
+          payload: {
+            rowIndex: Number(document.getElementById('editExpRowIndex').value),
+            date: document.getElementById('editExpDate').value,
+            place: document.getElementById('editExpPlace').value.trim(),
+            amount: document.getElementById('editExpAmount').value,
+            currency: editExpCurrency,
+            fxRate: document.getElementById('editExpFxRate').value,
+            payer: document.getElementById('editExpPayer').value,
+            category: document.getElementById('editExpCategory').value,
+            participants: participants,
+            comment: document.getElementById('editExpComment').value.trim(),
+            mapsUrl: document.getElementById('editExpMapsUrl').value.trim(),
+            websiteUrl: document.getElementById('editExpWebsiteUrl').value.trim(),
+            bookingUrl: document.getElementById('editExpBookingUrl').value.trim(),
+            orderUrl: document.getElementById('editExpOrderUrl').value.trim()
+          }
+        });
+        showToast(res.message, 'ok');
+        closeEditExpenseModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Spara utgift';
+      }
+    }
+
+    /* === REDIGERING: ÖVERFÖRINGAR === */
+    function openEditTransferModal(rowIndex) {
+      if (!latestData) return;
+      const tr = (latestData.transfers || []).find(x => Number(x.rowIndex) === Number(rowIndex));
+      if (!tr) return;
+
+      document.getElementById('editTrRowIndex').value = tr.rowIndex;
+      document.getElementById('editTrFrom').value = tr.fromParty || 'Anders';
+      document.getElementById('editTrTo').value = tr.toParty || 'Dick & Micke';
+      document.getElementById('editTrAmount').value = tr.amount || '';
+      setEditTrCurrency(tr.currency === 'GBP' ? 'GBP' : 'SEK');
+      document.getElementById('editTrDate').value = tr.date || todayISO();
+      document.getElementById('editTrComment').value = tr.comment || '';
+      document.getElementById('editTransferModal').style.display = 'flex';
+    }
+
+    function closeEditTransferModal() {
+      document.getElementById('editTransferModal').style.display = 'none';
+    }
+
+    async function saveEditedTransfer() {
+      const btn = document.getElementById('btnSaveEditTr');
+      btn.disabled = true;
+      btn.textContent = 'Sparar...';
+      try {
+        const res = await apiPost({
+          action: 'updateTransfer',
+          payload: {
+            rowIndex: Number(document.getElementById('editTrRowIndex').value),
+            fromParty: document.getElementById('editTrFrom').value,
+            toParty: document.getElementById('editTrTo').value,
+            amount: document.getElementById('editTrAmount').value,
+            currency: editTrCurrency,
+            date: document.getElementById('editTrDate').value,
+            comment: document.getElementById('editTrComment').value.trim()
+          }
+        });
+        showToast(res.message, 'ok');
+        closeEditTransferModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Spara överföring';
+      }
+    }
+
+    /* === REDIGERING: KARTA & LÄNKAR === */
     function openEditLinksModalByRow(rowIndex) {
       if (!latestData) return;
       const item = (latestData.expenses || []).find(x => Number(x.rowIndex) === Number(rowIndex));
@@ -1551,7 +2058,8 @@
         links.push('<a class="pill-link" href="' + r.orderUrl + '" target="_blank" rel="noopener">🛒 Onlineorder ↗</a>');
       }
       if (r.rowIndex) {
-        links.push('<button type="button" class="pill-link" onclick="openEditLinksModalByRow(' + r.rowIndex + ')">✏️ Karta &amp; länkar</button>');
+        links.push('<button type="button" class="pill-link edit-btn" onclick="openEditExpenseModal(' + r.rowIndex + ')">✏️ Redigera</button>');
+        links.push('<button type="button" class="pill-link" onclick="openEditLinksModalByRow(' + r.rowIndex + ')">📍 Karta &amp; länkar</button>');
       }
 
       const linksHtml = links.length ? ('<div class="item-links">' + links.join('') + '</div>') : '';
@@ -1591,7 +2099,7 @@
         const parsed = parseCommentAndReceipt(r.comment);
         const commentLine = parsed.cleanComment ? ('<div class="meta">' + parsed.cleanComment + '</div>') : '';
         return '<div class="recent-item">' +
-          '<div><strong>' + (r.place || 'Utgift') + '</strong><div class="meta">' + extra + '</div>' + commentLine + buildExpenseExtrasHtml(r) + '</div>' +
+          '<div style="flex:1;"><strong>' + (r.place || 'Utgift') + '</strong><div class="meta">' + extra + '</div>' + commentLine + buildExpenseExtrasHtml(r) + '</div>' +
           '<div style="text-align:right;white-space:nowrap;"><strong>' + fmtSek(r.amountSek || 0) + '</strong><div class="meta">' + orig + '</div></div>' +
         '</div>';
       }).join('');
@@ -1619,8 +2127,11 @@
           : (Math.round(Number(t.amount || 0)) + ' kr');
         const sekVal = t.amountSek != null ? fmtSek(t.amountSek) : orig;
         const meta = [t.date, t.comment].filter(Boolean).join(' • ');
+        const editBtnHtml = t.rowIndex
+          ? ('<div class="item-links"><button type="button" class="pill-link edit-btn" onclick="openEditTransferModal(' + t.rowIndex + ')">✏️ Redigera</button></div>')
+          : '';
         return '<div class="recent-item">' +
-          '<div><strong>' + title + '</strong><div class="meta">' + meta + '</div></div>' +
+          '<div style="flex:1;"><strong>' + title + '</strong><div class="meta">' + meta + '</div>' + editBtnHtml + '</div>' +
           '<div style="text-align:right;white-space:nowrap;"><strong>' + sekVal + '</strong><div class="meta">' + orig + '</div></div>' +
         '</div>';
       }).join('');
@@ -1636,13 +2147,11 @@
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 
-      // Steg 1: Dela upp texten på webbadresser och e-post först så att siffror i URL:er aldrig tolkas som telefonnummer
       const parts = escaped.split(/(https?:\/\/[^\s|<]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g);
 
       return parts.map(function(part) {
         if (!part) return '';
 
-        // Webbadress
         if (/^https?:\/\//i.test(part)) {
           let href = part;
           let label = '🔗 Öppna länk ↗';
@@ -1650,7 +2159,6 @@
           if (part.indexOf('chat.google.com') !== -1) {
             label = '💬 Öppna Google Chat ↗';
           } else if (part.indexOf('facebook.com/messages') !== -1 || part.indexOf('messenger.com') !== -1) {
-            // Byt facebook.com/messages/t/... till messenger.com/t/... som fungerar bättre i mobilappar
             href = part.replace('www.facebook.com/messages/t/', 'www.messenger.com/t/');
             label = '💙 Öppna Messenger ↗';
           } else if (part.indexOf('maps.app.goo.gl') !== -1 || part.indexOf('google.com/maps') !== -1) {
@@ -1661,12 +2169,10 @@
           return '<a class="pill-link" href="' + href + '" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" style="margin:3px 4px 2px 0;">' + label + '</a>';
         }
 
-        // E-postadress
         if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part)) {
           return '<a class="pill-link" href="mailto:' + part + '" onclick="event.stopPropagation();" style="margin:3px 4px 2px 0;">✉️ ' + part + '</a>';
         }
 
-        // Vanlig text: gör telefonnummer klickbara
         return part.replace(/(\+\d[\d\s\-()]{6,}|\b(?:999|111)\b)/g, function(tel) {
           const cleanTel = tel.replace(/[^\d+]/g, '');
           if (cleanTel.length < 3) return tel;
@@ -1674,7 +2180,14 @@
         });
       }).join('');
     }
-    
+
+    function getWikiBadgeClass(type) {
+      if (type === 'Checklista') return 'wiki-badge type-check';
+      if (type === 'Inköpslista') return 'wiki-badge type-shop';
+      if (type === 'Resväg') return 'wiki-badge type-route';
+      return 'wiki-badge type-wiki';
+    }
+
     function renderWikiList() {
       const container = document.getElementById('wikiItemsList');
       const metaEl = document.getElementById('wikiProgressMeta');
@@ -1699,7 +2212,7 @@
         const matchOwner = !ownerFilter || i.owner === ownerFilter;
         return matchType && matchPage && matchOwner;
       });
-      
+
       const checkable = filtered.filter(i => i.type !== 'Wiki');
       const doneCount = checkable.filter(i => i.checked).length;
       metaEl.textContent = checkable.length
@@ -1713,17 +2226,20 @@
 
       container.innerHTML = filtered.map(item => {
         const isWiki = item.type === 'Wiki';
-      const checkedAttr = item.checked ? ' checked' : '';
-      const checkedCls = (!isWiki && item.checked) ? ' checked' : '';
-      const subParts = [item.page, item.owner].filter(Boolean).join(' • ');
-      const noteHtml = item.note ? ('<div class="meta" style="margin-top:4px;line-height:1.5;">' + linkifyWikiNote(item.note) + '</div>') : '';
-      const leftControlHtml = isWiki
-        ? '<span style="font-size:20px;line-height:1;margin-top:2px;user-select:none;" title="Wiki-information">ℹ️</span>'
-        : '<input type="checkbox"' + checkedAttr + ' onchange="onToggleWikiItem(' + item.rowIndex + ', this.checked)">';
-      return '<div class="wiki-item' + checkedCls + '">' +
-        leftControlHtml +
+        const checkedAttr = item.checked ? ' checked' : '';
+        const checkedCls = (!isWiki && item.checked) ? ' checked' : '';
+        const subParts = [item.page, item.owner].filter(Boolean).join(' • ');
+        const noteHtml = item.note ? ('<div class="meta" style="margin-top:4px;line-height:1.5;">' + linkifyWikiNote(item.note) + '</div>') : '';
+        const leftControlHtml = isWiki
+          ? '<span style="font-size:20px;line-height:1;margin-top:2px;user-select:none;" title="Wiki-information">ℹ️</span>'
+          : '<input type="checkbox"' + checkedAttr + ' onchange="onToggleWikiItem(' + item.rowIndex + ', this.checked)">';
+        return '<div class="wiki-item' + checkedCls + '">' +
+          leftControlHtml +
           '<div style="flex:1;">' +
-            '<div class="wiki-title"><span class="wiki-badge">' + item.type + '</span><strong>' + item.title + '</strong></div>' +
+            '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">' +
+              '<div class="wiki-title"><span class="' + getWikiBadgeClass(item.type) + '">' + item.type + '</span><strong>' + item.title + '</strong></div>' +
+              '<button type="button" class="pill-link edit-btn" onclick="openEditWikiModal(' + item.rowIndex + ')" style="flex-shrink:0;">✏️ Redigera</button>' +
+            '</div>' +
             '<div class="meta">' + subParts + '</div>' +
             noteHtml +
           '</div>' +
@@ -1784,11 +2300,16 @@
       document.getElementById('kpiPerPerson').textContent = fmtSek(d.perPerson);
 
       const catSel = document.getElementById('expCategory');
+      const editCatSel = document.getElementById('editExpCategory');
       if (catSel.options.length === 0) {
         d.categories.forEach(c => {
           const o = document.createElement('option');
           o.value = c; o.textContent = c;
           catSel.appendChild(o);
+
+          const o2 = document.createElement('option');
+          o2.value = c; o2.textContent = c;
+          editCatSel.appendChild(o2);
         });
       }
 
@@ -1815,8 +2336,8 @@
           const parsed = parseCommentAndReceipt(r.comment);
           const cLine = parsed.cleanComment ? ('<div class="meta">' + parsed.cleanComment + '</div>') : '';
           return '<div class="recent-item">' +
-            '<div><strong>' + r.place + '</strong><div class="meta">' + r.date + ' • ' + r.payer + '</div>' + cLine + buildExpenseExtrasHtml(r) + '</div>' +
-            '<div style="text-align:right;"><strong>' + fmtSek(r.amountSek) + '</strong><div class="meta">' + orig + '</div></div>' +
+            '<div style="flex:1;"><strong>' + r.place + '</strong><div class="meta">' + r.date + ' • ' + r.payer + '</div>' + cLine + buildExpenseExtrasHtml(r) + '</div>' +
+            '<div style="text-align:right;white-space:nowrap;"><strong>' + fmtSek(r.amountSek) + '</strong><div class="meta">' + orig + '</div></div>' +
           '</div>';
         }).join('');
       }
