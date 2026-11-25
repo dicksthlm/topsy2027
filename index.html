@@ -27,6 +27,42 @@
         var(--pride-purple) 100%
       );
 
+      .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      align-items: stretch;
+    }
+
+    .modal-actions .btn-primary {
+      margin-top: 0;
+      flex: 1.4;
+    }
+
+    .btn-danger {
+      padding: 14px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(224, 108, 136, 0.45);
+      background: rgba(224, 108, 136, 0.14);
+      color: #F6A5B9;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: rgba(224, 108, 136, 0.26);
+      border-color: var(--pride-red);
+      color: #FFD6DF;
+      transform: translateY(-1px);
+    }
+
+    .btn-danger:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+      
       /* Mörka ytor & text */
       --bg: #0E1017;
       --bg-gradient: radial-gradient(circle at 15% 0%, rgba(156, 122, 230, 0.10), transparent 42%),
@@ -960,10 +996,14 @@
         <option value="Anders">Anders</option>
       </select>
 
-      <button type="button" class="btn-primary" id="btnSaveEditWiki" onclick="saveEditedWikiItem()">Spara ändringar</button>
-    </div>
-  </div>
-
+      <div class="modal-actions">
+         <button type="button" class="btn-danger" id="btnDeleteWiki" onclick="deleteWikiItem()">🗑️ Ta bort</button>
+         <button type="button" class="btn-primary" id="btnSaveEditWiki" onclick="saveEditedWikiItem()">Spara ändringar</button>
+        </div>
+      </div>
+     </div>
+  
+  
   <!-- MODAL: Redigera Utgift -->
   <div id="editExpenseModal" class="modal-backdrop">
     <div class="modal-card">
@@ -1037,7 +1077,10 @@
       <label class="field-lbl">Onlineorder / Webshop (valfritt)</label>
       <input id="editExpOrderUrl" type="url" placeholder="https://...">
 
+    <div class="modal-actions">
+      <button type="button" class="btn-danger" id="btnDeleteExp" onclick="deleteExpenseItem()">🗑️ Ta bort</button>
       <button type="button" class="btn-primary" id="btnSaveEditExp" onclick="saveEditedExpense()">Spara utgift</button>
+    </div>
     </div>
   </div>
 
@@ -1084,8 +1127,11 @@
       <label class="field-lbl">Kommentar / Betalsätt</label>
       <input id="editTrComment" type="text" placeholder="t.ex. Swish">
 
+    <div class="modal-actions">
+      <button type="button" class="btn-danger" id="btnDeleteTr" onclick="deleteTransferItem()">🗑️ Ta bort</button>
       <button type="button" class="btn-primary" id="btnSaveEditTr" onclick="saveEditedTransfer()">Spara överföring</button>
     </div>
+   </div>
   </div>
 
   <!-- MODAL: Uppdatera Karta & länkar -->
@@ -1964,6 +2010,80 @@
       }
     }
 
+    async function deleteWikiItem() {
+      const rowIndex = Number(document.getElementById('editWikiRowIndex').value);
+      const title = document.getElementById('editWikiTitle').value.trim() || 'denna post';
+      if (!confirm('Vill du ta bort "' + title + '" från Wiki & Listor?')) return;
+
+      const btn = document.getElementById('btnDeleteWiki');
+      btn.disabled = true;
+      btn.textContent = 'Tar bort...';
+      try {
+        const res = await apiPost({
+          action: 'deleteListItem',
+          payload: { rowIndex: rowIndex }
+        });
+        showToast(res.message, 'ok');
+        closeEditWikiModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🗑️ Ta bort';
+      }
+    }
+
+    async function deleteExpenseItem() {
+      const rowIndex = Number(document.getElementById('editExpRowIndex').value);
+      const place = document.getElementById('editExpPlace').value.trim() || 'denna utgift';
+      if (!confirm('Vill du ta bort utgiften "' + place + '"?')) return;
+
+      const btn = document.getElementById('btnDeleteExp');
+      btn.disabled = true;
+      btn.textContent = 'Tar bort...';
+      try {
+        const res = await apiPost({
+          action: 'deleteExpense',
+          payload: { rowIndex: rowIndex }
+        });
+        showToast(res.message, 'ok');
+        closeEditExpenseModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🗑️ Ta bort';
+      }
+    }
+
+    async function deleteTransferItem() {
+      const rowIndex = Number(document.getElementById('editTrRowIndex').value);
+      const from = document.getElementById('editTrFrom').value;
+      const to = document.getElementById('editTrTo').value;
+      if (!confirm('Vill du ta bort överföringen ' + from + ' → ' + to + '?')) return;
+
+      const btn = document.getElementById('btnDeleteTr');
+      btn.disabled = true;
+      btn.textContent = 'Tar bort...';
+      try {
+        const res = await apiPost({
+          action: 'deleteTransfer',
+          payload: { rowIndex: rowIndex }
+        });
+        showToast(res.message, 'ok');
+        closeEditTransferModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🗑️ Ta bort';
+      }
+    }
+
+    
     /* === REDIGERING: KARTA & LÄNKAR === */
     function openEditLinksModalByRow(rowIndex) {
       if (!latestData) return;
