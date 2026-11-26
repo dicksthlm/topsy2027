@@ -531,6 +531,27 @@
       border-color: rgba(94, 194, 155, 0.50);
     }
 
+    .pill-link.yt {
+      background: rgba(224, 108, 136, 0.16);
+      color: #FFA8BE;
+      border-color: rgba(224, 108, 136, 0.36);
+    }
+
+    .pill-link.yt:hover {
+      background: rgba(224, 108, 136, 0.28);
+      border-color: rgba(224, 108, 136, 0.60);
+    }
+
+    .pill-link.fb {
+      background: rgba(92, 164, 230, 0.16);
+      color: #9ACBFF;
+      border-color: rgba(92, 164, 230, 0.36);
+    }
+
+    .pill-link.fb:hover {
+      background: rgba(92, 164, 230, 0.28);
+      border-color: rgba(92, 164, 230, 0.60);
+    }
     .pill-link.edit-btn {
       background: var(--card-elevated);
       color: var(--text);
@@ -2502,7 +2523,6 @@
     function linkifyWikiNote(text) {
       if (!text) return '';
 
-      // Bevara ev. befintliga <strong>/<b> eller **fetstil** innan vi escapear
       const boldTokens = [];
       let working = String(text)
         .replace(/<(?:strong|b)>([\s\S]*?)<\/(?:strong|b)>/gi, function(_, inner) {
@@ -2526,19 +2546,49 @@
 
         if (/^https?:\/\//i.test(part)) {
           let href = part;
-          let label = '🔗 Öppna länk ↗';
+          let label = '';
+          let extraCls = '';
 
-          if (part.indexOf('chat.google.com') !== -1) {
-            label = '💬 Öppna Google Chat ↗';
-          } else if (part.indexOf('facebook.com/messages') !== -1 || part.indexOf('messenger.com') !== -1) {
-            href = part.replace('www.facebook.com/messages/t/', 'www.messenger.com/t/');
-            label = '💙 Öppna Messenger ↗';
-          } else if (part.indexOf('maps.app.goo.gl') !== -1 || part.indexOf('google.com/maps') !== -1) {
-            label = '📍 Google Maps ↗';
-          } else if (part.indexOf('bath-narrowboats.co.uk') !== -1) {
-            label = '🚤 Bath Narrowboats ↗';
+          try {
+            const parsedUrl = new URL(part);
+            const host = parsedUrl.hostname.replace(/^www\./i, '').toLowerCase();
+
+            if (host.indexOf('youtube.com') !== -1 || host === 'youtu.be') {
+              label = '▶️ YouTube ↗';
+              extraCls = ' yt';
+            } else if (host.indexOf('facebook.com') !== -1 || host === 'fb.watch') {
+              label = '📘 Facebook ↗';
+              extraCls = ' fb';
+            } else if (host.indexOf('chat.google.com') !== -1) {
+              label = '💬 Google Chat ↗';
+            } else if (host.indexOf('messenger.com') !== -1) {
+              label = '💙 Messenger ↗';
+              extraCls = ' fb';
+            } else if (host.indexOf('maps.app.goo.gl') !== -1 || host.indexOf('google.com') && parsedUrl.pathname.indexOf('/maps') !== -1) {
+              label = '📍 Google Maps ↗';
+              extraCls = ' map';
+            } else {
+              const shortPath = parsedUrl.pathname && parsedUrl.pathname !== '/'
+                ? parsedUrl.pathname.replace(/\/+$/, '').split('/').slice(0, 2).join('/')
+                : '';
+              const shortHost = host.length > 26 ? host.slice(0, 23) + '…' : host;
+              const shortDisplay = (shortHost + (shortPath && shortPath.length < 18 ? shortPath : '')).slice(0, 32);
+              label = '🌐 ' + shortDisplay + ' ↗';
+            }
+          } catch (e) {
+            if (part.indexOf('youtube.com') !== -1 || part.indexOf('youtu.be') !== -1) {
+              label = '▶️ YouTube ↗';
+              extraCls = ' yt';
+            } else if (part.indexOf('facebook.com') !== -1 || part.indexOf('messenger.com') !== -1) {
+              href = part.replace('www.facebook.com/messages/t/', 'www.messenger.com/t/');
+              label = '📘 Facebook ↗';
+              extraCls = ' fb';
+            } else {
+              label = '🌐 Öppna webbplats ↗';
+            }
           }
-          return '<a class="pill-link" href="' + href + '" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" style="margin:3px 4px 2px 0;">' + label + '</a>';
+
+          return '<a class="pill-link' + extraCls + '" href="' + href + '" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" style="margin:3px 4px 2px 0;">' + label + '</a>';
         }
 
         if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part)) {
@@ -2552,14 +2602,13 @@
         });
       }).join('');
 
-      // Gör radbrytningar till <br> och återställ fetstil
       return linked
         .replace(/\r\n|\r|\n/g, '<br>')
         .replace(/@@BOLD_(\d+)@@/g, function(_, idx) {
           return '<strong style="color:var(--navy);">' + boldTokens[Number(idx)] + '</strong>';
         });
     }
-
+    
     function getWikiBadgeClass(type) {
       if (type === 'Checklista') return 'wiki-badge type-check';
       if (type === 'Inköpslista') return 'wiki-badge type-shop';
