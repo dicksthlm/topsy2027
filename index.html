@@ -2501,14 +2501,27 @@
 
     function linkifyWikiNote(text) {
       if (!text) return '';
-      const escaped = String(text)
+
+      // Bevara ev. befintliga <strong>/<b> eller **fetstil** innan vi escapear
+      const boldTokens = [];
+      let working = String(text)
+        .replace(/<(?:strong|b)>([\s\S]*?)<\/(?:strong|b)>/gi, function(_, inner) {
+          const idx = boldTokens.push(inner) - 1;
+          return '@@BOLD_' + idx + '@@';
+        })
+        .replace(/\*\*([^\n*]+?)\*\*/g, function(_, inner) {
+          const idx = boldTokens.push(inner) - 1;
+          return '@@BOLD_' + idx + '@@';
+        });
+
+      const escaped = working
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 
       const parts = escaped.split(/(https?:\/\/[^\s|<]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g);
 
-      return parts.map(function(part) {
+      const linked = parts.map(function(part) {
         if (!part) return '';
 
         if (/^https?:\/\//i.test(part)) {
@@ -2538,6 +2551,13 @@
           return '<a class="pill-link" href="tel:' + cleanTel + '" onclick="event.stopPropagation();" style="margin:3px 4px 2px 0;">📞 ' + tel.trim() + '</a>';
         });
       }).join('');
+
+      // Gör radbrytningar till <br> och återställ fetstil
+      return linked
+        .replace(/\r\n|\r|\n/g, '<br>')
+        .replace(/@@BOLD_(\d+)@@/g, function(_, idx) {
+          return '<strong style="color:var(--navy);">' + boldTokens[Number(idx)] + '</strong>';
+        });
     }
 
     function getWikiBadgeClass(type) {
