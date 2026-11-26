@@ -28,42 +28,6 @@
         var(--pride-purple) 100%
       );
 
-      .modal-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-      align-items: stretch;
-    }
-
-    .modal-actions .btn-primary {
-      margin-top: 0;
-      flex: 1.4;
-    }
-
-    .btn-danger {
-      padding: 14px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(224, 108, 136, 0.45);
-      background: rgba(224, 108, 136, 0.14);
-      color: #F6A5B9;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
-    }
-
-    .btn-danger:hover:not(:disabled) {
-      background: rgba(224, 108, 136, 0.26);
-      border-color: var(--pride-red);
-      color: #FFD6DF;
-      transform: translateY(-1px);
-    }
-
-    .btn-danger:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-      
       /* Mörka ytor & text */
       --bg: #0E1017;
       --bg-gradient: radial-gradient(circle at 15% 0%, rgba(156, 122, 230, 0.10), transparent 42%),
@@ -99,6 +63,111 @@
       min-height: 100vh;
     }
 
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      align-items: stretch;
+    }
+
+    .modal-actions .btn-primary {
+      margin-top: 0;
+      flex: 1.4;
+    }
+
+    .btn-danger {
+      padding: 14px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(224, 108, 136, 0.45);
+      background: rgba(224, 108, 136, 0.14);
+      color: #F6A5B9;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease, transform 0.12s ease;
+    }
+
+    .btn-danger:hover:not(:disabled) {
+      background: rgba(224, 108, 136, 0.26);
+      border-color: var(--pride-red);
+      color: #FFD6DF;
+      transform: translateY(-1px);
+    }
+
+    .btn-danger:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Inloggningsskärm */
+    .auth-gate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--card);
+      border: 1px solid var(--border-strong);
+      border-top: 3px solid transparent;
+      border-bottom: 3px solid transparent;
+      border-image: var(--pride-gradient) 1;
+      border-radius: 18px;
+      padding: 28px 22px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .auth-logo {
+      font-size: 38px;
+      margin-bottom: 8px;
+    }
+
+    .auth-title {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .auth-desc {
+      margin: 8px 0 22px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .gsi-wrap {
+      display: flex;
+      justify-content: center;
+      min-height: 44px;
+    }
+
+    .auth-status {
+      margin-top: 16px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      display: none;
+    }
+
+    .auth-status.info {
+      background: rgba(156, 122, 230, 0.16);
+      color: #C7B2F5;
+      border: 1px solid rgba(156, 122, 230, 0.3);
+    }
+
+    .auth-status.err {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid rgba(224, 108, 136, 0.35);
+    }
+
     header {
       background: linear-gradient(135deg, rgba(22, 26, 36, 0.96) 0%, rgba(32, 26, 48, 0.96) 55%, rgba(20, 32, 48, 0.96) 100%);
       backdrop-filter: blur(12px);
@@ -114,6 +183,13 @@
       border-image: var(--pride-gradient) 1;
     }
 
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
     header h1 {
       margin: 0;
       font-size: 18px;
@@ -125,6 +201,34 @@
       font-size: 12px;
       color: var(--muted);
       margin-top: 3px;
+    }
+
+    .user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--card-elevated);
+      border: 1px solid var(--border-strong);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .logout-btn {
+      background: none;
+      border: none;
+      color: var(--pride-red);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0 0 0 4px;
+    }
+
+    .logout-btn:hover {
+      text-decoration: underline;
     }
 
     .container {
@@ -951,302 +1055,114 @@
   </style>
 </head>
 <body>
-  <header>
-    <h1>🚤🏳️‍🌈 Topsy – Reseutgifter 2027</h1>
-    <div class="sub" id="rateHeader">Laddar aktuell avräkning...</div>
-  </header>
-
   <div id="toast" class="toast"></div>
 
-  <!-- MODAL: Redigera Wiki & Listor -->
-  <div id="editWikiModal" class="modal-backdrop">
-    <div class="modal-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <strong style="color:var(--navy);font-size:15px;">✏️ Redigera punkt / wikisida</strong>
-        <button type="button" class="quick-btn" onclick="closeEditWikiModal()">✕</button>
-      </div>
-      <input type="hidden" id="editWikiRowIndex">
-
-      <div class="row2">
-        <div>
-          <label class="field-lbl">Typ</label>
-          <select id="editWikiType">
-            <option value="Checklista">Checklista</option>
-            <option value="Inköpslista">Inköpslista</option>
-            <option value="Resväg">Resväg</option>
-            <option value="Wiki">Wiki</option>
-          </select>
-        </div>
-        <div>
-          <label class="field-lbl">Kategori</label>
-          <input id="editWikiPage" type="text" placeholder="t.ex. Packning, Bath...">
-        </div>
-      </div>
-
-      <label class="field-lbl">Rubrik / Vara / Uppgift</label>
-      <input id="editWikiTitle" type="text" placeholder="Rubrik">
-
-      <label class="field-lbl">Anteckning / Wiki-text</label>
-      <textarea id="editWikiNote" rows="3" placeholder="Detaljer, länk, telefonnummer..."></textarea>
-
-      <label class="field-lbl">Ansvarig</label>
-      <select id="editWikiOwner">
-        <option value="Alla">Alla</option>
-        <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
-        <option value="Dick & Micke">Dick &amp; Micke</option>
-        <option value="Anders">Anders</option>
-      </select>
-
-      <div class="modal-actions">
-         <button type="button" class="btn-danger" id="btnDeleteWiki" onclick="deleteWikiItem()">🗑️ Ta bort</button>
-         <button type="button" class="btn-primary" id="btnSaveEditWiki" onclick="saveEditedWikiItem()">Spara ändringar</button>
-        </div>
-      </div>
-     </div>
-  
-  
-  <!-- MODAL: Redigera Utgift -->
-  <div id="editExpenseModal" class="modal-backdrop">
-    <div class="modal-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <strong style="color:var(--navy);font-size:15px;">✏️ Redigera utgift</strong>
-        <button type="button" class="quick-btn" onclick="closeEditExpenseModal()">✕</button>
-      </div>
-      <input type="hidden" id="editExpRowIndex">
-
-      <label class="field-lbl">Inköpsställe</label>
-      <input id="editExpPlace" type="text" placeholder="Inköpsställe">
-
-      <div class="row2">
-        <div>
-          <label class="field-lbl">Belopp</label>
-          <input id="editExpAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00">
-        </div>
-        <div>
-          <label class="field-lbl">Valuta</label>
-          <div class="seg">
-            <button type="button" id="editCurGBP" class="active" onclick="setEditExpCurrency('GBP')">£ GBP</button>
-            <button type="button" id="editCurSEK" onclick="setEditExpCurrency('SEK')">kr SEK</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="editFxRateWrap">
-        <label class="field-lbl">Manuell kurs (valfritt)</label>
-        <input id="editExpFxRate" type="number" inputmode="decimal" step="0.0001" placeholder="t.ex. 13,38">
-      </div>
-
-      <label class="field-lbl">Betalat av (Part)</label>
-      <select id="editExpPayer">
-        <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
-        <option value="Dick & Micke">Dick &amp; Micke</option>
-        <option value="Anders">Anders</option>
-      </select>
-
-      <div class="row2">
-        <div>
-          <label class="field-lbl">Kategori</label>
-          <select id="editExpCategory"></select>
-        </div>
-        <div>
-          <label class="field-lbl">Datum</label>
-          <input id="editExpDate" type="date">
-        </div>
-      </div>
-
-      <label class="field-lbl">Vilka delade på kvittot?</label>
-      <div class="chips" id="editPeopleChips">
-        <button type="button" class="chip active" data-idx="0" onclick="togglePerson(this)">Gunnar</button>
-        <button type="button" class="chip active" data-idx="1" onclick="togglePerson(this)">Patrik</button>
-        <button type="button" class="chip active" data-idx="2" onclick="togglePerson(this)">Dick</button>
-        <button type="button" class="chip active" data-idx="3" onclick="togglePerson(this)">Micke</button>
-        <button type="button" class="chip active" data-idx="4" onclick="togglePerson(this)">Anders</button>
-      </div>
-
-      <label class="field-lbl">Kommentar</label>
-      <input id="editExpComment" type="text" placeholder="Kommentar">
-
-      <label class="field-lbl">Google Maps-länk (valfritt)</label>
-      <input id="editExpMapsUrl" type="url" placeholder="https://www.google.com/maps/...">
-
-      <label class="field-lbl">Webbsida (valfritt)</label>
-      <input id="editExpWebsiteUrl" type="url" placeholder="https://...">
-
-      <label class="field-lbl">Bokningslänk (valfritt)</label>
-      <input id="editExpBookingUrl" type="url" placeholder="https://...">
-
-      <label class="field-lbl">Onlineorder / Webshop (valfritt)</label>
-      <input id="editExpOrderUrl" type="url" placeholder="https://...">
-
-    <div class="modal-actions">
-      <button type="button" class="btn-danger" id="btnDeleteExp" onclick="deleteExpenseItem()">🗑️ Ta bort</button>
-      <button type="button" class="btn-primary" id="btnSaveEditExp" onclick="saveEditedExpense()">Spara utgift</button>
-    </div>
+  <!-- INLOGGNINGSVY (visas tills Google-inloggning är verifierad) -->
+  <div id="authGate" class="auth-gate">
+    <div class="auth-card">
+      <div class="auth-logo">🚤🏳️‍🌈</div>
+      <h1 class="auth-title">Topsy – Reseutgifter 2027</h1>
+      <p class="auth-desc">
+        Endast för godkända deltagare i resesällskapet.<br>
+        Logga in med ditt registrerade Google-konto för att fortsätta.
+      </p>
+      <div id="gSignInBtn" class="gsi-wrap"></div>
+      <div id="authStatus" class="auth-status"></div>
     </div>
   </div>
 
-  <!-- MODAL: Redigera Överföring -->
-  <div id="editTransferModal" class="modal-backdrop">
-    <div class="modal-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <strong style="color:var(--navy);font-size:15px;">✏️ Redigera överföring</strong>
-        <button type="button" class="quick-btn" onclick="closeEditTransferModal()">✕</button>
-      </div>
-      <input type="hidden" id="editTrRowIndex">
-
-      <label class="field-lbl">Från part (Betalare)</label>
-      <select id="editTrFrom">
-        <option value="Anders">Anders</option>
-        <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
-        <option value="Dick & Micke">Dick &amp; Micke</option>
-      </select>
-
-      <label class="field-lbl">Till part (Mottagare)</label>
-      <select id="editTrTo">
-        <option value="Dick & Micke">Dick &amp; Micke</option>
-        <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
-        <option value="Anders">Anders</option>
-      </select>
-
-      <div class="row2">
-        <div>
-          <label class="field-lbl">Belopp</label>
-          <input id="editTrAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00">
+  <!-- HUVUDAPP (dold tills användaren är inloggad) -->
+  <div id="appShell" style="display:none;">
+    <header>
+      <div class="header-top">
+        <h1>🚤🏳️‍🌈 Topsy – Reseutgifter 2027</h1>
+        <div class="user-pill">
+          <span id="currentUserBadge">Inloggad</span>
+          <button type="button" class="logout-btn" onclick="logoutUser()">Logga ut</button>
         </div>
-        <div>
-          <label class="field-lbl">Valuta</label>
-          <div class="seg">
-            <button type="button" id="editTrCurSEK" class="active" onclick="setEditTrCurrency('SEK')">kr SEK</button>
-            <button type="button" id="editTrCurGBP" onclick="setEditTrCurrency('GBP')">£ GBP</button>
+      </div>
+      <div class="sub" id="rateHeader">Laddar aktuell avräkning...</div>
+    </header>
+
+    <!-- MODAL: Redigera Wiki & Listor -->
+    <div id="editWikiModal" class="modal-backdrop">
+      <div class="modal-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <strong style="color:var(--navy);font-size:15px;">✏️ Redigera punkt / wikisida</strong>
+          <button type="button" class="quick-btn" onclick="closeEditWikiModal()">✕</button>
+        </div>
+        <input type="hidden" id="editWikiRowIndex">
+
+        <div class="row2">
+          <div>
+            <label class="field-lbl">Typ</label>
+            <select id="editWikiType">
+              <option value="Checklista">Checklista</option>
+              <option value="Inköpslista">Inköpslista</option>
+              <option value="Resväg">Resväg</option>
+              <option value="Wiki">Wiki</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-lbl">Kategori</label>
+            <input id="editWikiPage" type="text" placeholder="t.ex. Packning, Bath...">
           </div>
         </div>
-      </div>
 
-      <label class="field-lbl">Datum</label>
-      <input id="editTrDate" type="date">
+        <label class="field-lbl">Rubrik / Vara / Uppgift</label>
+        <input id="editWikiTitle" type="text" placeholder="Rubrik">
 
-      <label class="field-lbl">Kommentar / Betalsätt</label>
-      <input id="editTrComment" type="text" placeholder="t.ex. Swish">
+        <label class="field-lbl">Anteckning / Wiki-text</label>
+        <textarea id="editWikiNote" rows="3" placeholder="Detaljer, länk, telefonnummer..."></textarea>
 
-    <div class="modal-actions">
-      <button type="button" class="btn-danger" id="btnDeleteTr" onclick="deleteTransferItem()">🗑️ Ta bort</button>
-      <button type="button" class="btn-primary" id="btnSaveEditTr" onclick="saveEditedTransfer()">Spara överföring</button>
-    </div>
-   </div>
-  </div>
+        <label class="field-lbl">Ansvarig</label>
+        <select id="editWikiOwner">
+          <option value="Alla">Alla</option>
+          <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+          <option value="Dick & Micke">Dick &amp; Micke</option>
+          <option value="Anders">Anders</option>
+        </select>
 
-  <!-- MODAL: Uppdatera Karta & länkar -->
-  <div id="editLinksModal" class="modal-backdrop">
-    <div class="modal-card">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <strong style="color:var(--navy);font-size:15px;" id="modalPlaceTitle">Uppdatera karta &amp; länkar</strong>
-        <button type="button" class="quick-btn" onclick="closeEditLinksModal()">✕</button>
-      </div>
-      <input type="hidden" id="editRowIndex">
-      <label class="field-lbl">Adress / Ort (valfritt)</label>
-      <input id="editAddress" type="text" placeholder="t.ex. Sydney Wharf, Bath">
-
-      <label class="field-lbl">Google Maps-länk</label>
-      <input id="editMapsUrl" type="url" placeholder="https://maps.app.goo.gl/... eller https://www.google.com/maps/...">
-
-      <div class="coord-line" id="editCoordsPreview">Koordinater: –</div>
-
-      <label class="field-lbl">Webbsida</label>
-      <input id="editWebsiteUrl" type="url" placeholder="https://...">
-
-      <label class="field-lbl">Bokningslänk</label>
-      <input id="editBookingUrl" type="url" placeholder="https://...">
-
-      <label class="field-lbl">Onlineorder / Webshop</label>
-      <input id="editOrderUrl" type="url" placeholder="https://...">
-
-      <div class="quick-row" style="margin-top:10px;">
-        <button type="button" class="quick-btn" onclick="autoLookupEditLinks()">🔎 Sök koordinater &amp; länkar automatiskt</button>
-      </div>
-      <button type="button" class="btn-primary" id="btnSaveEditLinks" onclick="saveEditedLinks()">Spara länkar &amp; koordinater</button>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="subnav-bar">
-      <button type="button" class="subnav-pill" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">💸 Betala av</button>
-      <button type="button" class="subnav-pill" onclick="switchTab('transfers-list', null)">🔄 Överföringar</button>
-      <button type="button" class="subnav-pill" onclick="switchTab('links', document.getElementById('nav-links'))">📸 Bilder &amp; Mappar</button>
-    </div>
-
-    <div id="tab-overview" class="section active">
-      <button class="hero-scan-btn" onclick="openScanFlow()">
-        📷 Skanna / fota nytt kvitto
-      </button>
-
-      <div class="kpi-grid">
-        <div class="kpi"><div class="lbl">Totala utgifter</div><div class="val" id="kpiTotal">–</div></div>
-        <div class="kpi"><div class="lbl">Snitt / person (1/5)</div><div class="val" id="kpiPerPerson">–</div></div>
-      </div>
-
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-          <strong style="color:var(--navy);">Betalningsförslag i realtid</strong>
-          <div style="display:flex;gap:6px;">
-            <button class="quick-btn" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">💸 Betala av</button>
-            <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
-          </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-danger" id="btnDeleteWiki" onclick="deleteWikiItem()">🗑️ Ta bort</button>
+          <button type="button" class="btn-primary" id="btnSaveEditWiki" onclick="saveEditedWikiItem()">Spara ändringar</button>
         </div>
-        <div id="partyList">Hämtar...</div>
-      </div>
-
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-          <strong style="color:var(--navy);">Senaste kvitton</strong>
-          <button class="quick-btn" onclick="switchTab('expenses-list', document.getElementById('nav-expenses-list'))">Visa alla →</button>
-        </div>
-        <div id="recentList" style="color:var(--muted);font-size:13px;">Hämtar...</div>
       </div>
     </div>
 
-    <div id="tab-expense" class="section">
-      <div class="card">
-        <div class="scan-box">
-          <strong style="color:var(--navy);font-size:15px;">Skanna eller fota kvitto</strong>
-          <div class="meta">Bilden sparas automatiskt i Google Drive-mappen <strong>Kvitton</strong>.</div>
-          <div class="scan-actions">
-            <label for="expPhotoCam" class="scan-btn cam">📷 Ta foto</label>
-            <label for="expPhotoGal" class="scan-btn gal">🖼️ Välj bild</label>
-          </div>
-          <input id="expPhotoCam" class="hidden-file" type="file" accept="image/*" capture="environment" onchange="handlePhoto(event)">
-          <input id="expPhotoGal" class="hidden-file" type="file" accept="image/*" onchange="handlePhoto(event)">
-          <img id="photoPreview" alt="Förhandsvisning kvitto">
-          <div id="aiStatus" class="ai-status"></div>
+    <!-- MODAL: Redigera Utgift -->
+    <div id="editExpenseModal" class="modal-backdrop">
+      <div class="modal-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <strong style="color:var(--navy);font-size:15px;">✏️ Redigera utgift</strong>
+          <button type="button" class="quick-btn" onclick="closeEditExpenseModal()">✕</button>
         </div>
+        <input type="hidden" id="editExpRowIndex">
 
         <label class="field-lbl">Inköpsställe</label>
-        <input id="expPlace" type="text" placeholder="t.ex. The George Inn, Sainsbury's...">
-
-        <label class="field-lbl">Adress / Ort (hjälper automatisk Google Maps-sökning)</label>
-        <input id="expAddress" type="text" placeholder="t.ex. Bathampton, Bath BA2 6TS">
+        <input id="editExpPlace" type="text" placeholder="Inköpsställe">
 
         <div class="row2">
           <div>
             <label class="field-lbl">Belopp</label>
-            <input id="expAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00" oninput="updatePreview()">
+            <input id="editExpAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00">
           </div>
           <div>
             <label class="field-lbl">Valuta</label>
             <div class="seg">
-              <button type="button" id="curGBP" class="active" onclick="setExpCurrency('GBP')">£ GBP</button>
-              <button type="button" id="curSEK" onclick="setExpCurrency('SEK')">kr SEK</button>
+              <button type="button" id="editCurGBP" class="active" onclick="setEditExpCurrency('GBP')">£ GBP</button>
+              <button type="button" id="editCurSEK" onclick="setEditExpCurrency('SEK')">kr SEK</button>
             </div>
           </div>
         </div>
-        <div class="preview-sek" id="sekPreview"></div>
 
-        <div id="fxRateWrap">
-          <label class="field-lbl">Manuell kurs (valfritt – lämnas tom för standardkurs)</label>
-          <input id="expFxRate" type="number" inputmode="decimal" step="0.0001" placeholder="t.ex. 13,23" oninput="updatePreview()">
+        <div id="editFxRateWrap">
+          <label class="field-lbl">Manuell kurs (valfritt)</label>
+          <input id="editExpFxRate" type="number" inputmode="decimal" step="0.0001" placeholder="t.ex. 13,38">
         </div>
 
         <label class="field-lbl">Betalat av (Part)</label>
-        <select id="expPayer">
+        <select id="editExpPayer">
           <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
           <option value="Dick & Micke">Dick &amp; Micke</option>
           <option value="Anders">Anders</option>
@@ -1255,43 +1171,16 @@
         <div class="row2">
           <div>
             <label class="field-lbl">Kategori</label>
-            <select id="expCategory"></select>
+            <select id="editExpCategory"></select>
           </div>
           <div>
             <label class="field-lbl">Datum</label>
-            <input id="expDate" type="date">
+            <input id="editExpDate" type="date">
           </div>
-        </div>
-
-        <div class="place-panel">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
-            <strong style="color:var(--navy);font-size:14px;">📍 Google Maps, Koordinater &amp; Webblänkar</strong>
-            <button type="button" class="quick-btn" id="btnAutoPlace" onclick="lookupNewExpensePlace()">🔎 Hämta automatiskt</button>
-          </div>
-          <div class="meta">Fylls i automatiskt när företagsnamn/adress finns, eller klistra in en Google Maps-länk manuellt.</div>
-
-          <label class="field-lbl">Google Maps-länk</label>
-          <input id="expMapsUrl" type="url" placeholder="https://maps.app.goo.gl/... eller https://www.google.com/maps/..." oninput="syncNewExpenseCoordsFromUrl()">
-
-          <div class="coord-line" id="expCoordsDisplay">Koordinater: –</div>
-          <input type="hidden" id="expCoords">
-
-          <label class="field-lbl">Webbsida (valfritt – hämtas från Google Maps om det finns)</label>
-          <input id="expWebsiteUrl" type="url" placeholder="https://...">
-
-          <label class="field-lbl">Bokningslänk (valfritt)</label>
-          <input id="expBookingUrl" type="url" placeholder="https://...">
-
-          <label class="field-lbl">Onlineorder / Webshop (valfritt)</label>
-          <input id="expOrderUrl" type="url" placeholder="https://...">
         </div>
 
         <label class="field-lbl">Vilka delade på kvittot?</label>
-        <div class="quick-row">
-          <button type="button" class="quick-btn" onclick="selectAllPeople(true)">Alla 5 (2/5, 2/5, 1/5)</button>
-          <button type="button" class="quick-btn" onclick="selectAllPeople(false)">Rensa</button>
-        </div>
-        <div class="chips" id="peopleChips">
+        <div class="chips" id="editPeopleChips">
           <button type="button" class="chip active" data-idx="0" onclick="togglePerson(this)">Gunnar</button>
           <button type="button" class="chip active" data-idx="1" onclick="togglePerson(this)">Patrik</button>
           <button type="button" class="chip active" data-idx="2" onclick="togglePerson(this)">Dick</button>
@@ -1299,30 +1188,46 @@
           <button type="button" class="chip active" data-idx="4" onclick="togglePerson(this)">Anders</button>
         </div>
 
-        <label class="field-lbl">Kommentar (valfritt)</label>
-        <input id="expComment" type="text" placeholder="t.ex. Middag och öl på terrassen">
+        <label class="field-lbl">Kommentar</label>
+        <input id="editExpComment" type="text" placeholder="Kommentar">
 
-        <button class="btn-primary" id="btnSaveExp" onclick="submitExpense()">Spara kvitto</button>
+        <label class="field-lbl">Google Maps-länk (valfritt)</label>
+        <input id="editExpMapsUrl" type="url" placeholder="https://www.google.com/maps/...">
+
+        <label class="field-lbl">Webbsida (valfritt)</label>
+        <input id="editExpWebsiteUrl" type="url" placeholder="https://...">
+
+        <label class="field-lbl">Bokningslänk (valfritt)</label>
+        <input id="editExpBookingUrl" type="url" placeholder="https://...">
+
+        <label class="field-lbl">Onlineorder / Webshop (valfritt)</label>
+        <input id="editExpOrderUrl" type="url" placeholder="https://...">
+
+        <div class="modal-actions">
+          <button type="button" class="btn-danger" id="btnDeleteExp" onclick="deleteExpenseItem()">🗑️ Ta bort</button>
+          <button type="button" class="btn-primary" id="btnSaveEditExp" onclick="saveEditedExpense()">Spara utgift</button>
+        </div>
       </div>
     </div>
 
-    <div id="tab-transfer" class="section">
-      <div class="card">
+    <!-- MODAL: Redigera Överföring -->
+    <div id="editTransferModal" class="modal-backdrop">
+      <div class="modal-card">
         <div style="display:flex;justify-content:space-between;align-items:center;">
-          <strong style="color:var(--navy);font-size:16px;">💸 Betala av / Registrera överföring</strong>
-          <button class="quick-btn" onclick="switchTab('transfers-list', null)">Visa historik →</button>
+          <strong style="color:var(--navy);font-size:15px;">✏️ Redigera överföring</strong>
+          <button type="button" class="quick-btn" onclick="closeEditTransferModal()">✕</button>
         </div>
-        <p style="font-size:13px;color:var(--muted);margin:4px 0 10px;">Använd när en part Swishar eller betalar en annan för att direkt minska skulden.</p>
+        <input type="hidden" id="editTrRowIndex">
 
         <label class="field-lbl">Från part (Betalare)</label>
-        <select id="trFrom">
+        <select id="editTrFrom">
           <option value="Anders">Anders</option>
           <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
           <option value="Dick & Micke">Dick &amp; Micke</option>
         </select>
 
         <label class="field-lbl">Till part (Mottagare)</label>
-        <select id="trTo">
+        <select id="editTrTo">
           <option value="Dick & Micke">Dick &amp; Micke</option>
           <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
           <option value="Anders">Anders</option>
@@ -1331,260 +1236,490 @@
         <div class="row2">
           <div>
             <label class="field-lbl">Belopp</label>
-            <input id="trAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00">
+            <input id="editTrAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00">
           </div>
           <div>
             <label class="field-lbl">Valuta</label>
             <div class="seg">
-              <button type="button" id="trCurSEK" class="active" onclick="setTrCurrency('SEK')">kr SEK</button>
-              <button type="button" id="trCurGBP" onclick="setTrCurrency('GBP')">£ GBP</button>
+              <button type="button" id="editTrCurSEK" class="active" onclick="setEditTrCurrency('SEK')">kr SEK</button>
+              <button type="button" id="editTrCurGBP" onclick="setEditTrCurrency('GBP')">£ GBP</button>
             </div>
           </div>
         </div>
 
         <label class="field-lbl">Datum</label>
-        <input id="trDate" type="date">
+        <input id="editTrDate" type="date">
 
         <label class="field-lbl">Kommentar / Betalsätt</label>
-        <input id="trComment" type="text" placeholder="t.ex. Swish delbetalning">
+        <input id="editTrComment" type="text" placeholder="t.ex. Swish">
 
-        <button class="btn-primary" id="btnSaveTr" onclick="submitTransfer()">Registrera betalning</button>
-      </div>
-
-      <div class="card">
-        <strong style="color:var(--navy);font-size:15px;">🔄 Registrerade överföringar</strong>
-        <div id="transferTabHistory" style="color:var(--muted);font-size:13px;margin-top:6px;">Hämtar överföringar...</div>
+        <div class="modal-actions">
+          <button type="button" class="btn-danger" id="btnDeleteTr" onclick="deleteTransferItem()">🗑️ Ta bort</button>
+          <button type="button" class="btn-primary" id="btnSaveEditTr" onclick="saveEditedTransfer()">Spara överföring</button>
+        </div>
       </div>
     </div>
 
-    <div id="tab-expenses-list" class="section">
-      <div class="card">
+    <!-- MODAL: Uppdatera Karta & länkar -->
+    <div id="editLinksModal" class="modal-backdrop">
+      <div class="modal-card">
         <div style="display:flex;justify-content:space-between;align-items:center;">
-          <strong style="color:var(--navy);font-size:16px;">🧾 Utgifter</strong>
-          <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
+          <strong style="color:var(--navy);font-size:15px;" id="modalPlaceTitle">Uppdatera karta &amp; länkar</strong>
+          <button type="button" class="quick-btn" onclick="closeEditLinksModal()">✕</button>
         </div>
-        <div class="meta" id="expensesSummaryMeta">Visar registrerade utgifter</div>
+        <input type="hidden" id="editRowIndex">
+        <label class="field-lbl">Adress / Ort (valfritt)</label>
+        <input id="editAddress" type="text" placeholder="t.ex. Sydney Wharf, Bath">
 
-        <div class="filter-bar">
-          <input id="expSearch" type="text" placeholder="Sök inköpsställe..." oninput="renderExpensesList()">
-          <select id="expPayerFilter" onchange="renderExpensesList()">
-            <option value="">Alla parter</option>
+        <label class="field-lbl">Google Maps-länk</label>
+        <input id="editMapsUrl" type="url" placeholder="https://maps.app.goo.gl/... eller https://www.google.com/maps/...">
+
+        <div class="coord-line" id="editCoordsPreview">Koordinater: –</div>
+
+        <label class="field-lbl">Webbsida</label>
+        <input id="editWebsiteUrl" type="url" placeholder="https://...">
+
+        <label class="field-lbl">Bokningslänk</label>
+        <input id="editBookingUrl" type="url" placeholder="https://...">
+
+        <label class="field-lbl">Onlineorder / Webshop</label>
+        <input id="editOrderUrl" type="url" placeholder="https://...">
+
+        <div class="quick-row" style="margin-top:10px;">
+          <button type="button" class="quick-btn" onclick="autoLookupEditLinks()">🔎 Sök koordinater &amp; länkar automatiskt</button>
+        </div>
+        <button type="button" class="btn-primary" id="btnSaveEditLinks" onclick="saveEditedLinks()">Spara länkar &amp; koordinater</button>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="subnav-bar">
+        <button type="button" class="subnav-pill" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">💸 Betala av</button>
+        <button type="button" class="subnav-pill" onclick="switchTab('transfers-list', null)">🔄 Överföringar</button>
+        <button type="button" class="subnav-pill" onclick="switchTab('links', document.getElementById('nav-links'))">📸 Bilder &amp; Mappar</button>
+      </div>
+
+      <div id="tab-overview" class="section active">
+        <button class="hero-scan-btn" onclick="openScanFlow()">
+          📷 Skanna / fota nytt kvitto
+        </button>
+
+        <div class="kpi-grid">
+          <div class="kpi"><div class="lbl">Totala utgifter</div><div class="val" id="kpiTotal">–</div></div>
+          <div class="kpi"><div class="lbl">Snitt / person (1/5)</div><div class="val" id="kpiPerPerson">–</div></div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <strong style="color:var(--navy);">Betalningsförslag i realtid</strong>
+            <div style="display:flex;gap:6px;">
+              <button class="quick-btn" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">💸 Betala av</button>
+              <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
+            </div>
+          </div>
+          <div id="partyList">Hämtar...</div>
+        </div>
+
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <strong style="color:var(--navy);">Senaste kvitton</strong>
+            <button class="quick-btn" onclick="switchTab('expenses-list', document.getElementById('nav-expenses-list'))">Visa alla →</button>
+          </div>
+          <div id="recentList" style="color:var(--muted);font-size:13px;">Hämtar...</div>
+        </div>
+      </div>
+
+      <div id="tab-expense" class="section">
+        <div class="card">
+          <div class="scan-box">
+            <strong style="color:var(--navy);font-size:15px;">Skanna eller fota kvitto</strong>
+            <div class="meta">Bilden sparas automatiskt i Google Drive-mappen <strong>Kvitton</strong>.</div>
+            <div class="scan-actions">
+              <label for="expPhotoCam" class="scan-btn cam">📷 Ta foto</label>
+              <label for="expPhotoGal" class="scan-btn gal">🖼️ Välj bild</label>
+            </div>
+            <input id="expPhotoCam" class="hidden-file" type="file" accept="image/*" capture="environment" onchange="handlePhoto(event)">
+            <input id="expPhotoGal" class="hidden-file" type="file" accept="image/*" onchange="handlePhoto(event)">
+            <img id="photoPreview" alt="Förhandsvisning kvitto">
+            <div id="aiStatus" class="ai-status"></div>
+          </div>
+
+          <label class="field-lbl">Inköpsställe</label>
+          <input id="expPlace" type="text" placeholder="t.ex. The George Inn, Sainsbury's...">
+
+          <label class="field-lbl">Adress / Ort (hjälper automatisk Google Maps-sökning)</label>
+          <input id="expAddress" type="text" placeholder="t.ex. Bathampton, Bath BA2 6TS">
+
+          <div class="row2">
+            <div>
+              <label class="field-lbl">Belopp</label>
+              <input id="expAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00" oninput="updatePreview()">
+            </div>
+            <div>
+              <label class="field-lbl">Valuta</label>
+              <div class="seg">
+                <button type="button" id="curGBP" class="active" onclick="setExpCurrency('GBP')">£ GBP</button>
+                <button type="button" id="curSEK" onclick="setExpCurrency('SEK')">kr SEK</button>
+              </div>
+            </div>
+          </div>
+          <div class="preview-sek" id="sekPreview"></div>
+
+          <div id="fxRateWrap">
+            <label class="field-lbl">Manuell kurs (valfritt – lämnas tom för standardkurs)</label>
+            <input id="expFxRate" type="number" inputmode="decimal" step="0.0001" placeholder="t.ex. 13,23" oninput="updatePreview()">
+          </div>
+
+          <label class="field-lbl">Betalat av (Part)</label>
+          <select id="expPayer">
             <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
             <option value="Dick & Micke">Dick &amp; Micke</option>
             <option value="Anders">Anders</option>
           </select>
-        </div>
 
-        <div id="allExpensesList" style="color:var(--muted);font-size:13px;">Hämtar utgifter...</div>
+          <div class="row2">
+            <div>
+              <label class="field-lbl">Kategori</label>
+              <select id="expCategory"></select>
+            </div>
+            <div>
+              <label class="field-lbl">Datum</label>
+              <input id="expDate" type="date">
+            </div>
+          </div>
+
+          <div class="place-panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <strong style="color:var(--navy);font-size:14px;">📍 Google Maps, Koordinater &amp; Webblänkar</strong>
+              <button type="button" class="quick-btn" id="btnAutoPlace" onclick="lookupNewExpensePlace()">🔎 Hämta automatiskt</button>
+            </div>
+            <div class="meta">Fylls i automatiskt när företagsnamn/adress finns, eller klistra in en Google Maps-länk manuellt.</div>
+
+            <label class="field-lbl">Google Maps-länk</label>
+            <input id="expMapsUrl" type="url" placeholder="https://maps.app.goo.gl/... eller https://www.google.com/maps/..." oninput="syncNewExpenseCoordsFromUrl()">
+
+            <div class="coord-line" id="expCoordsDisplay">Koordinater: –</div>
+            <input type="hidden" id="expCoords">
+
+            <label class="field-lbl">Webbsida (valfritt – hämtas från Google Maps om det finns)</label>
+            <input id="expWebsiteUrl" type="url" placeholder="https://...">
+
+            <label class="field-lbl">Bokningslänk (valfritt)</label>
+            <input id="expBookingUrl" type="url" placeholder="https://...">
+
+            <label class="field-lbl">Onlineorder / Webshop (valfritt)</label>
+            <input id="expOrderUrl" type="url" placeholder="https://...">
+          </div>
+
+          <label class="field-lbl">Vilka delade på kvittot?</label>
+          <div class="quick-row">
+            <button type="button" class="quick-btn" onclick="selectAllPeople(true)">Alla 5 (2/5, 2/5, 1/5)</button>
+            <button type="button" class="quick-btn" onclick="selectAllPeople(false)">Rensa</button>
+          </div>
+          <div class="chips" id="peopleChips">
+            <button type="button" class="chip active" data-idx="0" onclick="togglePerson(this)">Gunnar</button>
+            <button type="button" class="chip active" data-idx="1" onclick="togglePerson(this)">Patrik</button>
+            <button type="button" class="chip active" data-idx="2" onclick="togglePerson(this)">Dick</button>
+            <button type="button" class="chip active" data-idx="3" onclick="togglePerson(this)">Micke</button>
+            <button type="button" class="chip active" data-idx="4" onclick="togglePerson(this)">Anders</button>
+          </div>
+
+          <label class="field-lbl">Kommentar (valfritt)</label>
+          <input id="expComment" type="text" placeholder="t.ex. Middag och öl på terrassen">
+
+          <button class="btn-primary" id="btnSaveExp" onclick="submitExpense()">Spara kvitto</button>
+        </div>
       </div>
-    </div>
 
-    <div id="tab-wiki" class="section">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <strong style="color:var(--navy);font-size:16px;">📚 Wiki, Inköpslistor &amp; Checklistor</strong>
-          <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
-        </div>
-        <div class="meta" id="wikiProgressMeta">Synkat med fliken Wiki &amp; Listor i Google Kalkylark</div>
+      <div id="tab-transfer" class="section">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong style="color:var(--navy);font-size:16px;">💸 Betala av / Registrera överföring</strong>
+            <button class="quick-btn" onclick="switchTab('transfers-list', null)">Visa historik →</button>
+          </div>
+          <p style="font-size:13px;color:var(--muted);margin:4px 0 10px;">Använd när en part Swishar eller betalar en annan för att direkt minska skulden.</p>
 
-        <div class="filter-bar">
-          <select id="wikiTypeFilter" onchange="renderWikiList()">
-            <option value="">Alla typer</option>
-            <option value="Checklista">Checklistor</option>
-            <option value="Inköpslista">Inköpslistor</option>
-            <option value="Resväg">Resvägar</option>
-            <option value="Wiki">Wikisidor</option>
-          </select>
-          <select id="wikiPageFilter" onchange="renderWikiList()">
-            <option value="">Alla sidor/listor</option>
-          </select>
-          <select id="wikiOwnerFilter" onchange="renderWikiList()" style="grid-column: 1 / -1;">
-            <option value="">Alla ansvariga</option>
-            <option value="Alla">Alla (gemensamt)</option>
+          <label class="field-lbl">Från part (Betalare)</label>
+          <select id="trFrom">
+            <option value="Anders">Anders</option>
             <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
             <option value="Dick & Micke">Dick &amp; Micke</option>
+          </select>
+
+          <label class="field-lbl">Till part (Mottagare)</label>
+          <select id="trTo">
+            <option value="Dick & Micke">Dick &amp; Micke</option>
+            <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
             <option value="Anders">Anders</option>
           </select>
-        </div>
 
-        <div id="wikiItemsList">Hämtar listor &amp; wikisidor...</div>
-      </div>
-
-      <div class="card">
-        <strong style="color:var(--navy);font-size:15px;">➕ Lägg till punkt eller wikisida</strong>
-        <div class="row2">
-          <div>
-            <label class="field-lbl">Typ</label>
-            <select id="newWikiType">
-              <option value="Inköpslista">Inköpslista</option>
-              <option value="Checklista">Checklista</option>
-              <option value="Resväg">Resväg</option>
-              <option value="Wiki">Wiki</option>
-            </select>
+          <div class="row2">
+            <div>
+              <label class="field-lbl">Belopp</label>
+              <input id="trAmount" type="number" inputmode="decimal" step="0.01" placeholder="0,00">
+            </div>
+            <div>
+              <label class="field-lbl">Valuta</label>
+              <div class="seg">
+                <button type="button" id="trCurSEK" class="active" onclick="setTrCurrency('SEK')">kr SEK</button>
+                <button type="button" id="trCurGBP" onclick="setTrCurrency('GBP')">£ GBP</button>
+              </div>
+            </div>
           </div>
-          <div>
-            <label class="field-lbl">Kategori</label>
-            <input id="newWikiPage" type="text" placeholder="Fyll i kategori">
-          </div>
+
+          <label class="field-lbl">Datum</label>
+          <input id="trDate" type="date">
+
+          <label class="field-lbl">Kommentar / Betalsätt</label>
+          <input id="trComment" type="text" placeholder="t.ex. Swish delbetalning">
+
+          <button class="btn-primary" id="btnSaveTr" onclick="submitTransfer()">Registrera betalning</button>
         </div>
 
-        <label class="field-lbl">Rubrik / Vara / Uppgift</label>
-        <input id="newWikiTitle" type="text" placeholder="t.ex. Tonic water, Kolla slusstider...">
-
-        <label class="field-lbl">Anteckning / Wiki-text (valfritt)</label>
-        <textarea id="newWikiNote" rows="2" placeholder="Detaljer, länk eller kommentar..."></textarea>
-
-        <label class="field-lbl">Ansvarig</label>
-        <select id="newWikiOwner">
-          <option value="Alla">Alla</option>
-          <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
-          <option value="Dick & Micke">Dick &amp; Micke</option>
-          <option value="Anders">Anders</option>
-        </select>
-
-        <button type="button" class="btn-primary" id="btnSaveWikiItem" onclick="submitWikiItem()">Lägg till i kalkylarket</button>
-      </div>
-    </div>
-
-    <div id="tab-links" class="section">
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">📸 Bilder &amp; video – Ladda upp till mapp</strong>
-        <div class="meta">Öppnar direkt respektive mapp i Google Drive för att ladda upp foton och filmklipp</div>
-
-        <div class="link-list">
-          <a class="link-card" href="https://drive.google.com/drive/folders/1YapvxZEcSXJbAaq6H0-e5rFOqJw16Q2E" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">🌈</span>
-              <div>
-                <div class="link-title">Bilder och video – Alla</div>
-                <div class="link-desc">Gemensam mapp för hela gänget</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/1ZFpbujBUEg6gkQkotrMhCD-E2VgnrdZ2" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Anders</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/1zLFT5KB8p21E603Dgd7EdjRazQyP1War" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Dick</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/1s5SiJg9161LTPASJ1vjhK-CLRZzM0b6M" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Gunnar</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/1nB4d1Iy3ZCtGRJHyPAgALoSGftLHkgu3" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Micke</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://drive.google.com/drive/folders/17kVLmuyWgSBGgZ7_oNfra0SA62LwTjEg" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📷</span>
-              <div>
-                <div class="link-title">Bilder och video – Patrik</div>
-                <div class="link-desc">Personlig uppladdningsmapp</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
+        <div class="card">
+          <strong style="color:var(--navy);font-size:15px;">🔄 Registrerade överföringar</strong>
+          <div id="transferTabHistory" style="color:var(--muted);font-size:13px;margin-top:6px;">Hämtar överföringar...</div>
         </div>
       </div>
 
-      <div class="card">
-        <strong style="color:var(--navy);font-size:16px;">📁 Gemensamma dokument &amp; mappar</strong>
-        <div class="link-list">
-          <a class="link-card" href="https://drive.google.com/drive/folders/1IA2WIM_bH7kcY6tVLl9vuOzhjeJRjMAI?usp=drive_link" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📂</span>
-              <div>
-                <div class="link-title">Kanalbåt England (Huvudmapp)</div>
-                <div class="link-desc">Google Drive-mapp för hela resan</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://docs.google.com/spreadsheets/d/1FSdwExJGllOyjPYoJ26vBLDnUVZael0UkDBzKe2aj04/edit?usp=drive_link" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📊</span>
-              <div>
-                <div class="link-title">Kalkyldokument (Reseutgifter)</div>
-                <div class="link-desc">Google Kalkylark med utgifter, kurser &amp; avräkning</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-
-          <a class="link-card" href="https://docs.google.com/document/d/1zYGpz4lt1R67vbxJQn0xWLsrq-ObKty3tIBiqX1JBU4/edit?usp=sharing" target="_blank" rel="noopener">
-            <div class="link-left">
-              <span class="link-ico">📝</span>
-              <div>
-                <div class="link-title">Masterdokument (Reseplan)</div>
-                <div class="link-desc">Google Doc med rutt, båtfakta &amp; checklista</div>
-              </div>
-            </div>
-            <span class="link-arrow">↗</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-transfers-list" class="section">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <strong style="color:var(--navy);font-size:16px;">🔄 Överföringar</strong>
-          <div style="display:flex;gap:6px;">
-            <button class="quick-btn" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">+ Ny betalning</button>
+      <div id="tab-expenses-list" class="section">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong style="color:var(--navy);font-size:16px;">🧾 Utgifter</strong>
             <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
           </div>
-        </div>
-        <div class="meta" style="margin-bottom:8px;">Registrerade betalningar mellan parter</div>
+          <div class="meta" id="expensesSummaryMeta">Visar registrerade utgifter</div>
 
-        <div id="allTransfersList" style="color:var(--muted);font-size:13px;">Hämtar överföringar...</div>
+          <div class="filter-bar">
+            <input id="expSearch" type="text" placeholder="Sök inköpsställe..." oninput="renderExpensesList()">
+            <select id="expPayerFilter" onchange="renderExpensesList()">
+              <option value="">Alla parter</option>
+              <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+              <option value="Dick & Micke">Dick &amp; Micke</option>
+              <option value="Anders">Anders</option>
+            </select>
+          </div>
+
+          <div id="allExpensesList" style="color:var(--muted);font-size:13px;">Hämtar utgifter...</div>
+        </div>
+      </div>
+
+      <div id="tab-wiki" class="section">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong style="color:var(--navy);font-size:16px;">📚 Wiki, Inköpslistor &amp; Checklistor</strong>
+            <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
+          </div>
+          <div class="meta" id="wikiProgressMeta">Synkat med fliken Wiki &amp; Listor i Google Kalkylark</div>
+
+          <div class="filter-bar">
+            <select id="wikiTypeFilter" onchange="renderWikiList()">
+              <option value="">Alla typer</option>
+              <option value="Checklista">Checklistor</option>
+              <option value="Inköpslista">Inköpslistor</option>
+              <option value="Resväg">Resvägar</option>
+              <option value="Wiki">Wikisidor</option>
+            </select>
+            <select id="wikiPageFilter" onchange="renderWikiList()">
+              <option value="">Alla sidor/listor</option>
+            </select>
+            <select id="wikiOwnerFilter" onchange="renderWikiList()" style="grid-column: 1 / -1;">
+              <option value="">Alla ansvariga</option>
+              <option value="Alla">Alla (gemensamt)</option>
+              <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+              <option value="Dick & Micke">Dick &amp; Micke</option>
+              <option value="Anders">Anders</option>
+            </select>
+          </div>
+
+          <div id="wikiItemsList">Hämtar listor &amp; wikisidor...</div>
+        </div>
+
+        <div class="card">
+          <strong style="color:var(--navy);font-size:15px;">➕ Lägg till punkt eller wikisida</strong>
+          <div class="row2">
+            <div>
+              <label class="field-lbl">Typ</label>
+              <select id="newWikiType">
+                <option value="Inköpslista">Inköpslista</option>
+                <option value="Checklista">Checklista</option>
+                <option value="Resväg">Resväg</option>
+                <option value="Wiki">Wiki</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-lbl">Kategori</label>
+              <input id="newWikiPage" type="text" placeholder="Fyll i kategori">
+            </div>
+          </div>
+
+          <label class="field-lbl">Rubrik / Vara / Uppgift</label>
+          <input id="newWikiTitle" type="text" placeholder="t.ex. Tonic water, Kolla slusstider...">
+
+          <label class="field-lbl">Anteckning / Wiki-text (valfritt)</label>
+          <textarea id="newWikiNote" rows="2" placeholder="Detaljer, länk eller kommentar..."></textarea>
+
+          <label class="field-lbl">Ansvarig</label>
+          <select id="newWikiOwner">
+            <option value="Alla">Alla</option>
+            <option value="Gunnar & Patrik">Gunnar &amp; Patrik</option>
+            <option value="Dick & Micke">Dick &amp; Micke</option>
+            <option value="Anders">Anders</option>
+          </select>
+
+          <button type="button" class="btn-primary" id="btnSaveWikiItem" onclick="submitWikiItem()">Lägg till i kalkylarket</button>
+        </div>
+      </div>
+
+      <div id="tab-links" class="section">
+        <div class="card">
+          <strong style="color:var(--navy);font-size:16px;">📸 Bilder &amp; video – Ladda upp till mapp</strong>
+          <div class="meta">Öppnar direkt respektive mapp i Google Drive för att ladda upp foton och filmklipp</div>
+
+          <div class="link-list">
+            <a class="link-card" href="https://drive.google.com/drive/folders/1YapvxZEcSXJbAaq6H0-e5rFOqJw16Q2E" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">🌈</span>
+                <div>
+                  <div class="link-title">Bilder och video – Alla</div>
+                  <div class="link-desc">Gemensam mapp för hela gänget</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+
+            <a class="link-card" href="https://drive.google.com/drive/folders/1ZFpbujBUEg6gkQkotrMhCD-E2VgnrdZ2" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">📷</span>
+                <div>
+                  <div class="link-title">Bilder och video – Anders</div>
+                  <div class="link-desc">Personlig uppladdningsmapp</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+
+            <a class="link-card" href="https://drive.google.com/drive/folders/1zLFT5KB8p21E603Dgd7EdjRazQyP1War" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">📷</span>
+                <div>
+                  <div class="link-title">Bilder och video – Dick</div>
+                  <div class="link-desc">Personlig uppladdningsmapp</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+
+            <a class="link-card" href="https://drive.google.com/drive/folders/1s5SiJg9161LTPASJ1vjhK-CLRZzM0b6M" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">📷</span>
+                <div>
+                  <div class="link-title">Bilder och video – Gunnar</div>
+                  <div class="link-desc">Personlig uppladdningsmapp</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+
+            <a class="link-card" href="https://drive.google.com/drive/folders/1nB4d1Iy3ZCtGRJHyPAgALoSGftLHkgu3" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">📷</span>
+                <div>
+                  <div class="link-title">Bilder och video – Micke</div>
+                  <div class="link-desc">Personlig uppladdningsmapp</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+
+            <a class="link-card" href="https://drive.google.com/drive/folders/17kVLmuyWgSBGgZ7_oNfra0SA62LwTjEg" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">📷</span>
+                <div>
+                  <div class="link-title">Bilder och video – Patrik</div>
+                  <div class="link-desc">Personlig uppladdningsmapp</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <strong style="color:var(--navy);font-size:16px;">📁 Gemensamma dokument &amp; mappar</strong>
+          <div class="link-list">
+            <a class="link-card" href="https://drive.google.com/drive/folders/1IA2WIM_bH7kcY6tVLl9vuOzhjeJRjMAI?usp=drive_link" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">📂</span>
+                <div>
+                  <div class="link-title">Kanalbåt England (Huvudmapp)</div>
+                  <div class="link-desc">Google Drive-mapp för hela resan</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+
+            <a class="link-card" href="https://docs.google.com/spreadsheets/d/1FSdwExJGllOyjPYoJ26vBLDnUVZael0UkDBzKe2aj04/edit?usp=drive_link" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">📊</span>
+                <div>
+                  <div class="link-title">Kalkyldokument (Reseutgifter)</div>
+                  <div class="link-desc">Google Kalkylark med utgifter, kurser &amp; avräkning</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+
+            <a class="link-card" href="https://docs.google.com/document/d/1zYGpz4lt1R67vbxJQn0xWLsrq-ObKty3tIBiqX1JBU4/edit?usp=sharing" target="_blank" rel="noopener">
+              <div class="link-left">
+                <span class="link-ico">📝</span>
+                <div>
+                  <div class="link-title">Masterdokument (Reseplan)</div>
+                  <div class="link-desc">Google Doc med rutt, båtfakta &amp; checklista</div>
+                </div>
+              </div>
+              <span class="link-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-transfers-list" class="section">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong style="color:var(--navy);font-size:16px;">🔄 Överföringar</strong>
+            <div style="display:flex;gap:6px;">
+              <button class="quick-btn" onclick="switchTab('transfer', document.getElementById('nav-transfer'))">+ Ny betalning</button>
+              <button class="quick-btn" onclick="loadData()">↻ Uppdatera</button>
+            </div>
+          </div>
+          <div class="meta" style="margin-bottom:8px;">Registrerade betalningar mellan parter</div>
+
+          <div id="allTransfersList" style="color:var(--muted);font-size:13px;">Hämtar överföringar...</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <nav class="tabs">
-    <button class="tab-btn active" id="nav-overview" onclick="switchTab('overview', this)"><span class="ico">📊</span>Saldo</button>
-    <button class="tab-btn" id="nav-expense" onclick="switchTab('expense', this)"><span class="ico">📷</span>Nytt kvitto</button>
-    <button class="tab-btn" id="nav-expenses-list" onclick="switchTab('expenses-list', this)"><span class="ico">🧾</span>Utgifter</button>
-    <button class="tab-btn" id="nav-wiki" onclick="switchTab('wiki', this)"><span class="ico">✅</span>Wiki &amp; Listor</button>
-    <button class="tab-btn" id="nav-links" onclick="switchTab('links', this)"><span class="ico">📸</span>Mappar</button>
-  </nav>
+    <nav class="tabs">
+      <button class="tab-btn active" id="nav-overview" onclick="switchTab('overview', this)"><span class="ico">📊</span>Saldo</button>
+      <button class="tab-btn" id="nav-expense" onclick="switchTab('expense', this)"><span class="ico">📷</span>Nytt kvitto</button>
+      <button class="tab-btn" id="nav-expenses-list" onclick="switchTab('expenses-list', this)"><span class="ico">🧾</span>Utgifter</button>
+      <button class="tab-btn" id="nav-wiki" onclick="switchTab('wiki', this)"><span class="ico">✅</span>Wiki &amp; Listor</button>
+      <button class="tab-btn" id="nav-links" onclick="switchTab('links', this)"><span class="ico">📸</span>Mappar</button>
+    </nav>
+  </div>
 
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbzL0EbrmcCKkWPR74iH51vpxtUnaHZUI6EviQ8VuBOCMRPhJphHHlz7n_mx_vpAGmzf/exec';
+    const GOOGLE_CLIENT_ID = '149003426182-agash08qbh6hhf0k886igb1r33qjn6sb.apps.googleusercontent.com';
+
+    let sessionToken = sessionStorage.getItem('topsy2027_session') || '';
+    let currentUser = null;
+    try {
+      currentUser = JSON.parse(sessionStorage.getItem('topsy2027_user') || 'null');
+    } catch (e) {
+      currentUser = null;
+    }
 
     let currentRate = 13.38;
     let expCurrency = 'GBP';
@@ -1594,20 +1729,124 @@
     let compressedBase64 = '';
     let latestData = null;
 
+    function setAuthStatus(msg, cls) {
+      const el = document.getElementById('authStatus');
+      if (!msg) { el.style.display = 'none'; return; }
+      el.textContent = msg;
+      el.className = 'auth-status ' + (cls || 'info');
+      el.style.display = 'block';
+    }
+
+    function showAuthGate(message) {
+      document.getElementById('appShell').style.display = 'none';
+      document.getElementById('authGate').style.display = 'flex';
+      if (message) setAuthStatus(message, 'err');
+      else setAuthStatus('');
+    }
+
+    function showAppUnlocked(user, data) {
+      currentUser = user || currentUser;
+      if (currentUser) {
+        sessionStorage.setItem('topsy2027_user', JSON.stringify(currentUser));
+        document.getElementById('currentUserBadge').textContent = '👤 ' + (currentUser.name || currentUser.email);
+        if (currentUser.party) {
+          const payerSel = document.getElementById('expPayer');
+          const trFromSel = document.getElementById('trFrom');
+          if (payerSel) payerSel.value = currentUser.party;
+          if (trFromSel) trFromSel.value = currentUser.party;
+        }
+      }
+      document.getElementById('authGate').style.display = 'none';
+      document.getElementById('appShell').style.display = 'block';
+      if (data) renderData(data);
+    }
+
+    function logoutUser(reasonMsg) {
+      sessionToken = '';
+      currentUser = null;
+      latestData = null;
+      sessionStorage.removeItem('topsy2027_session');
+      sessionStorage.removeItem('topsy2027_user');
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.disableAutoSelect();
+      }
+      showAuthGate(reasonMsg || '');
+    }
+
+    async function handleGoogleCredentialResponse(response) {
+      setAuthStatus('🔐 Verifierar Google-konto...', 'info');
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'authGoogle',
+            idToken: response.credential
+          })
+        });
+        const json = await res.json();
+        if (!json.ok) {
+          throw new Error(json.error || 'Inloggningen nekades.');
+        }
+        sessionToken = json.sessionToken;
+        sessionStorage.setItem('topsy2027_session', sessionToken);
+        setAuthStatus('');
+        showAppUnlocked(json.user, json.data);
+      } catch (err) {
+        setAuthStatus('⛔ ' + err.message, 'err');
+      }
+    }
+
+    function initGoogleSignIn() {
+      if (!window.google || !google.accounts || !google.accounts.id) {
+        setTimeout(initGoogleSignIn, 250);
+        return;
+      }
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleCredentialResponse
+      });
+      const btnContainer = document.getElementById('gSignInBtn');
+      if (btnContainer) {
+        btnContainer.innerHTML = '';
+        google.accounts.id.renderButton(btnContainer, {
+          theme: 'filled_black',
+          size: 'large',
+          text: 'signin_with',
+          shape: 'pill',
+          width: 280
+        });
+      }
+    }
+
     async function apiGet() {
-      const res = await fetch(API_URL, { method: 'GET' });
+      if (!sessionToken) {
+        logoutUser('Logga in med Google för att se reseutgifterna.');
+        throw new Error('Ej inloggad');
+      }
+      const res = await fetch(API_URL + '?token=' + encodeURIComponent(sessionToken), { method: 'GET' });
       const json = await res.json();
-      if (!json.ok) throw new Error(json.error || 'Kunde inte hämta data');
+      if (!json.ok) {
+        if (json.authError) logoutUser(json.error || 'Sessionen har gått ut.');
+        throw new Error(json.error || 'Kunde inte hämta data');
+      }
       return json.data;
     }
 
     async function apiPost(bodyObj) {
+      if (!sessionToken && bodyObj.action !== 'authGoogle') {
+        logoutUser('Sessionen saknas. Logga in igen.');
+        throw new Error('Ej inloggad');
+      }
+      const payloadWithAuth = Object.assign({}, bodyObj, { sessionToken: sessionToken });
       const res = await fetch(API_URL, {
         method: 'POST',
-        body: JSON.stringify(bodyObj)
+        body: JSON.stringify(payloadWithAuth)
       });
       const json = await res.json();
-      if (json.ok === false) throw new Error(json.error || 'Serverfel');
+      if (json.ok === false) {
+        if (json.authError) logoutUser(json.error || 'Sessionen har gått ut.');
+        throw new Error(json.error || 'Serverfel');
+      }
       return json;
     }
 
@@ -1838,7 +2077,7 @@
       reader.readAsDataURL(file);
     }
 
-    /* === REDIGERING: WIKI & LISTOR === */
+    /* === REDIGERING & BORTTAGNING: WIKI & LISTOR === */
     function openEditWikiModal(rowIndex) {
       if (!latestData) return;
       const item = (latestData.wikiItems || []).find(x => Number(x.rowIndex) === Number(rowIndex));
@@ -1889,7 +2128,31 @@
       }
     }
 
-    /* === REDIGERING: UTGIFTER === */
+    async function deleteWikiItem() {
+      const rowIndex = Number(document.getElementById('editWikiRowIndex').value);
+      const title = document.getElementById('editWikiTitle').value.trim() || 'denna post';
+      if (!confirm('Vill du ta bort "' + title + '" från Wiki & Listor?')) return;
+
+      const btn = document.getElementById('btnDeleteWiki');
+      btn.disabled = true;
+      btn.textContent = 'Tar bort...';
+      try {
+        const res = await apiPost({
+          action: 'deleteListItem',
+          payload: { rowIndex: rowIndex }
+        });
+        showToast(res.message, 'ok');
+        closeEditWikiModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🗑️ Ta bort';
+      }
+    }
+
+    /* === REDIGERING & BORTTAGNING: UTGIFTER === */
     function openEditExpenseModal(rowIndex) {
       if (!latestData) return;
       const item = (latestData.expenses || []).find(x => Number(x.rowIndex) === Number(rowIndex));
@@ -1963,7 +2226,31 @@
       }
     }
 
-    /* === REDIGERING: ÖVERFÖRINGAR === */
+    async function deleteExpenseItem() {
+      const rowIndex = Number(document.getElementById('editExpRowIndex').value);
+      const place = document.getElementById('editExpPlace').value.trim() || 'denna utgift';
+      if (!confirm('Vill du ta bort utgiften "' + place + '"?')) return;
+
+      const btn = document.getElementById('btnDeleteExp');
+      btn.disabled = true;
+      btn.textContent = 'Tar bort...';
+      try {
+        const res = await apiPost({
+          action: 'deleteExpense',
+          payload: { rowIndex: rowIndex }
+        });
+        showToast(res.message, 'ok');
+        closeEditExpenseModal();
+        if (res.data) renderData(res.data);
+      } catch (err) {
+        showToast(err.message, 'err');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🗑️ Ta bort';
+      }
+    }
+
+    /* === REDIGERING & BORTTAGNING: ÖVERFÖRINGAR === */
     function openEditTransferModal(rowIndex) {
       if (!latestData) return;
       const tr = (latestData.transfers || []).find(x => Number(x.rowIndex) === Number(rowIndex));
@@ -2011,54 +2298,6 @@
       }
     }
 
-    async function deleteWikiItem() {
-      const rowIndex = Number(document.getElementById('editWikiRowIndex').value);
-      const title = document.getElementById('editWikiTitle').value.trim() || 'denna post';
-      if (!confirm('Vill du ta bort "' + title + '" från Wiki & Listor?')) return;
-
-      const btn = document.getElementById('btnDeleteWiki');
-      btn.disabled = true;
-      btn.textContent = 'Tar bort...';
-      try {
-        const res = await apiPost({
-          action: 'deleteListItem',
-          payload: { rowIndex: rowIndex }
-        });
-        showToast(res.message, 'ok');
-        closeEditWikiModal();
-        if (res.data) renderData(res.data);
-      } catch (err) {
-        showToast(err.message, 'err');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = '🗑️ Ta bort';
-      }
-    }
-
-    async function deleteExpenseItem() {
-      const rowIndex = Number(document.getElementById('editExpRowIndex').value);
-      const place = document.getElementById('editExpPlace').value.trim() || 'denna utgift';
-      if (!confirm('Vill du ta bort utgiften "' + place + '"?')) return;
-
-      const btn = document.getElementById('btnDeleteExp');
-      btn.disabled = true;
-      btn.textContent = 'Tar bort...';
-      try {
-        const res = await apiPost({
-          action: 'deleteExpense',
-          payload: { rowIndex: rowIndex }
-        });
-        showToast(res.message, 'ok');
-        closeEditExpenseModal();
-        if (res.data) renderData(res.data);
-      } catch (err) {
-        showToast(err.message, 'err');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = '🗑️ Ta bort';
-      }
-    }
-
     async function deleteTransferItem() {
       const rowIndex = Number(document.getElementById('editTrRowIndex').value);
       const from = document.getElementById('editTrFrom').value;
@@ -2084,7 +2323,6 @@
       }
     }
 
-    
     /* === REDIGERING: KARTA & LÄNKAR === */
     function openEditLinksModalByRow(rowIndex) {
       if (!latestData) return;
@@ -2474,7 +2712,7 @@
         const data = await apiGet();
         renderData(data);
       } catch (err) {
-        showToast('Fel: ' + err.message, 'err');
+        if (sessionToken) showToast('Fel: ' + err.message, 'err');
       }
     }
 
@@ -2566,7 +2804,14 @@
 
     document.getElementById('expDate').value = todayISO();
     document.getElementById('trDate').value = todayISO();
-    loadData();
+    initGoogleSignIn();
+
+    if (sessionToken) {
+      showAppUnlocked(currentUser, null);
+      loadData();
+    } else {
+      showAuthGate('');
+    }
   </script>
 </body>
 </html>
